@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Water Timeseries Parameters</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/ol/ol.css" />
+  <link rel="stylesheet" href="style/style.css" />
+
+  <style>
+    footer {
+      background-color: rgba(13, 110, 253, 0.9);
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    #layer-switcher {
+      position: absolute;
+      top: 90px;
+      left: 95%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 10px 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      font-size: 14px;
+      max-height: 300px;
+      max-width: 500px;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+  </style>
+
+  <!-- Chart.js & OpenLayers -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="assets/ol/ol.js"></script>
+</head>
+<body>
+  <!-- Header Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Water Timeseries Parameters</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid mt-3">
+    <div class="row mb-3">
+      <div class="col-md-9">
+        <div id="map" class="border rounded shadow-sm" style="height: 60vh; position: relative;">
+          <div id="hover-info" class="p-2 bg-white shadow-sm"></div>
+          <div id="legend"></div>
+          <div id="layer-switcher"></div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="mb-2">
+              <label for="fileSelect" class="form-label">Dataset</label>
+              <select id="fileSelect" class="form-select">
+                <option value="input_data/GLEAM_WaterBalanceAllBAsin.json">Water Balance</option>
+                <option value="input_data/P_MSWEP_ALL.json">Precipitation(MSWEP)</option>
+                <option value="input_data/Soil_Moisture_ERA5.json">Soil Moisture(ERA5)</option>
+              </select>
+            </div>
+            <div class="mb-2">
+              <label for="metricSelect" class="form-label">Metric</label>
+              <select id="metricSelect" class="form-select" disabled></select>
+            </div>
+            <div class="mb-2">
+              <label for="timeSlider" class="form-label">Date: <span id="sliderDate">--</span></label>
+              <input type="range" id="timeSlider" class="form-range" min="0" step="1" disabled />
+            </div>
+            <div class="d-flex gap-2 mb-2">
+              <button id="playPauseBtn" class="btn btn-sm btn-secondary" aria-label="Play animation">▶</button>
+              <button id="clearSelection" class="btn btn-sm btn-warning" disabled aria-label="Clear selected watershed">Show All</button>
+            </div>
+            <hr />
+            <div class="d-flex flex-column gap-1">
+              <a id="downloadGeoJSON" class="btn btn-sm btn-outline-primary" download="selected_watershed.geojson">Download GeoJSON</a>
+              <a id="downloadCSV" class="btn btn-sm btn-outline-primary" download="timeseries.csv">Download CSV</a>
+              <a id="downloadChart" class="btn btn-sm btn-outline-primary" download="chart.png">Download Chart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row for Chart -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <canvas id="chart" style="height: 40vh; width: 100%;"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    © 2025 National Laboratory Astana | Open Data GIS Portal – Kazakhstan Basins
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/chartHandler.js"></script>
+  <script src="js/mapHandler.js"></script>
+</body>
+</html>

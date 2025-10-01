@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spatial Data Catalogue</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+   html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Background */
+body {
+  background: url('image_logo/background_image.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  color: #212529;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: -1;
+}
+
+/* Content wrapper grows to fill space */
+.section-box {
+  flex: 1; /* 👈 pushes footer down */
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 35px;
+  border-radius: 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  width: 100%;
+}
+
+/* Footer always at bottom */
+footer {
+  background-color: #0d6efd;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 0.9rem;
+  margin-top: auto; /* 👈 sticks footer to bottom */
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Open Data GIS Portal</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="spatialData.html">Spatial Data Catalogue</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Catalogue Section -->
+  <div class="container-fluid section-box">
+    <h2 class="text-primary mb-4">📂 Spatial Data Catalogue</h2>
+    <p class="mb-4">
+      This catalogue provides descriptions and direct access to the spatial datasets used in the GIS portal. 
+      You can preview datasets on the maps in the portal, or download them directly here.
+    </p>
+
+    <!-- 🔍 Search Box -->
+    <div class="mb-3">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search datasets by keyword (e.g., Soil, Basin, LULC)" />
+    </div>
+
+    <!-- Catalogue Table -->
+    <div class="table-responsive">
+      <table id="dataTable" class="table table-hover align-middle">
+        <thead class="table-primary">
+          <tr>
+            <th>Dataset Name</th>
+            <th>Description</th>
+            <th>Format</th>
+            <th>Access</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>All Watersheds</td>
+            <td>Polygon boundaries of all watersheds in Northern Kazakhstan.</td>
+            <td>GeoJSON</td>
+            <td><a href="input_data/ALL_watersheds_wgs84.geojson" class="btn btn-sm btn-outline-primary">Download</a></td>
+          </tr>
+          <tr>
+            <td>Water Management Basins</td>
+            <td>Administrative basins for water resource planning.</td>
+            <td>GeoJSON</td>
+            <td><a href="input_data/Water management basins.geojson" class="btn btn-sm btn-outline-primary">Download</a></td>
+          </tr>
+          <tr>
+            <td>Sub-Basins</td>
+            <td>Detailed sub-basin divisions inside watershed areas.</td>
+            <td>GeoJSON</td>
+            <td><a href="input_data/waterhed_subbasins.geojson" class="btn btn-sm btn-outline-primary">Download</a></td>
+          </tr>
+          <tr>
+            <td>LULC Classification</td>
+            <td>Land Use / Land Cover dataset (ESA WorldCover resampled).</td>
+            <td>GeoTIFF / WMS</td>
+            <td><a href="http://localhost:8080/geoserver/KZ_Water_Portal/wms?service=WMS&request=GetCapabilities" target="_blank" class="btn btn-sm btn-outline-success">View WMS</a></td>
+          </tr>
+          <tr>
+            <td>Precipitation (MSWEP)</td>
+            <td>Monthly precipitation dataset used for hydrological analysis.</td>
+            <td>JSON</td>
+            <td><a href="input_data/P_MSWEP_ALL.json" class="btn btn-sm btn-outline-primary">Download</a></td>
+          </tr>
+          <tr>
+            <td>Soil Moisture (ERA5)</td>
+            <td>ERA5 monthly soil moisture in millimeters. The soil moisture datasets were aggregated by mean into two depths: 0-100 cm and 0-289 cm for each Watershed basin..</td>
+            <td>JSON</td>
+            <td><a href="input_data/Soil_Moisture_ERA5.json" class="btn btn-sm btn-outline-primary">Download</a></td>
+          </tr>
+          <tr>
+            <td>GLEAM Water Balance</td>
+            <td>Water balance dataset (evapotranspiration vs precipitation).</td>
+            <td>JSON</td>
+            <td><a href="input_data/GLEAM_WaterBalanceAllBAsin.json" class="btn btn-sm btn-outline-primary">Download</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 National Laboratory Astana | Open Data GIS Portal – Kazakhstan Basins
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- 🔍 Search Filter Script -->
+  <script>
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+      const filter = this.value.toLowerCase();
+      const rows = document.querySelectorAll('#dataTable tbody tr');
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

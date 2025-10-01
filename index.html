@@ -1,97 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Time Series Choropleth Map</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/ol/ol.css" />
-  <link rel="stylesheet" href="style.css" />
-  
-  <!-- Chart.js & OpenLayers -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="assets/ol/ol.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Open Data GIS Portal for Watershed Basins in Kazakhstan. Explore LULC maps, water timeseries datasets, and water use analysis.">
+  <title>Open Data GIS Portal for Watershed Basin Kazakhstan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: url('image_logo/background_image.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: #212529;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.0);
+      z-index: -1;
+    }
+    .card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffffee;
+    }
+    .card:hover { transform: scale(1.03); }
+    .card img {
+      max-height: 180px;
+      object-fit: contain;
+      margin: 20px auto;
+    }
+    .card-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .section-box {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    footer {
+      background-color: #0d6efd;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-  <div class="container-fluid mt-3">
-    <!-- Row for Map + Controls -->
-    <div class="row mb-3">
-      <!-- Map -->
-      <div class="col-md-9">
-        <div id="map" class="border rounded shadow-sm" style="height: 60vh; position: relative;">
-          <div id="hover-info" class="p-2 bg-white shadow-sm"></div>
-          <div id="legend"></div>
-        </div>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Open Data GIS Portal – Kazakhstan Basins</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="spatialData.html">Spatial Data Catalogue</a></li>
+        </ul>
       </div>
+    </div>
+  </nav>
 
-      <!-- Controls -->
-      <div class="col-md-3">
-        <div class="card">
+  <!-- 3 Feature Boxes -->
+  <div class="container mt-5">
+    <div class="row g-4">
+      <!-- 1. LULC Boundaries -->
+      <div class="col-md-4 d-flex">
+        <div class="card text-center w-100">
+          <img src="image_logo/LULC_Boudnries.png" class="card-img-top img-fluid" alt="LULC Boundaries Map Logo">
           <div class="card-body">
-            <div class="mb-2">
-              <label for="fileSelect" class="form-label">Dataset</label>
-              <select id="fileSelect" class="form-select">
-                <option value="input_data/CumPE.json">cumP-cumE</option>
-                <option value="input_data/soil_moisture.json">Soil Moisture</option>
-                <option value="input_data/ET_GLEAM_4.2_all.json">ET GLEAM</option>
-                <option value="input_data/GLEAM_WaterBalanceAllBAsin.json">Water Balance GLEAM</option>
-                <option value="input_data/P_MSWEP_ALL.json">Precipitation (MSWEP)</option>
-              </select>
-            </div>
-            <div class="mb-2">
-              <label for="metricSelect" class="form-label">Metric</label>
-              <select id="metricSelect" class="form-select" disabled></select>
-            </div>
-            <div class="mb-2">
-              <label for="timeSlider" class="form-label">Date: <span id="sliderDate">--</span></label>
-              <input type="range" id="timeSlider" class="form-range" min="0" step="1" disabled />
-            </div>
-            <div class="d-flex gap-2 mb-2">
-              <button id="playPauseBtn" class="btn btn-sm btn-secondary" disabled>▶</button>
-              <button id="clearSelection" class="btn btn-sm btn-warning" disabled>Show All</button>
-            </div>
-            <hr />
-            <div class="d-flex flex-column gap-1">
-              <a id="downloadGeoJSON" class="btn btn-sm btn-outline-primary" download="selected_watershed.geojson">Download GeoJSON</a>
-              <a id="downloadCSV" class="btn btn-sm btn-outline-primary" download="timeseries.csv">Download CSV</a>
-              <a id="downloadChart" class="btn btn-sm btn-outline-primary" download="chart.png">Download Chart</a>
-            </div>
+            <h5 class="card-title">LULC Boundaries</h5>
+            <p class="card-text">Land Use and Land Cover boundaries served via GeoServer WMS layer.</p>
+            <a href="lulc_map.html" class="btn btn-primary">Explore Map</a>
           </div>
         </div>
       </div>
-    </div>
-
-<div id="basemap-control" class="ol-control ol-unselectable">
-  <select id="basemapSelect" class="form-select form-select-sm">
-    <option value="osm">OpenStreetMap</option>
-    <option value="satellite">Satellite (ESRI)</option>
-
-  </select>
-</div>
-
-
-    <!-- Row for Chart -->
-
-
-    <div class="row">
-      <div class="col-12">
-        <div class="card shadow-sm">
+      <!-- 2. Water Timeseries -->
+      <div class="col-md-4 d-flex">
+        <div class="card text-center w-100">
+          <img src="image_logo/logo_watershed_timeseries.png" class="card-img-top img-fluid" alt="Water Timeseries Datasets Logo">
           <div class="card-body">
-            <canvas id="chart" style="height: 40vh; width: 100%;"></canvas>
+            <h5 class="card-title">Water Timeseries Datasets</h5>
+            <p class="card-text">Interactive WebGIS app with charts of precipitation, evapotranspiration, and soil moisture datasets.</p>
+            <a href="timeseries.html" class="btn btn-primary">Explore Timeseries</a>
+          </div>
+        </div>
+      </div>
+      <!-- 3. Water Use & Abstraction -->
+      <div class="col-md-4 d-flex">
+        <div class="card text-center w-100">
+          <img src="image_logo/water_use.png" class="card-img-top img-fluid" alt="Water Use and Abstraction Logo">
+          <div class="card-body">
+            <h5 class="card-title">Water Use & Abstraction</h5>
+            <p class="card-text">Jupyter Notebook visualization showing water use and abstraction analysis.</p>
+            <a href="Report Water Use Analysis.html" class="btn btn-primary">Explore Notebook</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
 
-  <!-- Bootstrap JS -->
+  <!-- Sections -->
+  <div class="container mt-5 section-box" id="overview">
+    <h2 class="text-primary">Portal Overview</h2>
+    <p>
+      This portal provides spatial data on watershed basins and water management basin boundaries as part of the project 
+      <em>“Water Balance of Northern Kazakhstan’s Water Management Basins Estimated Using Remote Sensing, Global Datasets, and Hydrological Information.”</em> 
+      It was developed with grant funding from the Ministry of Science and Higher Education of the Republic of Kazakhstan.  
+      Learn more in detail from this 
+      <a href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan" target="_blank">project link</a>.
+    </p>
+  </div>
+
+  <div class="container mt-5 section-box" id="data">
+    <h2 class="text-primary">Data Overview</h2>
+    <p>Available datasets include GeoServer WMS layers, time-series precipitation and soil moisture data, and water abstraction datasets from notebooks.</p>
+  </div>
+
+  <div class="container mt-5 mb-5 section-box" id="contact">
+    <h2 class="text-primary">Contact</h2>
+    <p>
+      For inquiries, please contact the project manager: 
+      <a href="mailto:vyapiyev@nu.edu.kz" class="btn btn-link p-0">vyapiyev@nu.edu.kz</a>
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 National Laboratory Astana | Open Data GIS Portal – Kazakhstan Basins
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- App Scripts -->
-  <script src="chartHandler.js"></script>
-  <script src="mapHandler.js"></script>
 </body>
 </html>
