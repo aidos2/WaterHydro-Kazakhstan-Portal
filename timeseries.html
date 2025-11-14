@@ -24,12 +24,12 @@
       position: absolute;
       top: 90px;
       left: 95%;
-      transform: translateX(-50%);
+      transform: translateX(-5%);
       background: rgba(255, 255, 255, 0.95);
-      padding: 10px 10px;
+      padding: 1px 1px;
       border: 1px solid #ccc;
       border-radius: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       font-size: 14px;
       max-height: 300px;
       max-width: 500px;
@@ -57,6 +57,7 @@
       </div>
     </div>
   </nav>
+  
 
   <div class="container-fluid mt-3">
     <div class="row mb-3">
@@ -93,14 +94,21 @@
             </div>
             <hr />
             <div class="d-flex flex-column gap-1">
-              <a id="downloadGeoJSON" class="btn btn-sm btn-outline-primary" download="selected_watershed.geojson">Download GeoJSON</a>
-              <a id="downloadCSV" class="btn btn-sm btn-outline-primary" download="timeseries.csv">Download CSV</a>
-              <a id="downloadChart" class="btn btn-sm btn-outline-primary" download="chart.png">Download Chart</a>
+              <a id="downloadCSV" class="btn btn-sm btn-outline-primary" href="#">Download CSV</a>
+              <a id="downloadChart" class="btn btn-sm btn-outline-primary" href="#">Download Chart</a>
+
             </div>
           </div>
         </div>
       </div>
     </div>
+<hr />
+<div class="mt-2">
+  <label class="form-label mb-1">Selected basins for comparison</label>
+  <div id="selectedBasins" class="small text-muted">
+    None
+  </div>
+</div>
 
     <!-- Row for Chart -->
     <div class="row">

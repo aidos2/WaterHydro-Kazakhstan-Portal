@@ -20,7 +20,7 @@ html, body {
 #legend {
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-  border-radius: 6px;
+  border-radius: 4px;
   z-index: 1000;
 }
 
@@ -37,10 +37,10 @@ html, body {
 
 #legend {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  padding: 8px;
-  font-size: 12px;
+  bottom: 30px;
+  right: 2px;
+  padding: 5px;
+  font-size: 10px;
 }
 
 #legend .item {

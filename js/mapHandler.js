@@ -4,8 +4,11 @@
 
 let map, selectedFeature = null;
 let watershedNames = {}, latestData = [];
-let selectedMetric = '', selectedWatershedId = null;
+let selectedMetric = '';
 let timeSeriesByWatershed = {}, allDates = [];
+
+/* NEW: support multiple selected watersheds */
+let selectedWatershedIds = new Set();
 
 /* ---------- Utils --------------------------------------------------- */
 const $ = (id) => document.getElementById(id);
@@ -36,8 +39,27 @@ const timeSlider   = $('timeSlider');
 const sliderDate   = $('sliderDate');
 const playPauseBtn = $('playPauseBtn');
 const clearBtn     = $('clearSelection');
-const hoverInfo    = $('hover-info');
 const legendDiv    = $('legend');
+const selectedBasinsDiv = $('selectedBasins'); // widget (will exist after HTML change)
+
+/* ---------- Dataset style config ----------------------------------- */
+const DATASET_STYLE = {
+  "input_data/GLEAM_WaterBalanceAllBAsin.json": {
+    name: "Water Balance",
+    rampColors: ['#f7fbff','#c6dbef','#6baed6','#3182bd','#08519c'],
+    unit: "mm/month"
+  },
+  "input_data/P_MSWEP_ALL.json": {
+    name: "Precipitation (MSWEP)",
+    rampColors: ['#f7fcf5','#c7e9c0','#74c476','#31a354','#006d2c'],
+    unit: "mm/month"
+  },
+  "input_data/Soil_Moisture_ERA5.json": {
+    name: "Soil Moisture (ERA5)",
+    rampColors: ['#fff5f0','#fcbba1','#fc9272','#fb6a4a','#cb181d'],
+    unit: "mm/month"
+  }
+};
 
 /* ---------- No-data hatch fill ------------------------------------- */
 const NO_DATA_PATTERN = (() => {
@@ -53,7 +75,7 @@ const NO_DATA_PATTERN = (() => {
   return g.createPattern(c, 'repeat');
 })();
 
-/* ---------- Base layers (only OSM + World Imagery) ----------------- */
+/* ---------- Base layers -------------------------------------------- */
 let baseLayers = {
   osm: new ol.layer.Tile({
     source: new ol.source.OSM(),
@@ -75,7 +97,7 @@ let vectorLayers = {
       url: 'input_data/ALL_watersheds_wgs84.geojson',
       format: new ol.format.GeoJSON()
     }),
-    visible: true // ✅ start with watersheds visible
+    visible: true
   }),
   basins: new ol.layer.Vector({
     source: new ol.source.Vector({
@@ -86,7 +108,7 @@ let vectorLayers = {
   }),
   subbasins: new ol.layer.Vector({
     source: new ol.source.Vector({
-      url: 'input_data/waterhed_subbasins.geojson',
+      url: 'input_data/watershed_subbasins.geojson',
       format: new ol.format.GeoJSON()
     }),
     visible: false
@@ -106,21 +128,51 @@ map = new ol.Map({
   view: new ol.View({
     projection: 'EPSG:3857',
     center: fromLonLatXY(72, 48),
-    zoom: 5
+    zoom: 4
   })
 });
 
-/* ---------- Layer switcher UI -------------------------------------- */
+/* ---------- Horizontal top-right Layer switcher UI ----------------- */
+
 const switcher = $('layer-switcher');
+
 switcher.innerHTML = `
-  <label><input type="radio" name="activeLayer" value="basins"> Water Management Basins</label><br> 
-  <label><input type="radio" name="activeLayer" value="watersheds" checked> All Watersheds</label><br>
-  <label><input type="radio" name="activeLayer" value="subbasins"> Sub-basins</label>
+  <div style="
+      display:flex;
+      gap:14px;
+      align-items:center;
+      background:rgba(255,255,255,0.95);
+      padding:8px 16px;
+      border-radius:22px;
+      border:1px solid #ccc;
+      font-size:13px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.25);
+  ">
+    <label style="margin:0;">
+      <input type="radio" name="activeLayer" value="watersheds" checked>
+      Watersheds
+    </label>
+    <label style="margin:0;">
+      <input type="radio" name="activeLayer" value="basins">
+      Basins
+    </label>
+    <label style="margin:0;">
+      <input type="radio" name="activeLayer" value="subbasins">
+      Sub-basins
+    </label>
+  </div>
 `;
+
+switcher.style.position = "absolute";
+switcher.style.top = "10px";
+switcher.style.right = "10px";
+switcher.style.left = "auto";
+switcher.style.zIndex = "1000";
 
 switcher.querySelectorAll('input').forEach(input => {
   input.addEventListener('change', e => {
     const selectedKey = e.target.value;
+
     Object.entries(vectorLayers).forEach(([key, layer]) => {
       layer.setVisible(key === selectedKey);
     });
@@ -135,6 +187,8 @@ switcher.querySelectorAll('input').forEach(input => {
       timeSlider.disabled = true;
       playPauseBtn.disabled = true;
       legendDiv.innerHTML = '';
+      selectedWatershedIds.clear();
+      updateSelectedWidget();
       drawChart('', [], {}, null);
     }
   });
@@ -148,41 +202,95 @@ function jenks(values, k) {
   return Array.from({ length: k + 1 }, (_, i) => min + i * step);
 }
 
-/* ---------- Choropleth with labels -------------------------------- */
+/* ---------- Selected basins widget --------------------------------- */
+function updateSelectedWidget() {
+  if (!selectedBasinsDiv) return;
+
+  if (!selectedWatershedIds.size) {
+    selectedBasinsDiv.textContent = 'None';
+    return;
+  }
+
+  const names = [...selectedWatershedIds].map(
+    id => watershedNames[id] || id
+  );
+  selectedBasinsDiv.textContent = names.join(', ');
+}
+
+/* ---------- Choropleth + legend ------------------------------------ */
 function updateMapStyle() {
   if (!vectorLayers.watersheds.getVisible()) return;
-  if (!selectedMetric || !allDates.length) return;
+
+  const datasetKey = fileSelect.value;
+  const cfg = DATASET_STYLE[datasetKey] || {
+    name: "Dataset",
+    rampColors: ['#edf8fb','#b2e2e2','#66c2a4','#2ca25f','#006d2c'],
+    unit: "mm/month"
+  };
+
+  const unit = cfg.unit || "mm/month";
+
+  // Legend header
+  let headerHTML = `
+    <div style="font-size:13px; margin-bottom:6px;">
+      <strong>${cfg.name}</strong><br>
+      Metric: ${selectedMetric || "—"}<br>
+      Unit: ${unit}
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+      <span style="
+        display:inline-block;width:16px;height:16px;
+        background:rgba(0,0,0,0.18);
+        border:2px solid #000000;
+        border-radius:3px;
+      "></span>
+      <span>Selected watersheds</span>
+    </div>
+  `;
+
+  if (!selectedMetric || !allDates.length) {
+    legendDiv.innerHTML = headerHTML;
+    return;
+  }
 
   const date = allDates[+timeSlider.value || 0];
+
   const values = Object.values(timeSeriesByWatershed)
     .map(d => d[date])
     .filter(v => Number.isFinite(v));
 
-  if (!values.length) return;
+  if (!values.length) {
+    legendDiv.innerHTML = headerHTML +
+      `<em style="font-size:12px;">No data for ${date || ''}</em>`;
+    return;
+  }
 
   const breaks = jenks(values, 5);
-  const colors = ['#edf8fb','#b2e2e2','#66c2a4','#2ca25f','#006d2c'];
+  const ramp = cfg.rampColors || ['#edf8fb','#b2e2e2','#66c2a4','#2ca25f','#006d2c'];
 
-  // Legend
-  legendDiv.innerHTML =
+  const classesHTML =
     breaks.slice(0, -1).map((b, i) => `
-      <div class="item">
-        <div class="swatch" style="background:${colors[i]}"></div>
+      <div class="item" style="display:flex;align-items:center;gap:6px;font-size:12px;">
+        <div class="swatch" style="width:14px;height:14px;background:${ramp[i]};border:1px solid #333;"></div>
         <div>${breaks[i].toFixed(1)} – ${breaks[i+1].toFixed(1)}</div>
       </div>`).join('') +
-    `<div class="item">
-      <div class="swatch" style="background:
-        repeating-linear-gradient(45deg,#ffffff 0 4px,#aaaaaa 4px 8px);"></div>
+    `<div class="item" style="display:flex;align-items:center;gap:6px;font-size:12px;margin-top:4px;">
+      <div class="swatch" style="
+        width:14px;height:14px;
+        background:repeating-linear-gradient(45deg,#ffffff 0 4px,#aaaaaa 4px 8px);
+        border:1px solid #333;"></div>
       <div>No data</div>
     </div>`;
 
-  // Style
+  legendDiv.innerHTML = headerHTML + classesHTML;
+
+  // Style function for all polygons
   vectorLayers.watersheds.setStyle(feat => {
     const id   = feat.get('WATERSHED_ID');
     const name = watershedNames[id] || '';
     const v    = timeSeriesByWatershed[id]?.[date];
 
-    let fillColor, strokeColor = '#444';
+    let fillColor, strokeColor = '#444', strokeWidth = 1;
 
     if (v == null || !Number.isFinite(v)) {
       fillColor = NO_DATA_PATTERN;
@@ -192,14 +300,19 @@ function updateMapStyle() {
       for (let i = 0; i < 5; i++) {
         if (v >= breaks[i] && v <= breaks[i+1]) { cls = i; break; }
       }
-      fillColor = colors[cls];
+      fillColor = ramp[cls];
     }
 
-    if (id === selectedWatershedId) strokeColor = '#000';
+    // UNIVERSAL SELECTION STYLE for ALL selected basins
+    if (selectedWatershedIds.has(id)) {
+      strokeColor = '#000000';
+      strokeWidth = 3;
+      fillColor   = 'rgba(0,0,0,0.18)';
+    }
 
     return new ol.style.Style({
       fill:   new ol.style.Fill({ color: fillColor }),
-      stroke: new ol.style.Stroke({ color: strokeColor, width: (id === selectedWatershedId ? 2 : 1) }),
+      stroke: new ol.style.Stroke({ color: strokeColor, width: strokeWidth }),
       text: new ol.style.Text({
         text: name,
         font: '12px Poppins, Arial, sans-serif',
@@ -240,7 +353,6 @@ function loadWatershedData() {
         watershedNames[f.properties.WATERSHED_ID] = f.properties.WATERSHED_NAME;
       });
 
-      // ✅ Fit map to full extent of watersheds on first load
       const src = vectorLayers.watersheds.getSource();
       if (src) {
         if (src.getState() === 'ready') {
@@ -293,8 +405,12 @@ function loadData(url) {
         highlightChartPoint(0);
       }
 
+      selectedWatershedIds.clear();
+      updateSelectedWidget();
       updateMapStyle();
-      drawChart(selectedMetric, latestData, watershedNames, null); // all by default
+
+      // IMPORTANT: we filter later in drawChart based on selection
+      drawChart(selectedMetric, latestData, watershedNames, null);
     });
 }
 
@@ -308,6 +424,8 @@ fileSelect.addEventListener('change', () => {
 /* ---------- Metric change ------------------------------------------ */
 metricSelect.addEventListener('change', () => {
   selectedMetric = metricSelect.value;
+  window.selectedMetric = selectedMetric; // *** чтобы глобальная метрика была актуальной
+
   buildTimeSeriesMap(selectedMetric);
   extractSortedDates();
 
@@ -319,30 +437,56 @@ metricSelect.addEventListener('change', () => {
   }
 
   updateMapStyle();
-  drawChart(selectedMetric, latestData, watershedNames, selectedWatershedId);
+
+  // Re-draw chart with current selection
+  const ids = [...selectedWatershedIds];
+  const chartData = ids.length
+    ? latestData.filter(d => ids.includes(d.WATERSHED_ID))
+    : latestData;
+  drawChart(selectedMetric, chartData, watershedNames, null);
 });
 
-/* ---------- Selection: show single chart --------------------------- */
+/* ---------- Selection: MULTI-SELECTION on map ---------------------- */
 map.on('singleclick', evt => {
   if (!vectorLayers.watersheds.getVisible()) return;
   const feat = map.forEachFeatureAtPixel(evt.pixel, f => f);
   if (feat && feat.get('WATERSHED_ID')) {
-    selectedFeature     = feat;
-    selectedWatershedId = feat.get('WATERSHED_ID');
-    drawChart(selectedMetric, latestData, watershedNames, selectedWatershedId);
-    clearBtn.disabled = false;
-    map.getView().fit(feat.getGeometry(), { padding: [40, 40, 40, 40], duration: 250 });
+    selectedFeature = feat;
+    const id = feat.get('WATERSHED_ID');
+
+    // Toggle selection
+    if (selectedWatershedIds.has(id)) {
+      selectedWatershedIds.delete(id);
+    } else {
+      selectedWatershedIds.add(id);
+    }
+
+    updateSelectedWidget();
+    clearBtn.disabled = selectedWatershedIds.size === 0;
+
+    // Optional: zoom to last clicked feature
+    map.getView().fit(feat.getGeometry(), {
+      padding: [40, 40, 40, 40],
+      duration: 250
+    });
+
     updateMapStyle();
+
+    // Filter data for chart: only selected basins, or all if none
+    const ids = [...selectedWatershedIds];
+    const chartData = ids.length
+      ? latestData.filter(d => ids.includes(d.WATERSHED_ID))
+      : latestData;
+
+    drawChart(selectedMetric, chartData, watershedNames, null);
   }
 });
 
 /* ---------- Clear selection (Show All) ----------------------------- */
 clearBtn.addEventListener('click', () => {
-  selectedWatershedId = null;
-  selectedFeature     = null;
-
-  drawChart(selectedMetric, latestData, watershedNames, null);
-  clearBtn.disabled = true;
+  selectedFeature = null;
+  selectedWatershedIds.clear();
+  updateSelectedWidget();
 
   const src = vectorLayers.watersheds.getSource();
   if (src && src.getState() === 'ready') {
@@ -350,7 +494,7 @@ clearBtn.addEventListener('click', () => {
     if (extent && extent.every(Number.isFinite)) {
       map.getView().fit(extent, { padding: [40, 40, 40, 40], duration: 400 });
     }
-  } else {
+  } else if (src) {
     src.once('change', e => {
       if (e.target.getState() === 'ready') {
         const extent = src.getExtent();
@@ -362,6 +506,8 @@ clearBtn.addEventListener('click', () => {
   }
 
   updateMapStyle();
+  drawChart(selectedMetric, latestData, watershedNames, null);
+  clearBtn.disabled = true;
 });
 
 /* ---------- Play/Pause animation ----------------------------------- */
@@ -395,9 +541,7 @@ playPauseBtn.addEventListener('click', () => {
   isPlaying = true;
 });
 
-
-
-/* ---------- Stubs for charts --------------------------------------- */
+/* ---------- Stubs for charts (safety) ------------------------------ */
 window.drawChart ??= () => {};
 window.highlightChartPoint ??= () => {};
 
@@ -406,3 +550,6 @@ loadWatershedData();
 metricSelect.disabled = false;
 timeSlider.disabled = false;
 playPauseBtn.disabled = false;
+
+window.selectedWatershedIds = selectedWatershedIds;
+window.selectedFeature = selectedFeature;
