@@ -86,7 +86,8 @@ https://aidos2.github.io/WaterHydro-Kazakhstan-Portal/
 Contact
 --------
 Project Manager: vyapiyev@nu.edu.kz
-Developer / GIS Specialist: aidos_makhanov@icloud.com
+
+Developer / GIS Specialist: aidos_makhanov@gmail.com
 
 License
 --------
