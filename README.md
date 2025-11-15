@@ -1,5 +1,4 @@
 **WaterHydro-Kazakhstan-Portal**
-
 **Open Data GIS Platform for Water Resources of Northern Kazakhstan**
 ---------------------------------------------------------------
 
