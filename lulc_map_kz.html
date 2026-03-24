@@ -1,83 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kk">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LULC Map | WaterBalance Kazakhstan</title>
-
+  <title>LULC картасы | WaterBalance Kazakhstan</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style/nla-theme.css">
-
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    /* Navbar sits at top; map fills the space between navbar and footer */
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
     #map-container {
       position: absolute;
-      top: 52px;    /* navbar height */
-      bottom: 42px; /* footer height */
-      left: 0;
-      right: 0;
+      top: 52px; bottom: 42px; left: 0; right: 0;
       overflow: hidden;
     }
-
-    #map-container iframe {
-      border: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
+    #map-container iframe { border: 0; width: 100%; height: 100%; display: block; }
     footer.nla-footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      margin-top: 0;
-      padding: 0.6rem 0;
-      font-size: 0.8rem;
-      z-index: 999;
+      position: absolute; bottom: 0; left: 0; width: 100%;
+      margin-top: 0; padding: 0.6rem 0; font-size: 0.8rem; z-index: 999;
     }
-
-    /* Compact navbar for full-screen map layout */
     .nla-navbar { padding: 0.35rem 0; }
   </style>
 </head>
 <body>
 
-  <!-- ===== Navbar ===== -->
   <nav class="navbar navbar-expand-lg nla-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="index_kz.html">
         <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="spatialData.html">Data Catalogue</a></li>
-          <li class="nav-item"><a class="nav-link active" href="lulc_map.html">LULC Map</a></li>
-          <li class="nav-item"><a class="nav-link" href="timeseries.html">Timeseries</a></li>
+          <li class="nav-item"><a class="nav-link" href="index_kz.html">Басты бет</a></li>
+          <li class="nav-item"><a class="nav-link" href="spatialData_kz.html">Деректер каталогы</a></li>
+          <li class="nav-item"><a class="nav-link active" href="lulc_map_kz.html">LULC картасы</a></li>
+          <li class="nav-item"><a class="nav-link" href="timeseries_kz.html">Уақыт қатарлары</a></li>
         </ul>
         <div class="lang-switcher">
-          <a class="lang-btn active" href="lulc_map.html">EN</a>
+          <a class="lang-btn" href="lulc_map.html">EN</a>
           <a class="lang-btn" href="lulc_map_ru.html">RU</a>
-          <a class="lang-btn" href="lulc_map_kz.html">KZ</a>
+          <a class="lang-btn active" href="lulc_map_kz.html">KZ</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- ===== Full-screen ArcGIS Map ===== -->
   <div id="map-container">
     <iframe
       src="https://experience.arcgis.com/experience/1a27e186103e473e9852592a341cf117/"
@@ -86,12 +55,11 @@
     </iframe>
   </div>
 
-  <!-- ===== Footer ===== -->
   <footer class="nla-footer">
     <div class="container text-center">
       <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
       <span class="footer-divider">|</span>
-      <a href="https://nla.nu.edu.kz/" target="_blank">National Laboratory Astana</a>
+      <a href="https://nla.nu.edu.kz/" target="_blank">Астана ұлттық зертханасы</a>
       <span class="footer-divider">|</span>
       <span style="opacity:0.6;font-size:0.75rem;">&copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz</span>
     </div>

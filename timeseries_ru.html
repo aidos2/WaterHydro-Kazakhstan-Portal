@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Временные ряды | WaterBalance Kazakhstan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/ol/ol.css" />
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/nla-theme.css" />
+  <style>
+    html, body { height: 100%; margin: 0; background-color: #eef1f6; font-family: 'Roboto', sans-serif; }
+    .dash-topbar { background: #0e1c36; border-bottom: 3px solid #c9a84c; padding: 8px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .dash-topbar .page-title { font-family: 'Roboto Condensed', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; letter-spacing: 0.04em; text-transform: uppercase; margin: 0; }
+    .dash-topbar .page-subtitle { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin: 0; }
+    .dash-body { display: grid; grid-template-columns: 260px 1fr; grid-template-rows: auto auto; gap: 12px; padding: 14px 16px; min-height: calc(100vh - 52px - 43px - 47px); }
+    .dash-sidebar { grid-column: 1; grid-row: 1 / 3; display: flex; flex-direction: column; gap: 10px; }
+    .panel { background: #ffffff; border-radius: 8px; border: 1px solid #dce2ec; box-shadow: 0 1px 6px rgba(14,28,54,0.08); overflow: hidden; }
+    .panel-header { background: #0e1c36; padding: 8px 14px; display: flex; align-items: center; gap: 8px; }
+    .panel-header .panel-title { font-family: 'Roboto Condensed', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #fff; margin: 0; }
+    .panel-header .panel-icon { width: 6px; height: 6px; border-radius: 50%; background: #c9a84c; flex-shrink: 0; }
+    .panel-body { padding: 12px 14px; }
+    .panel-body .form-label { font-family: 'Roboto Condensed', sans-serif; font-size: 0.78rem; font-weight: 700; color: #0e1c36; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+    .stat-badge { background: #f0f3f8; border-radius: 6px; padding: 8px 10px; text-align: center; border-left: 3px solid #0e1c36; }
+    .stat-badge .stat-value { font-family: 'Roboto Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; color: #0e1c36; line-height: 1.1; }
+    .stat-badge .stat-label { font-size: 0.68rem; color: #6c757d; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; }
+    .stat-block { background: #f0f3f8; border-radius: 6px; padding: 7px 10px; margin-bottom: 7px; border-left: 3px solid #0e1c36; }
+    .stat-block-header { font-family: 'Roboto Condensed', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; color: #6c757d; text-transform: uppercase; display: flex; align-items: center; gap: 5px; margin-bottom: 2px; }
+    .stat-block-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .stat-block-value { font-family: 'Roboto Condensed', sans-serif; font-size: 1.15rem; font-weight: 700; color: #0e1c36; line-height: 1.1; }
+    .stat-block-date { font-size: 0.72rem; color: #8a96a8; margin-top: 2px; }
+    .btn-play { background: #0e1c36; color: #fff; border: none; border-radius: 5px; padding: 5px 16px; font-family: 'Roboto Condensed', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: background 0.2s; }
+    .btn-play:hover { background: #1a2f55; }
+    .btn-show-all { background: transparent; color: #0e1c36; border: 1px solid #0e1c36; border-radius: 5px; padding: 5px 14px; font-family: 'Roboto Condensed', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: all 0.2s; }
+    .btn-show-all:hover { background: #0e1c36; color: #fff; }
+    .btn-show-all:disabled { opacity: 0.4; cursor: default; }
+    .btn-dl { display: block; width: 100%; background: transparent; color: #0e1c36; border: 1px solid #c9a84c; border-radius: 5px; padding: 5px 10px; font-family: 'Roboto Condensed', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-align: center; text-decoration: none; transition: all 0.2s; }
+    .btn-dl:hover { background: #c9a84c; color: #fff; border-color: #c9a84c; }
+    .dash-map { grid-column: 2; grid-row: 1; }
+    .map-panel { background: #fff; border-radius: 8px; border: 1px solid #dce2ec; box-shadow: 0 1px 6px rgba(14,28,54,0.08); overflow: hidden; height: 100%; }
+    .map-panel .panel-header { border-radius: 0; }
+    #map { width: 100%; height: 54vh; position: relative; }
+    .dash-chart { grid-column: 2; grid-row: 2; }
+    #selectedBasins { font-size: 0.82rem; color: #6c757d; }
+    #hover-info, #legend { background: rgba(255,255,255,0.97); box-shadow: 0 2px 6px rgba(0,0,0,0.18); border-radius: 5px; z-index: 1000; }
+    #hover-info { position: absolute; top: 10px; right: 10px; padding: 7px 11px; font-size: 13px; pointer-events: none; display: none; }
+    #legend { position: absolute; bottom: 28px; right: 4px; padding: 6px 8px; font-size: 11px; }
+    #legend .item { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+    #legend .swatch { width: 18px; height: 14px; border: 1px solid #999; }
+    #layer-switcher { position: absolute; top: 86px; left: 95%; transform: translateX(-5%); background: rgba(255,255,255,0.97); padding: 2px; border: 1px solid #ccc; border-radius: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.12); font-size: 13px; max-height: 280px; max-width: 480px; overflow-y: auto; z-index: 1000; }
+    @media (max-width: 900px) {
+      .dash-body { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .dash-sidebar { grid-column: 1; grid-row: auto; flex-direction: row; flex-wrap: wrap; }
+      .dash-map, .dash-chart { grid-column: 1; grid-row: auto; }
+      #map { height: 45vh; }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="assets/ol/ol.js"></script>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg nla-navbar">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand" href="index_ru.html">
+        <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index_ru.html">Главная</a></li>
+          <li class="nav-item"><a class="nav-link" href="spatialData_ru.html">Каталог данных</a></li>
+          <li class="nav-item"><a class="nav-link" href="lulc_map_ru.html">Карта LULC</a></li>
+          <li class="nav-item"><a class="nav-link active" href="timeseries_ru.html">Временные ряды</a></li>
+        </ul>
+        <div class="lang-switcher">
+          <a class="lang-btn" href="timeseries.html">EN</a>
+          <a class="lang-btn active" href="timeseries_ru.html">RU</a>
+          <a class="lang-btn" href="timeseries_kz.html">KZ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dash-topbar">
+    <div>
+      <p class="page-title">Дашборд временных рядов</p>
+      <p class="page-subtitle">Осадки · Эвапотранспирация · Влажность почвы — Бассейны Северного Казахстана</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <span style="font-size:0.72rem;color:rgba(255,255,255,0.45);font-family:'Roboto Condensed',sans-serif;letter-spacing:0.05em;">НАБОР ДАННЫХ</span>
+      <select id="fileSelect" class="form-select form-select-sm" style="width:220px;font-size:0.82rem;border-color:#c9a84c;">
+        <option value="input_data/GLEAM_WaterBalanceAllBAsin.json">Водный баланс (GLEAM)</option>
+        <option value="input_data/P_MSWEP_ALL.json">Осадки (MSWEP)</option>
+        <option value="input_data/Soil_Moisture_ERA5.json">Влажность почвы (ERA5)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="dash-body">
+    <aside class="dash-sidebar">
+
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title">Управление</span></div>
+        <div class="panel-body">
+          <div class="mb-3">
+            <label for="metricSelect" class="form-label">Показатель</label>
+            <select id="metricSelect" class="form-select form-select-sm" disabled></select>
+          </div>
+          <div class="mb-3">
+            <label for="timeSlider" class="form-label">Дата &nbsp;<span id="sliderDate" style="color:#c9a84c;font-size:0.88rem;">--</span></label>
+            <input type="range" id="timeSlider" class="form-range" min="0" step="1" disabled />
+          </div>
+          <div class="d-flex gap-2">
+            <button id="playPauseBtn" class="btn-play" aria-label="Воспроизвести анимацию">&#9654; Запуск</button>
+            <button id="clearSelection" class="btn-show-all" disabled aria-label="Сбросить выделение">Все</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title">Информация о бассейне</span></div>
+        <div class="panel-body">
+          <div class="stat-row" style="margin-bottom:10px;">
+            <div class="stat-badge">
+              <div class="stat-value" id="stat-basins">—</div>
+              <div class="stat-label">Бассейны</div>
+            </div>
+            <div class="stat-badge">
+              <div class="stat-value" id="stat-years">—</div>
+              <div class="stat-label">Годы</div>
+            </div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-block-header"><span class="stat-block-dot" style="background:#c9a84c;"></span>МАКС</div>
+            <div class="stat-block-value" id="stat-max-val">—</div>
+            <div class="stat-block-date" id="stat-max-date"></div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-block-header"><span class="stat-block-dot" style="background:#6baed6;"></span>МИН</div>
+            <div class="stat-block-value" id="stat-min-val">—</div>
+            <div class="stat-block-date" id="stat-min-date"></div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-block-header"><span class="stat-block-dot" style="background:#74c476;"></span>СРЕДНЕЕ</div>
+            <div class="stat-block-value" id="stat-mean-val">—</div>
+            <div class="stat-block-date" id="stat-mean-date" style="font-size:0.68rem;color:#aaa;margin-top:1px;">все периоды</div>
+          </div>
+          <div style="margin-top:10px;border-top:1px solid #eef1f6;padding-top:8px;">
+            <label class="form-label">Выбранные бассейны</label>
+            <div id="selectedBasins" class="small text-muted mt-1">Нет</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title">Экспорт</span></div>
+        <div class="panel-body" style="display:flex;flex-direction:column;gap:7px;">
+          <a id="downloadCSV"   class="btn-dl" href="#">&#8595; Скачать CSV</a>
+          <a id="downloadChart" class="btn-dl" href="#">&#8595; Скачать график</a>
+        </div>
+      </div>
+
+    </aside>
+
+    <div class="dash-map">
+      <div class="map-panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title">Карта бассейнов — кликните на бассейн для просмотра графика</span></div>
+        <div id="map">
+          <div id="hover-info"></div>
+          <div id="legend"></div>
+          <div id="layer-switcher"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-chart">
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title">График временного ряда</span></div>
+        <div class="panel-body" style="padding:12px 16px;">
+          <canvas id="chart" style="width:100%;height:32vh;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="nla-footer">
+    <div class="container-fluid text-center px-3">
+      <div>
+        <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
+        <span class="footer-divider">|</span>
+        <a href="https://nla.nu.edu.kz/" target="_blank">Национальная лаборатория Астана</a>
+        <span class="footer-divider">|</span>
+        Назарбаев Университет
+      </div>
+      <div style="margin-top:4px;font-size:0.75rem;opacity:0.55;">
+        &copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz &nbsp;·&nbsp; Все права защищены
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/chartHandler.js"></script>
+  <script src="js/mapHandler.js"></script>
+  <script>
+    function safeNum(v) { const n = parseFloat(String(v).replace(',', '.')); return Number.isFinite(n) ? n : null; }
+    window.updateBasinStats = function () {
+      try {
+        const data = window.latestData || [], metric = window.selectedMetric || '';
+        const ids = window.selectedWatershedIds, names = window.watershedNames || {};
+        if (!data.length || !metric) return;
+        const rows = (ids && ids.size) ? data.filter(d => ids.has(d.WATERSHED_ID)) : data;
+        const points = [];
+        rows.forEach(d => { const v = safeNum(d[metric]); if (v !== null && d.date) points.push({ v, date: d.date, name: names[d.WATERSHED_ID] || d.WATERSHED_ID }); });
+        if (!points.length) return;
+        const maxPt = points.reduce((a, b) => b.v > a.v ? b : a);
+        const minPt = points.reduce((a, b) => b.v < a.v ? b : a);
+        const mean  = points.reduce((s, p) => s + p.v, 0) / points.length;
+        const basinCount = new Set(rows.map(d => d.WATERSHED_ID)).size;
+        const dates = rows.map(d => d.date).filter(Boolean);
+        const years = dates.length ? (() => { const yrs = new Set(dates.map(d => d.split('.')[2])); return yrs.size; })() : '—';
+        document.getElementById('stat-basins').textContent = basinCount || '—';
+        document.getElementById('stat-years').textContent  = years;
+        document.getElementById('stat-max-val').textContent  = maxPt.v.toFixed(2) + ' мм';
+        document.getElementById('stat-max-date').textContent = maxPt.date + (maxPt.name ? '  ·  ' + maxPt.name : '');
+        document.getElementById('stat-min-val').textContent  = minPt.v.toFixed(2) + ' мм';
+        document.getElementById('stat-min-date').textContent = minPt.date + (minPt.name ? '  ·  ' + minPt.name : '');
+        document.getElementById('stat-mean-val').textContent = mean.toFixed(2) + ' мм';
+      } catch(e) {}
+    };
+  </script>
+</body>
+</html>

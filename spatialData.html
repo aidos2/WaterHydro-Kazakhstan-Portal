@@ -1,268 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Spatial Data Catalogue</title>
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spatial Data Catalogue | WaterBalance Kazakhstan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/nla-theme.css">
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Background */
+    html, body { height: 100%; display: flex; flex-direction: column; }
     body {
-      background: url('image_logo/background_image.jpg') no-repeat center center fixed;
+      background: url('image_logo/Irtysh 1.png') no-repeat center center fixed;
       background-size: cover;
-      font-family: Arial, sans-serif;
-      color: #212529;
-      position: relative;
     }
-
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.85);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(245, 247, 250, 0.85);
       z-index: -1;
     }
-
-    /* Content wrapper */
-    .section-box {
-      flex: 1;
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 35px;
-      border-radius: 0;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
-      width: 100%;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #0d6efd;
-      color: white;
-      text-align: center;
-      padding: 15px 0;
-      font-size: 0.9rem;
-      margin-top: auto;
-    }
+    .content-wrap { flex: 1; }
   </style>
 </head>
-
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar navbar-expand-lg nla-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Open Data GIS Portal</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <a class="navbar-brand" href="index.html">
+        <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="spatialData.html">Spatial Data Catalogue</a></li>
+          <li class="nav-item"><a class="nav-link active" href="spatialData.html">Data Catalogue</a></li>
+          <li class="nav-item"><a class="nav-link" href="lulc_map.html">LULC Map</a></li>
+          <li class="nav-item"><a class="nav-link" href="timeseries.html">Timeseries</a></li>
         </ul>
+        <div class="lang-switcher">
+          <a class="lang-btn active" href="spatialData.html">EN</a>
+          <a class="lang-btn" href="spatialData_ru.html">RU</a>
+          <a class="lang-btn" href="spatialData_kz.html">KZ</a>
+        </div>
       </div>
     </div>
   </nav>
 
-  <!-- Catalogue Section -->
-  <div class="container-fluid section-box">
-    <h2 class="text-primary mb-4">📂 Spatial Data Catalogue</h2>
-    <p class="mb-4">
-      This catalogue provides descriptions and direct access to the spatial datasets used in the GIS portal.
-      You can preview datasets on the maps in the portal, or download them directly here.
-    </p>
-
-    <!-- Search -->
-    <div class="mb-3">
-      <input
-        type="text"
-        id="searchInput"
-        class="form-control"
-        placeholder="Search datasets by keyword (e.g., Soil, Basin, LULC)"
-        aria-label="Search datasets"
-      />
-    </div>
-
-    <!-- Catalogue Table -->
-    <div class="table-responsive">
-      <table id="dataTable" class="table table-hover align-middle">
-        <thead class="table-primary">
-          <tr>
-            <th>Dataset Name</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Downloads</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          <!-- All Watersheds -->
-          <tr>
-            <td>All Watersheds</td>
-            <td>Polygon boundaries of all watersheds in Northern Kazakhstan.</td>
-            <td>Vector</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <a href="input_data/ALL_watersheds_wgs84.geojson" class="btn btn-outline-primary">GeoJSON</a>
-                <a href="input_data/ALL_watersheds_wgs84.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
-                <a href="input_data/ALL_watersheds_wgs84.zip" class="btn btn-outline-dark">Shapefile</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Water Management Basins -->
-          <tr>
-            <td>Water Management Basins</td>
-            <td>Administrative basins for water resource planning.</td>
-            <td>Vector</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <a href="input_data/Water management basins.geojson" class="btn btn-outline-primary">GeoJSON</a>
-                <a href="input_data/Water management basins.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
-                <a href="input_data/Water management basins.zip" class="btn btn-outline-dark">Shapefile</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Sub-Basins -->
-          <tr>
-            <td>Sub-Basins</td>
-            <td>Detailed sub-basin divisions inside watershed areas.</td>
-            <td>Vector</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <a href="input_data/watershed_subbasins.geojson" class="btn btn-outline-primary">GeoJSON</a>
-                <a href="input_data/watershed_subbasins.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
-                <a href="input_data/watershed_subbasins.zip" class="btn btn-outline-dark">Shapefile</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Hydro Region Boundary -->
-          <tr>
-            <td>Hydro Region Boundary</td>
-            <td>Hydrological region boundaries dividing the study area into major drainage zones.</td>
-            <td>Vector</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <a href="input_data/Hydro Region Boundry.geojson" class="btn btn-outline-primary">GeoJSON</a>
-                <a href="input_data/Hydro Region Boundry.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
-                <a href="input_data/Hydro Region Boundry.zip" class="btn btn-outline-dark">Shapefile</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- River Network -->
-          <tr>
-            <td>River Network (GIRES v10)</td>
-            <td>Hydrological river network dataset derived from GIRES v10.</td>
-            <td>Vector</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <a href="input_data/River network GIRES_v10.geojson" class="btn btn-outline-primary">GeoJSON</a>
-                <a href="input_data/River network GIRES_v10.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
-                <a href="input_data/River network GIRES_v10.zip" class="btn btn-outline-dark">Shapefile</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Lakes -->
-          <tr>
-            <td>Lakes</td>
-            <td>Polygon boundaries of lakes and water bodies in the study area.</td>
-            <td>Vector</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <a href="input_data/lakes.geojson" class="btn btn-outline-primary">GeoJSON</a>
-                <a href="input_data/lakes.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
-                <a href="input_data/lakes.zip" class="btn btn-outline-dark">Shapefile</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- ESA WorldCover -->
-          <tr>
-            <td>ESA WorldCover (100 m)</td>
-            <td>Land Use / Land Cover dataset (ESA WorldCover, 100 m resolution).</td>
-            <td>Raster</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <a href="input_data/ESA_WorldCover_100m.tif" class="btn btn-outline-success">GeoTIFF</a>
-                <a href="https://tiles.arcgis.com/tiles/Kri0Q7xwN5k6MG7L/arcgis/rest/services/LULC_Boundaries_WTL1/MapServer?view=wmtsview&cacheKey=9d73a0d114c9e54d"
-                   target="_blank" class="btn btn-outline-primary">WMTS</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Precipitation MSWEP -->
-          <tr>
-            <td>Precipitation (MSWEP)</td>
-            <td>Monthly precipitation dataset used for hydrological analysis.</td>
-            <td>Time series</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <a href="input_data/P_MSWEP_ALL.json" class="btn btn-outline-primary">JSON</a>
-                <a href="input_data/P_MSWEP_ALL.csv" class="btn btn-outline-secondary">CSV</a>
-                <a href="input_data/P_MSWEP_ALL.xlsx" class="btn btn-outline-success">Excel</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Soil Moisture ERA5 -->
-          <tr>
-            <td>Soil Moisture (ERA5)</td>
-            <td>ERA5 monthly soil moisture (0–100 cm, 0–289 cm) aggregated per basin.</td>
-            <td>Time series</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <a href="input_data/Soil_Moisture_ERA5.json" class="btn btn-outline-primary">JSON</a>
-                <a href="input_data/Soil_Moisture_ERA5.csv" class="btn btn-outline-secondary">CSV</a>
-                <a href="input_data/Soil_Moisture_ERA5.xlsx" class="btn btn-outline-success">Excel</a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- GLEAM Water Balance -->
-          <tr>
-            <td>GLEAM Water Balance</td>
-            <td>Water balance dataset (evapotranspiration vs precipitation).</td>
-            <td>Time series</td>
-            <td>
-              <div class="btn-group btn-group-sm">
-                <a href="input_data/GLEAM_WaterBalanceAllBAsin.json" class="btn btn-outline-primary">JSON</a>
-                <a href="input_data/GLEAM_WaterBalanceAllBAsin.csv" class="btn btn-outline-secondary">CSV</a>
-                <a href="input_data/GLEAM_WaterBalanceAllBAsin.xlsx" class="btn btn-outline-success">Excel</a>
-              </div>
-            </td>
-          </tr>
-
-        </tbody>
-      </table>
+  <!-- ===== Page Header ===== -->
+  <div class="nla-hero" style="padding:2rem 0 1.5rem;">
+    <div class="container">
+      <h1 style="font-size:1.6rem;margin-bottom:0.3rem;">Spatial Data Catalogue</h1>
+      <p class="lead" style="font-size:0.9rem;">
+        Download and preview all spatial and time-series datasets used in the portal.
+      </p>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    © 2025 National Laboratory Astana | Open Data GIS Portal – Kazakhstan Basins
+  <!-- ===== Catalogue ===== -->
+  <div class="content-wrap">
+    <div class="container mt-4 mb-5">
+
+      <!-- Search -->
+      <div class="mb-3">
+        <input type="text" id="searchInput" class="form-control nla-search"
+               placeholder="Search datasets by keyword (e.g., Soil, Basin, LULC)"
+               aria-label="Search datasets">
+      </div>
+
+      <!-- Table -->
+      <div class="table-responsive">
+        <table id="dataTable" class="table table-hover align-middle nla-table">
+          <thead>
+            <tr>
+              <th>Dataset Name</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th>Downloads</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td><strong>All Watersheds</strong></td>
+              <td>Polygon boundaries of all watersheds in Northern Kazakhstan.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Vector</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/ALL_watersheds_wgs84.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                  <a href="input_data/ALL_watersheds_wgs84.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                  <a href="input_data/ALL_watersheds_wgs84.zip" class="btn btn-outline-dark">Shapefile</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Water Management Basins</strong></td>
+              <td>Administrative basins for water resource planning.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Vector</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/Water management basins.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                  <a href="input_data/Water management basins.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                  <a href="input_data/Water management basins.zip" class="btn btn-outline-dark">Shapefile</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Sub-Basins</strong></td>
+              <td>Detailed sub-basin divisions inside watershed areas.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Vector</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/watershed_subbasins.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                  <a href="input_data/watershed_subbasins.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                  <a href="input_data/watershed_subbasins.zip" class="btn btn-outline-dark">Shapefile</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Hydro Region Boundary</strong></td>
+              <td>Hydrological region boundaries dividing the study area into major drainage zones.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Vector</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/Hydro Region Boundry.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                  <a href="input_data/Hydro Region Boundry.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                  <a href="input_data/Hydro Region Boundry.zip" class="btn btn-outline-dark">Shapefile</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>River Network (GIRES v10)</strong></td>
+              <td>Hydrological river network dataset derived from GIRES v10.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Vector</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/River network GIRES_v10.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                  <a href="input_data/River network GIRES_v10.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                  <a href="input_data/River network GIRES_v10.zip" class="btn btn-outline-dark">Shapefile</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Lakes</strong></td>
+              <td>Polygon boundaries of lakes and water bodies in the study area.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Vector</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/lakes.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                  <a href="input_data/lakes.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                  <a href="input_data/lakes.zip" class="btn btn-outline-dark">Shapefile</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>ESA WorldCover (100 m)</strong></td>
+              <td>Land Use / Land Cover dataset (ESA WorldCover, 100 m resolution).</td>
+              <td><span class="badge" style="background:#1a6b3c;font-family:'Roboto Condensed',sans-serif;">Raster</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/ESA_WorldCover_100m.tif" class="btn btn-outline-success">GeoTIFF</a>
+                  <a href="https://tiles.arcgis.com/tiles/Kri0Q7xwN5k6MG7L/arcgis/rest/services/LULC_Boundaries_WTL1/MapServer?view=wmtsview&cacheKey=9d73a0d114c9e54d"
+                     target="_blank" class="btn btn-outline-primary">WMTS</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Precipitation (MSWEP)</strong></td>
+              <td>Monthly precipitation dataset used for hydrological analysis.</td>
+              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Timeseries</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/P_MSWEP_ALL.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/P_MSWEP_ALL.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/P_MSWEP_ALL.xlsx" class="btn btn-outline-success">Excel</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Soil Moisture (ERA5)</strong></td>
+              <td>ERA5 monthly soil moisture (0–100 cm, 0–289 cm) aggregated per basin.</td>
+              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Timeseries</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/Soil_Moisture_ERA5.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/Soil_Moisture_ERA5.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/Soil_Moisture_ERA5.xlsx" class="btn btn-outline-success">Excel</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>GLEAM Water Balance</strong></td>
+              <td>Water balance dataset (evapotranspiration vs precipitation).</td>
+              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Timeseries</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/GLEAM_WaterBalanceAllBAsin.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/GLEAM_WaterBalanceAllBAsin.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/GLEAM_WaterBalanceAllBAsin.xlsx" class="btn btn-outline-success">Excel</a>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="nla-footer">
+    <div class="container text-center">
+      <div>
+        <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
+        <span class="footer-divider">|</span>
+        <a href="https://nla.nu.edu.kz/" target="_blank">National Laboratory Astana</a>
+        <span class="footer-divider">|</span>
+        Nazarbayev University
+      </div>
+      <div style="margin-top:6px;font-size:0.78rem;opacity:0.6;">
+        &copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz &nbsp;·&nbsp; All rights reserved
+      </div>
+    </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Search filter -->
   <script>
     document.getElementById('searchInput').addEventListener('keyup', function() {
       const filter = this.value.toLowerCase();

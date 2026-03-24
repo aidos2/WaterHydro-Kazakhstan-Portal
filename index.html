@@ -3,151 +3,171 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Open Data GIS Portal for Watershed Basins in Kazakhstan. Explore LULC maps, water timeseries datasets, and water use analysis.">
-  <title>Open Data GIS Portal for Watershed Basin Kazakhstan</title>
+  <meta name="description" content="WaterBalance Kazakhstan – Open Data GIS Portal for Watershed Basins. Explore LULC maps, water timeseries datasets, and water use analysis.">
+  <title>WaterBalance Kazakhstan | Open Data GIS Portal</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/nla-theme.css">
   <style>
     body {
       background: url('image_logo/Irtysh 1.png') no-repeat center center fixed;
       background-size: cover;
-      font-family: Arial, sans-serif;
-      color: #212529;
-      position: relative;
     }
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.0);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(245, 247, 250, 0.82);
       z-index: -1;
-    }
-    .card {
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      background-color: #ffffffee;
-    }
-    .card:hover { transform: scale(1.03); }
-    .card img {
-      max-height: 180px;
-      object-fit: contain;
-      margin: 20px auto;
-    }
-    .card-body {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .section-box {
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-    footer {
-      background-color: #0d6efd;
-      color: white;
-      text-align: center;
-      padding: 15px 0;
-      margin-top: 40px;
-      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar navbar-expand-lg nla-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Open Data GIS Portal – Kazakhstan Basins</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <a class="navbar-brand" href="index.html">
+        <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
           <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="spatialData.html">Spatial Data Catalogue</a></li>
+          <li class="nav-item"><a class="nav-link" href="spatialData.html">Data Catalogue</a></li>
+          <li class="nav-item"><a class="nav-link" href="lulc_map.html">LULC Map</a></li>
+          <li class="nav-item"><a class="nav-link" href="timeseries.html">Timeseries</a></li>
         </ul>
+        <!-- Language switcher -->
+        <div class="lang-switcher">
+          <a class="lang-btn active" href="index.html">EN</a>
+          <a class="lang-btn" href="index_ru.html">RU</a>
+          <a class="lang-btn" href="index_kz.html">KZ</a>
+        </div>
       </div>
     </div>
   </nav>
 
-  <!-- 3 Feature Boxes -->
-  <div class="container mt-5">
-    <div class="row g-4">
-      <!-- 1. LULC Boundaries -->
-      <div class="col-md-4 d-flex">
-        <div class="card text-center w-100">
-          <img src="image_logo/LULC_Boudnries.png" class="card-img-top img-fluid" alt="LULC Boundaries Map Logo">
-          <div class="card-body">
-            <h5 class="card-title">LULC Boundaries</h5>
-            <p class="card-text">Land Use and Land Cover with Boundary spatial layers.</p>
-            <a href="lulc_map.html" class="btn btn-primary">Explore Map</a>
-          </div>
-        </div>
-      </div>
-      <!-- 2. Water Timeseries -->
-      <div class="col-md-4 d-flex">
-        <div class="card text-center w-100">
-          <img src="image_logo/logo_watershed_timeseries.png" class="card-img-top img-fluid" alt="Water Timeseries Datasets Logo">
-          <div class="card-body">
-            <h5 class="card-title">Water Timeseries Datasets</h5>
-            <p class="card-text">Interactive WebGIS app with charts of precipitation, evapotranspiration, and soil moisture datasets.</p>
-            <a href="timeseries.html" class="btn btn-primary">Explore Timeseries</a>
-          </div>
-        </div>
-      </div>
-      <!-- 3. Water Use & Abstraction -->
-      <div class="col-md-4 d-flex">
-        <div class="card text-center w-100">
-          <img src="image_logo/water_use.png" class="card-img-top img-fluid" alt="Water Use and Abstraction Logo">
-          <div class="card-body">
-            <h5 class="card-title">Water Use & Abstraction</h5>
-            <p class="card-text">Jupyter Notebook visualization showing water use and abstraction analysis.</p>
-            <a href="Report Water Use Analysis.html" class="btn btn-primary">Explore Notebook</a>
-          </div>
-        </div>
-      </div>
+  <!-- ===== Hero Banner ===== -->
+  <div class="nla-hero">
+    <div class="container">
+      <div class="badge-domain">waterbalance.org.kz</div>
+      <h1 id="hero-title">Open Data GIS Portal – Kazakhstan Water Basins</h1>
+      <p class="lead" id="hero-lead">
+        Water Balance of Northern Kazakhstan's Water Management Basins<br>
+        estimated using Remote Sensing, Global Datasets, and Hydrological Information.
+      </p>
+      <a href="spatialData.html" class="btn btn-nla mt-2 me-2" id="hero-btn1">Explore Data Catalogue</a>
+      <a href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan"
+         target="_blank" class="btn btn-nla-outline mt-2" style="color:#fff;border-color:rgba(255,255,255,0.5);"
+         id="hero-btn2">Project Page ↗</a>
     </div>
   </div>
 
-  <!-- Sections -->
-  <div class="container mt-5 section-box" id="overview">
-    <h2 class="text-primary">Portal Overview</h2>
-    <p>
-      This portal provides spatial data on watershed basins and water management basin boundaries as part of the project 
-      <em>“Water Balance of Northern Kazakhstan’s Water Management Basins Estimated Using Remote Sensing, Global Datasets, and Hydrological Information.”</em> 
-      It was developed with grant funding from the Ministry of Science and Higher Education of the Republic of Kazakhstan.  
-      Learn more in detail from this 
-      <a href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan" target="_blank">project link</a>.
-    </p>
+  <!-- ===== Feature Cards ===== -->
+  <div class="container mt-5">
+    <div class="row g-4">
+
+      <!-- 1. LULC Boundaries -->
+      <div class="col-md-4 d-flex">
+        <div class="nla-card text-center w-100">
+          <img src="image_logo/logo_lulc.svg" class="img-fluid" alt="LULC Boundaries Map">
+          <div class="card-body">
+            <h5 class="card-title" id="card1-title">LULC Boundaries</h5>
+            <p class="card-text" id="card1-text">Land Use and Land Cover with boundary spatial layers for Kazakhstan watersheds.</p>
+            <a href="lulc_map.html" class="btn btn-nla" id="card1-btn">Explore Map</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Water Timeseries -->
+      <div class="col-md-4 d-flex">
+        <div class="nla-card text-center w-100">
+          <img src="image_logo/logo_timeseries.svg" class="img-fluid" alt="Water Timeseries Datasets">
+          <div class="card-body">
+            <h5 class="card-title" id="card2-title">Water Timeseries Datasets</h5>
+            <p class="card-text" id="card2-text">Interactive WebGIS with charts of precipitation, evapotranspiration, and soil moisture.</p>
+            <a href="timeseries.html" class="btn btn-nla" id="card2-btn">Explore Timeseries</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Water Use & Abstraction -->
+      <div class="col-md-4 d-flex">
+        <div class="nla-card text-center w-100">
+          <img src="image_logo/logo_wateruse.svg" class="img-fluid" alt="Water Use and Abstraction">
+          <div class="card-body">
+            <h5 class="card-title" id="card3-title">Water Use &amp; Abstraction</h5>
+            <p class="card-text" id="card3-text">Jupyter Notebook visualization of water use and abstraction analysis across basins.</p>
+            <a href="Report Water Use Analysis.html" class="btn btn-nla" id="card3-btn">Explore Notebook</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="container mt-5 section-box" id="data">
-    <h2 class="text-primary">Data Overview</h2>
-    <p>Available datasets include spatial and time-series information for hydrological analysis in Northern Kazakhstan. They cover vector layers such as watersheds, basins, sub-basins, hydrological regions, rivers, and lakes, as well as 100-m ESA WorldCover land-cover data. Time-series datasets provide monthly precipitation (MSWEP), soil moisture (ERA5), and water-balance indicators (GLEAM), aggregated at the basin level. All datasets are offered in multiple formats—GeoJSON, GeoPackage, Shapefile, GeoTIFF, JSON, CSV, and Excel—for seamless use in GIS platforms, modeling workflows, and visualization tools.</p>
+  <!-- ===== Portal Overview ===== -->
+  <div class="container mt-5">
+    <div class="nla-section" id="overview">
+      <h2 id="overview-title">Portal Overview</h2>
+      <p id="overview-text">
+        This portal provides spatial data on watershed basins and water management basin boundaries as part of the project
+        <em>"Water Balance of Northern Kazakhstan's Water Management Basins Estimated Using Remote Sensing, Global Datasets, and Hydrological Information."</em>
+        It was developed with grant funding from the Ministry of Science and Higher Education of the Republic of Kazakhstan.
+        Learn more at the
+        <a href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan" target="_blank">project page</a>.
+      </p>
+    </div>
   </div>
 
-  <div class="container mt-5 mb-5 section-box" id="contact">
-    <h2 class="text-primary">Contact</h2>
-    <p>
-      For inquiries, please contact the project manager: 
-      <a href="mailto:vyapiyev@nu.edu.kz" class="btn btn-link p-0">vyapiyev@nu.edu.kz</a>
-    </p>
+  <!-- ===== Data Overview ===== -->
+  <div class="container">
+    <div class="nla-section" id="data">
+      <h2 id="data-title">Data Overview</h2>
+      <p id="data-text">
+        Available datasets include spatial and time-series information for hydrological analysis in Northern Kazakhstan.
+        They cover vector layers such as watersheds, basins, sub-basins, hydrological regions, rivers, and lakes,
+        as well as 100-m ESA WorldCover land-cover data. Time-series datasets provide monthly precipitation (MSWEP),
+        soil moisture (ERA5), and water-balance indicators (GLEAM), aggregated at the basin level.
+        All datasets are offered in multiple formats — GeoJSON, GeoPackage, Shapefile, GeoTIFF, JSON, CSV, and Excel —
+        for seamless use in GIS platforms, modeling workflows, and visualization tools.
+      </p>
+    </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    © 2025 National Laboratory Astana | Open Data GIS Portal – Kazakhstan Basins
+  <!-- ===== Contact ===== -->
+  <div class="container mb-4">
+    <div class="nla-section" id="contact">
+      <h2 id="contact-title">Contact</h2>
+      <p id="contact-text">
+        For inquiries, please contact the project manager:
+        <a href="mailto:vyapiyev@nu.edu.kz">vyapiyev@nu.edu.kz</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="nla-footer">
+    <div class="container text-center">
+      <div>
+        <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
+        <span class="footer-divider">|</span>
+        <a href="https://nla.nu.edu.kz/" target="_blank">National Laboratory Astana</a>
+        <span class="footer-divider">|</span>
+        Nazarbayev University
+      </div>
+      <div style="margin-top:6px;font-size:0.78rem;opacity:0.6;">
+        &copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz &nbsp;·&nbsp; All rights reserved
+      </div>
+    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
 </html>

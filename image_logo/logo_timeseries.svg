@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 200">
+  <defs>
+    <linearGradient id="chartbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0f5fc"/>
+      <stop offset="100%" stop-color="#e4edf9"/>
+    </linearGradient>
+    <linearGradient id="precipfill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e88e5" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#1e88e5" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="etfill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#43a047" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#43a047" stop-opacity="0.04"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Card background -->
+  <rect width="260" height="200" rx="12" fill="#f5f8fc"/>
+
+  <!-- Top header bar -->
+  <rect x="0" y="0" width="260" height="30" rx="10" fill="#0e1c36"/>
+  <rect x="0" y="20" width="260" height="10" fill="#0e1c36"/>
+  <rect x="0" y="27" width="260" height="3" fill="#c9a84c"/>
+  <text x="13" y="19" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#fff" letter-spacing="0.5">WATER BALANCE TIMESERIES</text>
+  <!-- Dots -->
+  <circle cx="225" cy="14" r="4" fill="#e53935" opacity="0.8"/>
+  <circle cx="237" cy="14" r="4" fill="#f9c846" opacity="0.8"/>
+  <circle cx="249" cy="14" r="4" fill="#43a047" opacity="0.8"/>
+
+  <!-- Chart area background -->
+  <rect x="10" y="34" width="240" height="118" rx="4" fill="url(#chartbg)"/>
+
+  <!-- Y-axis grid lines -->
+  <g stroke="#b0c4d8" stroke-width="0.7" stroke-dasharray="4,3">
+    <line x1="35" y1="45"  x2="248" y2="45"/>
+    <line x1="35" y1="65"  x2="248" y2="65"/>
+    <line x1="35" y1="85"  x2="248" y2="85"/>
+    <line x1="35" y1="105" x2="248" y2="105"/>
+    <line x1="35" y1="125" x2="248" y2="125"/>
+    <line x1="35" y1="145" x2="248" y2="145"/>
+  </g>
+
+  <!-- Y-axis labels -->
+  <g font-family="Arial" font-size="7.5" fill="#6a7d94" text-anchor="end">
+    <text x="32" y="48">100</text>
+    <text x="32" y="68">80</text>
+    <text x="32" y="88">60</text>
+    <text x="32" y="108">40</text>
+    <text x="32" y="128">20</text>
+    <text x="32" y="148">0</text>
+  </g>
+
+  <!-- X-axis labels (months) -->
+  <g font-family="Arial" font-size="7" fill="#6a7d94" text-anchor="middle">
+    <text x="50"  y="156">Jan</text>
+    <text x="77"  y="156">Mar</text>
+    <text x="104" y="156">May</text>
+    <text x="131" y="156">Jul</text>
+    <text x="158" y="156">Sep</text>
+    <text x="185" y="156">Nov</text>
+    <text x="212" y="156">Jan</text>
+    <text x="239" y="156">Mar</text>
+  </g>
+
+  <!-- Y-axis line -->
+  <line x1="35" y1="45" x2="35" y2="148" stroke="#8ea8c3" stroke-width="1.2"/>
+  <!-- X-axis line -->
+  <line x1="35" y1="148" x2="248" y2="148" stroke="#8ea8c3" stroke-width="1.2"/>
+
+  <!-- Precipitation area fill -->
+  <path d="M50,95 L77,68 L104,52 L131,75 L158,60 L185,88 L212,110 L239,98 L239,148 L50,148 Z"
+        fill="url(#precipfill)"/>
+  <!-- Precipitation line -->
+  <polyline points="50,95 77,68 104,52 131,75 158,60 185,88 212,110 239,98"
+            fill="none" stroke="#1e88e5" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Precip data points -->
+  <g fill="#1e88e5" stroke="white" stroke-width="1.5">
+    <circle cx="50"  cy="95" r="3.5"/>
+    <circle cx="77"  cy="68" r="3.5"/>
+    <circle cx="104" cy="52" r="3.5"/>
+    <circle cx="131" cy="75" r="3.5"/>
+    <circle cx="158" cy="60" r="3.5"/>
+    <circle cx="185" cy="88" r="3.5"/>
+    <circle cx="212" cy="110" r="3.5"/>
+    <circle cx="239" cy="98"  r="3.5"/>
+  </g>
+
+  <!-- ET area fill -->
+  <path d="M50,115 L77,100 L104,82 L131,95 L158,80 L185,105 L212,120 L239,112 L239,148 L50,148 Z"
+        fill="url(#etfill)"/>
+  <!-- ET line -->
+  <polyline points="50,115 77,100 104,82 131,95 158,80 185,105 212,120 239,112"
+            fill="none" stroke="#43a047" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"
+            stroke-dasharray="6,3"/>
+  <!-- ET data points -->
+  <g fill="#43a047" stroke="white" stroke-width="1.5">
+    <circle cx="50"  cy="115" r="3"/>
+    <circle cx="104" cy="82"  r="3"/>
+    <circle cx="158" cy="80"  r="3"/>
+    <circle cx="212" cy="120" r="3"/>
+  </g>
+
+  <!-- Soil moisture line -->
+  <polyline points="50,128 77,122 104,118 131,125 158,120 185,130 212,135 239,128"
+            fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- SM data points -->
+  <g fill="#c9a84c" stroke="white" stroke-width="1.5">
+    <circle cx="50"  cy="128" r="2.8"/>
+    <circle cx="131" cy="125" r="2.8"/>
+    <circle cx="212" cy="135" r="2.8"/>
+  </g>
+
+  <!-- Legend -->
+  <rect x="10" y="161" width="240" height="30" rx="0" fill="#0e1c36"/>
+
+  <line x1="18" y1="176" x2="32" y2="176" stroke="#1e88e5" stroke-width="2.5"/>
+  <circle cx="25" cy="176" r="3" fill="#1e88e5" stroke="white" stroke-width="1"/>
+  <text x="36" y="180" font-family="Arial" font-size="8" fill="#fff">Precipitation (MSWEP)</text>
+
+  <line x1="118" y1="176" x2="132" y2="176" stroke="#43a047" stroke-width="2" stroke-dasharray="4,2"/>
+  <circle cx="125" cy="176" r="2.5" fill="#43a047" stroke="white" stroke-width="1"/>
+  <text x="136" y="180" font-family="Arial" font-size="8" fill="#fff">ET (GLEAM)</text>
+
+  <line x1="185" y1="176" x2="199" y2="176" stroke="#c9a84c" stroke-width="2"/>
+  <circle cx="192" cy="176" r="2.5" fill="#c9a84c" stroke="white" stroke-width="1"/>
+  <text x="203" y="180" font-family="Arial" font-size="8" fill="#fff">Soil M.</text>
+</svg>

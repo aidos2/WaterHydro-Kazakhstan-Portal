@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Қазақстанның су балансы – Су алаптарына арналған ашық геодерекқор. LULC карталары, гидрологиялық деректер уақыт қатарлары және су пайдалану талдауы.">
+  <title>Қазақстанның Су Балансы | Ашық Геодерекқор</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/nla-theme.css">
+  <style>
+    body {
+      background: url('image_logo/Irtysh 1.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(245, 247, 250, 0.82);
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar navbar-expand-lg nla-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index_kz.html">
+        <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Навигацияны ашу">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="index_kz.html">Басты бет</a></li>
+          <li class="nav-item"><a class="nav-link" href="spatialData.html">Деректер каталогы</a></li>
+          <li class="nav-item"><a class="nav-link" href="lulc_map.html">LULC картасы</a></li>
+          <li class="nav-item"><a class="nav-link" href="timeseries.html">Уақыт қатарлары</a></li>
+        </ul>
+        <div class="lang-switcher">
+          <a class="lang-btn" href="index.html">EN</a>
+          <a class="lang-btn" href="index_ru.html">RU</a>
+          <a class="lang-btn active" href="index_kz.html">KZ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Hero Banner ===== -->
+  <div class="nla-hero">
+    <div class="container">
+      <div class="badge-domain">waterbalance.org.kz</div>
+      <h1>Ашық геодерекқор – Қазақстанның су алаптары</h1>
+      <p class="lead">
+        Қашықтықтан зондтау, жаһандық деректер және гидрологиялық ақпарат негізінде<br>
+        Солтүстік Қазақстанның су шаруашылығы алаптарының су балансы.
+      </p>
+      <a href="spatialData.html" class="btn btn-nla mt-2 me-2">Деректер каталогы</a>
+      <a href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan"
+         target="_blank" class="btn btn-nla-outline mt-2" style="color:#fff;border-color:rgba(255,255,255,0.5);">
+        Жоба беті ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== Feature Cards ===== -->
+  <div class="container mt-5">
+    <div class="row g-4">
+
+      <!-- 1. LULC -->
+      <div class="col-md-4 d-flex">
+        <div class="nla-card text-center w-100">
+          <img src="image_logo/logo_lulc.svg" class="img-fluid" alt="Жер жамылғысы картасы">
+          <div class="card-body">
+            <h5 class="card-title">Жер жамылғысы (LULC)</h5>
+            <p class="card-text">Қазақстан су алаптарының жер пайдалану және жер жамылғысы карталары.</p>
+            <a href="lulc_map.html" class="btn btn-nla">Картаны ашу</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Timeseries -->
+      <div class="col-md-4 d-flex">
+        <div class="nla-card text-center w-100">
+          <img src="image_logo/logo_timeseries.svg" class="img-fluid" alt="Гидрологиялық уақыт қатарлары">
+          <div class="card-body">
+            <h5 class="card-title">Гидрологиялық уақыт қатарлары</h5>
+            <p class="card-text">Жауын-шашын, булану және топырақ ылғалдылығының интерактивті WebGIS қосымшасы.</p>
+            <a href="timeseries.html" class="btn btn-nla">Графиктер</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Water Use -->
+      <div class="col-md-4 d-flex">
+        <div class="nla-card text-center w-100">
+          <img src="image_logo/logo_wateruse.svg" class="img-fluid" alt="Су пайдалану мен алу">
+          <div class="card-body">
+            <h5 class="card-title">Су пайдалану мен алу</h5>
+            <p class="card-text">Jupyter Notebook форматындағы су пайдалану мен алу талдауы.</p>
+            <a href="Report Water Use Analysis.html" class="btn btn-nla">Есепті ашу</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== Портал туралы ===== -->
+  <div class="container mt-5">
+    <div class="nla-section">
+      <h2>Портал туралы</h2>
+      <p>
+        Портал <em>«Қашықтықтан зондтау, жаһандық деректер мен гидрологиялық ақпарат негізінде
+        Солтүстік Қазақстанның су шаруашылығы алаптарының су балансы»</em> жобасы аясында дайындалған.
+        ҚР Ғылым және жоғары білім министрлігінің гранттық қолдауымен жасалды.
+        Жоба туралы толығырақ:
+        <a href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan" target="_blank">осы сілтемеде</a>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== Деректер сипаттамасы ===== -->
+  <div class="container">
+    <div class="nla-section">
+      <h2>Деректер сипаттамасы</h2>
+      <p>
+        Солтүстік Қазақстанның гидрологиялық талдауына арналған кеңістіктік және уақыттық деректер:
+        су алаптары, бассейндер, кіші бассейндер, гидрологиялық аудандар, өзендер мен көлдердің векторлық қабаттары,
+        сондай-ақ ESA WorldCover (100 м) растрлық деректері.
+        Уақыт қатарлары: жауын-шашын (MSWEP), топырақ ылғалдылығы (ERA5), су балансы (GLEAM).
+        Форматтары: GeoJSON, GeoPackage, Shapefile, GeoTIFF, JSON, CSV, Excel —
+        ГИС платформаларында, модельдеуде және визуализацияда қолдануға арналған.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== Байланыс ===== -->
+  <div class="container mb-4">
+    <div class="nla-section">
+      <h2>Байланыс</h2>
+      <p>
+        Сұрақтар бойынша жоба менеджеріне хабарласыңыз:
+        <a href="mailto:vyapiyev@nu.edu.kz">vyapiyev@nu.edu.kz</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="nla-footer">
+    <div class="container text-center">
+      <div>
+        <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
+        <span class="footer-divider">|</span>
+        <a href="https://nla.nu.edu.kz/" target="_blank">Астана ұлттық зертханасы</a>
+        <span class="footer-divider">|</span>
+        Назарбаев Университеті
+      </div>
+      <div style="margin-top:6px;font-size:0.78rem;opacity:0.6;">
+        &copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz &nbsp;·&nbsp; Барлық құқықтар қорғалған
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

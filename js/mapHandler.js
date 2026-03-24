@@ -411,6 +411,7 @@ function loadData(url) {
 
       // IMPORTANT: we filter later in drawChart based on selection
       drawChart(selectedMetric, latestData, watershedNames, null);
+      window.updateBasinStats?.();
     });
 }
 
@@ -444,6 +445,7 @@ metricSelect.addEventListener('change', () => {
     ? latestData.filter(d => ids.includes(d.WATERSHED_ID))
     : latestData;
   drawChart(selectedMetric, chartData, watershedNames, null);
+  window.updateBasinStats?.();
 });
 
 /* ---------- Selection: MULTI-SELECTION on map ---------------------- */
@@ -479,6 +481,7 @@ map.on('singleclick', evt => {
       : latestData;
 
     drawChart(selectedMetric, chartData, watershedNames, null);
+    window.updateBasinStats?.();
   }
 });
 
@@ -507,6 +510,7 @@ clearBtn.addEventListener('click', () => {
 
   updateMapStyle();
   drawChart(selectedMetric, latestData, watershedNames, null);
+  window.updateBasinStats?.();
   clearBtn.disabled = true;
 });
 
@@ -553,3 +557,4 @@ playPauseBtn.disabled = false;
 
 window.selectedWatershedIds = selectedWatershedIds;
 window.selectedFeature = selectedFeature;
+window.watershedNames = watershedNames;

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Кеңістіктік деректер каталогы | WaterBalance Kazakhstan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/nla-theme.css">
+  <style>
+    html, body { height: 100%; display: flex; flex-direction: column; }
+    body {
+      background: url('image_logo/Irtysh 1.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(245, 247, 250, 0.85);
+      z-index: -1;
+    }
+    .content-wrap { flex: 1; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg nla-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index_kz.html">
+        <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index_kz.html">Басты бет</a></li>
+          <li class="nav-item"><a class="nav-link active" href="spatialData_kz.html">Деректер каталогы</a></li>
+          <li class="nav-item"><a class="nav-link" href="lulc_map_kz.html">LULC картасы</a></li>
+          <li class="nav-item"><a class="nav-link" href="timeseries_kz.html">Уақыт қатарлары</a></li>
+        </ul>
+        <div class="lang-switcher">
+          <a class="lang-btn" href="spatialData.html">EN</a>
+          <a class="lang-btn" href="spatialData_ru.html">RU</a>
+          <a class="lang-btn active" href="spatialData_kz.html">KZ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="nla-hero" style="padding:2rem 0 1.5rem;">
+    <div class="container">
+      <h1 style="font-size:1.6rem;margin-bottom:0.3rem;">Кеңістіктік деректер каталогы</h1>
+      <p class="lead" style="font-size:0.9rem;">
+        Порталда қолданылатын барлық кеңістіктік және уақыттық деректерді жүктеп алыңыз.
+      </p>
+    </div>
+  </div>
+
+  <div class="content-wrap">
+    <div class="container mt-4 mb-5">
+      <div class="mb-3">
+        <input type="text" id="searchInput" class="form-control nla-search"
+               placeholder="Кілт сөз бойынша іздеу (мысалы: Топырақ, Бассейн, LULC)"
+               aria-label="Деректерді іздеу">
+      </div>
+
+      <div class="table-responsive">
+        <table id="dataTable" class="table table-hover align-middle nla-table">
+          <thead>
+            <tr>
+              <th>Деректер атауы</th>
+              <th>Сипаттама</th>
+              <th>Түрі</th>
+              <th>Жүктеу</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td><strong>Барлық су алаптары</strong></td>
+              <td>Солтүстік Қазақстанның барлық су алаптарының полигондық шекаралары.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Вектор</span></td>
+              <td><div class="btn-group btn-group-sm btn-dl-group">
+                <a href="input_data/ALL_watersheds_wgs84.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                <a href="input_data/ALL_watersheds_wgs84.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                <a href="input_data/ALL_watersheds_wgs84.zip" class="btn btn-outline-dark">Shapefile</a>
+              </div></td>
+            </tr>
+
+            <tr>
+              <td><strong>Су шаруашылығы бассейндері</strong></td>
+              <td>Су ресурстарын жоспарлауға арналған әкімшілік бассейндер.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Вектор</span></td>
+              <td><div class="btn-group btn-group-sm btn-dl-group">
+                <a href="input_data/Water management basins.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                <a href="input_data/Water management basins.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                <a href="input_data/Water management basins.zip" class="btn btn-outline-dark">Shapefile</a>
+              </div></td>
+            </tr>
+
+            <tr>
+              <td><strong>Кіші бассейндер</strong></td>
+              <td>Су алаптары ішіндегі кіші бассейндердің егжей-тегжейлі шекаралары.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Вектор</span></td>
+              <td><div class="btn-group btn-group-sm btn-dl-group">
+                <a href="input_data/watershed_subbasins.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                <a href="input_data/watershed_subbasins.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                <a href="input_data/watershed_subbasins.zip" class="btn btn-outline-dark">Shapefile</a>
+              </div></td>
+            </tr>
+
+            <tr>
+              <td><strong>Гидрологиялық аудан шекарасы</strong></td>
+              <td>Аумақты негізгі дренаждық зоналарға бөлетін гидрологиялық аудандар шекарасы.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Вектор</span></td>
+              <td><div class="btn-group btn-group-sm btn-dl-group">
+                <a href="input_data/Hydro Region Boundry.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                <a href="input_data/Hydro Region Boundry.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                <a href="input_data/Hydro Region Boundry.zip" class="btn btn-outline-dark">Shapefile</a>
+              </div></td>
+            </tr>
+
+            <tr>
+              <td><strong>Өзен желісі (GIRES v10)</strong></td>
+              <td>GIRES v10 негізінде алынған гидрологиялық өзен желісі деректері.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Вектор</span></td>
+              <td><div class="btn-group btn-group-sm btn-dl-group">
+                <a href="input_data/River network GIRES_v10.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                <a href="input_data/River network GIRES_v10.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                <a href="input_data/River network GIRES_v10.zip" class="btn btn-outline-dark">Shapefile</a>
+              </div></td>
+            </tr>
+
+            <tr>
+              <td><strong>Көлдер</strong></td>
+              <td>Зерттеу аймағындағы көлдер мен су объектілерінің полигондық шекаралары.</td>
+              <td><span class="badge" style="background:#0e1c36;font-family:'Roboto Condensed',sans-serif;">Вектор</span></td>
+              <td><div class="btn-group btn-group-sm btn-dl-group">
+                <a href="input_data/lakes.geojson" class="btn btn-outline-primary">GeoJSON</a>
+                <a href="input_data/lakes.gpkg" class="btn btn-outline-secondary">GeoPackage</a>
+                <a href="input_data/lakes.zip" class="btn btn-outline-dark">Shapefile</a>
+              </div></td>
+            </tr>
+
+            <tr>
+              <td><strong>ESA WorldCover (100 м)</strong></td>
+              <td>Жер пайдалану және жер жамылғысы деректері (ESA WorldCover, 100 м ажыратымдылық).</td>
+              <td><span class="badge" style="background:#1a6b3c;font-family:'Roboto Condensed',sans-serif;">Растр</span></td>
+              <td><div class="btn-group btn-group-sm btn-dl-group">
+                <a href="input_data/ESA_WorldCover_100m.tif" class="btn btn-outline-success">GeoTIFF</a>
+                <a href="https://tiles.arcgis.com/tiles/Kri0Q7xwN5k6MG7L/arcgis/rest/services/LULC_Boundaries_WTL1/MapServer?view=wmtsview&cacheKey=9d73a0d114c9e54d" target="_blank" class="btn btn-outline-primary">WMTS</a>
+              </div></td>
+            </tr>
+
+            <tr>
+              <td><strong>Жауын-шашын (MSWEP)</strong></td>
+              <td>Гидрологиялық талдауға арналған ай сайынғы жауын-шашын деректері.</td>
+              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Уақыт қатары</span></td>
+              <td><div class="btn-group btn-group-sm btn-dl-group">
+                <a href="input_data/P_MSWEP_ALL.json" class="btn btn-outline-primary">JSON</a>
+                <a href="input_data/P_MSWEP_ALL.csv" class="btn btn-outline-secondary">CSV</a>
+                <a href="input_data/P_MSWEP_ALL.xlsx" class="btn btn-outline-success">Excel</a>
+              </div></td>
+            </tr>
+
+            <tr>
+              <td><strong>Топырақ ылғалдылығы (ERA5)</strong></td>
+              <td>ERA5 ай сайынғы топырақ ылғалдылығы (0–100 см, 0–289 см), бассейндер бойынша жинақталған.</td>
+              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Уақыт қатары</span></td>
+              <td><div class="btn-group btn-group-sm btn-dl-group">
+                <a href="input_data/Soil_Moisture_ERA5.json" class="btn btn-outline-primary">JSON</a>
+                <a href="input_data/Soil_Moisture_ERA5.csv" class="btn btn-outline-secondary">CSV</a>
+                <a href="input_data/Soil_Moisture_ERA5.xlsx" class="btn btn-outline-success">Excel</a>
+              </div></td>
+            </tr>
+
+            <tr>
+              <td><strong>Су балансы GLEAM</strong></td>
+              <td>Су балансы деректері (булану мен жауын-шашынның арақатынасы).</td>
+              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Уақыт қатары</span></td>
+              <td><div class="btn-group btn-group-sm btn-dl-group">
+                <a href="input_data/GLEAM_WaterBalanceAllBAsin.json" class="btn btn-outline-primary">JSON</a>
+                <a href="input_data/GLEAM_WaterBalanceAllBAsin.csv" class="btn btn-outline-secondary">CSV</a>
+                <a href="input_data/GLEAM_WaterBalanceAllBAsin.xlsx" class="btn btn-outline-success">Excel</a>
+              </div></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer class="nla-footer">
+    <div class="container text-center">
+      <div>
+        <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
+        <span class="footer-divider">|</span>
+        <a href="https://nla.nu.edu.kz/" target="_blank">Астана ұлттық зертханасы</a>
+        <span class="footer-divider">|</span>
+        Назарбаев Университеті
+      </div>
+      <div style="margin-top:6px;font-size:0.78rem;opacity:0.6;">
+        &copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz &nbsp;·&nbsp; Барлық құқықтар қорғалған
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+      const filter = this.value.toLowerCase();
+      document.querySelectorAll('#dataTable tbody tr').forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(filter) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

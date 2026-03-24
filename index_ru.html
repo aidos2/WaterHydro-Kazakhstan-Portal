@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Водный баланс Казахстана – Открытый геопортал для водосборных бассейнов. Карты LULC, временные ряды гидрологических данных и анализ водопользования.">
+  <title>Водный баланс Казахстана | Открытый геопортал</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/nla-theme.css">
+  <style>
+    body {
+      background: url('image_logo/Irtysh 1.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(245, 247, 250, 0.82);
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar navbar-expand-lg nla-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index_ru.html">
+        <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="index_ru.html">Главная</a></li>
+          <li class="nav-item"><a class="nav-link" href="spatialData.html">Каталог данных</a></li>
+          <li class="nav-item"><a class="nav-link" href="lulc_map.html">Карта LULC</a></li>
+          <li class="nav-item"><a class="nav-link" href="timeseries.html">Временные ряды</a></li>
+        </ul>
+        <div class="lang-switcher">
+          <a class="lang-btn" href="index.html">EN</a>
+          <a class="lang-btn active" href="index_ru.html">RU</a>
+          <a class="lang-btn" href="index_kz.html">KZ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Hero Banner ===== -->
+  <div class="nla-hero">
+    <div class="container">
+      <div class="badge-domain">waterbalance.org.kz</div>
+      <h1>Открытый геопортал – Водные бассейны Казахстана</h1>
+      <p class="lead">
+        Водный баланс водохозяйственных бассейнов Северного Казахстана<br>
+        на основе дистанционного зондирования, глобальных наборов данных и гидрологической информации.
+      </p>
+      <a href="spatialData.html" class="btn btn-nla mt-2 me-2">Каталог данных</a>
+      <a href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan"
+         target="_blank" class="btn btn-nla-outline mt-2" style="color:#fff;border-color:rgba(255,255,255,0.5);">
+        Страница проекта ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== Feature Cards ===== -->
+  <div class="container mt-5">
+    <div class="row g-4">
+
+      <!-- 1. LULC -->
+      <div class="col-md-4 d-flex">
+        <div class="nla-card text-center w-100">
+          <img src="image_logo/logo_lulc.svg" class="img-fluid" alt="Карта земельного покрова">
+          <div class="card-body">
+            <h5 class="card-title">Земельный покров (LULC)</h5>
+            <p class="card-text">Карты использования и покрова земель с границами водосборов Казахстана.</p>
+            <a href="lulc_map.html" class="btn btn-nla">Открыть карту</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Timeseries -->
+      <div class="col-md-4 d-flex">
+        <div class="nla-card text-center w-100">
+          <img src="image_logo/logo_timeseries.svg" class="img-fluid" alt="Гидрологические временные ряды">
+          <div class="card-body">
+            <h5 class="card-title">Гидрологические временные ряды</h5>
+            <p class="card-text">Интерактивное WebGIS-приложение: осадки, эвапотранспирация, влажность почвы.</p>
+            <a href="timeseries.html" class="btn btn-nla">Открыть графики</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Water Use -->
+      <div class="col-md-4 d-flex">
+        <div class="nla-card text-center w-100">
+          <img src="image_logo/logo_wateruse.svg" class="img-fluid" alt="Водопользование и водозабор">
+          <div class="card-body">
+            <h5 class="card-title">Водопользование и водозабор</h5>
+            <p class="card-text">Визуализация анализа водопользования и водозабора в Jupyter Notebook.</p>
+            <a href="Report Water Use Analysis.html" class="btn btn-nla">Открыть отчёт</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== О портале ===== -->
+  <div class="container mt-5">
+    <div class="nla-section">
+      <h2>О портале</h2>
+      <p>
+        Портал предоставляет пространственные данные по водосборным бассейнам в рамках проекта
+        <em>«Водный баланс водохозяйственных бассейнов Северного Казахстана с использованием дистанционного зондирования,
+        глобальных наборов данных и гидрологической информации».</em>
+        Проект реализован при поддержке Министерства науки и высшего образования Республики Казахстан.
+        Подробнее на
+        <a href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan" target="_blank">странице проекта</a>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== Описание данных ===== -->
+  <div class="container">
+    <div class="nla-section">
+      <h2>Описание данных</h2>
+      <p>
+        Доступны пространственные и временные ряды для гидрологического анализа Северного Казахстана:
+        векторные слои водосборов, бассейнов, суббассейнов, гидрологических районов, рек и озёр,
+        а также растровые данные ESA WorldCover (100 м).
+        Временные ряды: осадки (MSWEP), влажность почвы (ERA5), показатели водного баланса (GLEAM) в разрезе бассейнов.
+        Форматы: GeoJSON, GeoPackage, Shapefile, GeoTIFF, JSON, CSV, Excel —
+        для использования в ГИС-платформах, моделировании и визуализации.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== Контакты ===== -->
+  <div class="container mb-4">
+    <div class="nla-section">
+      <h2>Контакты</h2>
+      <p>
+        По вопросам обращайтесь к менеджеру проекта:
+        <a href="mailto:vyapiyev@nu.edu.kz">vyapiyev@nu.edu.kz</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="nla-footer">
+    <div class="container text-center">
+      <div>
+        <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
+        <span class="footer-divider">|</span>
+        <a href="https://nla.nu.edu.kz/" target="_blank">Национальная лаборатория Астана</a>
+        <span class="footer-divider">|</span>
+        Назарбаев Университет
+      </div>
+      <div style="margin-top:6px;font-size:0.78rem;opacity:0.6;">
+        &copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz &nbsp;·&nbsp; Все права защищены
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

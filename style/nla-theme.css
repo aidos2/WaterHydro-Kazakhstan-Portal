@@ -1,0 +1,338 @@
+/* ================================================================
+   WaterBalance Kazakhstan Portal – NLA-inspired Theme
+   Domain: waterbalance.org.kz
+   Mirrors the visual identity of nla.nu.edu.kz
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Roboto:wght@300;400;500&display=swap');
+
+/* ---------- CSS Variables ---------------------------------------- */
+:root {
+  --navy:       #0e1c36;
+  --navy-light: #1a2f55;
+  --gold:       #c9a84c;
+  --gold-light: #e0c06a;
+  --white:      #ffffff;
+  --off-white:  #f5f7fa;
+  --text-dark:  #212529;
+  --text-muted: #6c757d;
+  --border:     #dee2e6;
+  --shadow:     0 2px 12px rgba(14,28,54,0.12);
+}
+
+/* ---------- Base -------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-dark);
+  background-color: var(--off-white);
+}
+
+h1, h2, h3, h4, h5, h6,
+.navbar-brand,
+.section-title {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+}
+
+/* ---------- Navbar ------------------------------------------------ */
+.nla-navbar {
+  background-color: var(--navy) !important;
+  padding: 0.6rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.nla-navbar .navbar-brand {
+  color: var(--white) !important;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.nla-navbar .navbar-brand span {
+  color: var(--gold);
+}
+
+.nla-navbar .nav-link {
+  color: rgba(255,255,255,0.85) !important;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  padding: 0.5rem 1rem !important;
+  transition: color 0.2s;
+}
+
+.nla-navbar .nav-link:hover,
+.nla-navbar .nav-link.active {
+  color: var(--gold) !important;
+}
+
+/* Language switcher */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 1rem;
+}
+
+.lang-switcher .lang-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.75);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-switcher .lang-btn:hover,
+.lang-switcher .lang-btn.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy);
+}
+
+/* ---------- Hero / Banner ---------------------------------------- */
+.nla-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1e3a6e 100%);
+  color: var(--white);
+  padding: 3.5rem 0 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.nla-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+
+.nla-hero h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.nla-hero .lead {
+  color: rgba(255,255,255,0.75);
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.nla-hero .badge-domain {
+  display: inline-block;
+  background: rgba(201,168,76,0.2);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+/* ---------- Cards ------------------------------------------------- */
+.nla-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nla-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(14,28,54,0.18);
+}
+
+.nla-card img {
+  max-height: 170px;
+  object-fit: contain;
+  padding: 20px 20px 0;
+  background: var(--off-white);
+}
+
+.nla-card .card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+
+.nla-card .card-title {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+
+.nla-card .card-text {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Buttons ----------------------------------------------- */
+.btn-nla {
+  background-color: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  padding: 0.45rem 1.2rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-nla:hover {
+  background-color: var(--navy-light);
+  border-color: var(--navy-light);
+  color: var(--white);
+}
+
+.btn-nla-outline {
+  background-color: transparent;
+  border: 1px solid var(--navy);
+  color: var(--navy);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  padding: 0.45rem 1.2rem;
+  transition: all 0.2s;
+}
+
+.btn-nla-outline:hover {
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+/* Download button groups */
+.btn-dl-group .btn {
+  font-size: 0.78rem;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 3px;
+  padding: 3px 10px;
+}
+
+/* ---------- Section Boxes ---------------------------------------- */
+.nla-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--navy);
+  border-radius: 6px;
+  padding: 2rem 2rem 1.5rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.nla-section h2 {
+  color: var(--navy);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.nla-section a {
+  color: var(--navy);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.nla-section a:hover {
+  color: var(--gold);
+}
+
+/* ---------- Table ------------------------------------------------- */
+.nla-table thead th {
+  background-color: var(--navy);
+  color: var(--white);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-color: var(--navy-light);
+}
+
+.nla-table tbody tr:hover {
+  background-color: rgba(14,28,54,0.04);
+}
+
+/* Search input */
+.nla-search {
+  border: 1px solid var(--navy);
+  border-radius: 4px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+.nla-search:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+  outline: none;
+}
+
+/* ---------- Footer ------------------------------------------------ */
+.nla-footer {
+  background-color: var(--navy);
+  color: rgba(255,255,255,0.75);
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+  margin-top: 3rem;
+  position: relative;
+}
+
+.nla-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+
+.nla-footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.nla-footer a:hover {
+  color: var(--gold-light);
+  text-decoration: underline;
+}
+
+.nla-footer .footer-divider {
+  color: rgba(255,255,255,0.3);
+  margin: 0 8px;
+}
+
+/* ---------- Responsive ------------------------------------------- */
+@media (max-width: 768px) {
+  .nla-hero h1 { font-size: 1.4rem; }
+  .lang-switcher { margin-left: 0; margin-top: 0.5rem; }
+}

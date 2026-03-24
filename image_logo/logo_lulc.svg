@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 200">
+  <defs>
+    <clipPath id="mc"><rect x="0" y="0" width="260" height="155" rx="10"/></clipPath>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8f4fb"/>
+      <stop offset="100%" stop-color="#cce4f4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="260" height="200" rx="12" fill="#f5f8fc"/>
+
+  <!-- Map area -->
+  <rect x="0" y="0" width="260" height="155" rx="10" fill="url(#sky)" clip-path="url(#mc)"/>
+
+  <!-- LULC patches (land cover classes) -->
+  <!-- Cropland – amber -->
+  <polygon points="0,155 0,85 55,60 110,80 105,155" fill="#f9c846" clip-path="url(#mc)"/>
+  <!-- Grassland – light green -->
+  <polygon points="55,60 130,30 185,55 160,105 110,80" fill="#81c784" clip-path="url(#mc)"/>
+  <!-- Dense forest – dark green -->
+  <polygon points="130,30 200,10 260,25 260,80 185,55" fill="#2e7d32" clip-path="url(#mc)"/>
+  <!-- Shrubland – olive -->
+  <polygon points="160,105 185,55 260,80 260,155 175,155" fill="#a5d6a7" clip-path="url(#mc)"/>
+  <!-- Water body – blue -->
+  <ellipse cx="68" cy="128" rx="42" ry="22" fill="#1e88e5" opacity="0.88" clip-path="url(#mc)"/>
+  <!-- Urban – grey -->
+  <rect x="115" y="105" width="45" height="45" rx="4" fill="#90a4ae" clip-path="url(#mc)"/>
+  <!-- Bare soil – tan -->
+  <polygon points="0,85 0,155 45,155 105,155 55,60" fill="#bcaaa4" clip-path="url(#mc)" opacity="0.5"/>
+
+  <!-- Boundary lines over patches -->
+  <g stroke="#0e1c36" stroke-width="1.8" fill="none" clip-path="url(#mc)" stroke-linejoin="round">
+    <polygon points="0,155 0,85 55,60 110,80 105,155"/>
+    <polygon points="55,60 130,30 185,55 160,105 110,80"/>
+    <polygon points="130,30 200,10 260,25 260,80 185,55"/>
+    <polygon points="160,105 185,55 260,80 260,155 175,155"/>
+    <rect x="115" y="105" width="45" height="45" rx="0"/>
+  </g>
+
+  <!-- Grid overlay (subtle) -->
+  <g stroke="#0e1c36" stroke-width="0.4" opacity="0.18" clip-path="url(#mc)">
+    <line x1="65"  y1="0" x2="65"  y2="155"/>
+    <line x1="130" y1="0" x2="130" y2="155"/>
+    <line x1="195" y1="0" x2="195" y2="155"/>
+    <line x1="0" y1="52"  x2="260" y2="52"/>
+    <line x1="0" y1="104" x2="260" y2="104"/>
+  </g>
+
+  <!-- Compass rose (top-right) -->
+  <g transform="translate(235,22)">
+    <circle r="13" fill="white" fill-opacity="0.85" stroke="#0e1c36" stroke-width="1"/>
+    <text y="-4" text-anchor="middle" font-family="Arial" font-size="7" font-weight="bold" fill="#0e1c36">N</text>
+    <line x1="0" y1="2" x2="0" y2="-2" stroke="#c9a84c" stroke-width="2.5"/>
+    <line x1="0" y1="4" x2="0" y2="10" stroke="#0e1c36" stroke-width="1.5"/>
+  </g>
+
+  <!-- Legend bar -->
+  <rect x="0" y="155" width="260" height="45" rx="0" fill="#0e1c36"/>
+  <rect x="0" y="155" width="260" height="3" fill="#c9a84c"/>
+
+  <!-- Legend items -->
+  <rect x="10" y="167" width="10" height="10" rx="2" fill="#2e7d32"/>
+  <text x="24" y="176" font-family="Arial, sans-serif" font-size="8.5" fill="#fff">Forest</text>
+
+  <rect x="68" y="167" width="10" height="10" rx="2" fill="#81c784"/>
+  <text x="82" y="176" font-family="Arial, sans-serif" font-size="8.5" fill="#fff">Grassland</text>
+
+  <rect x="138" y="167" width="10" height="10" rx="2" fill="#f9c846"/>
+  <text x="152" y="176" font-family="Arial, sans-serif" font-size="8.5" fill="#fff">Cropland</text>
+
+  <rect x="207" y="167" width="10" height="10" rx="2" fill="#1e88e5"/>
+  <text x="221" y="176" font-family="Arial, sans-serif" font-size="8.5" fill="#fff">Water</text>
+
+  <rect x="10" y="182" width="10" height="10" rx="2" fill="#90a4ae"/>
+  <text x="24" y="191" font-family="Arial, sans-serif" font-size="8.5" fill="#fff">Urban</text>
+
+  <rect x="68" y="182" width="10" height="10" rx="2" fill="#bcaaa4"/>
+  <text x="82" y="191" font-family="Arial, sans-serif" font-size="8.5" fill="#fff">Bare Soil</text>
+</svg>

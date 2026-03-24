@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 200">
+  <defs>
+    <linearGradient id="dropgrad" x1="0.3" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#42a5f5"/>
+      <stop offset="100%" stop-color="#0d47a1"/>
+    </linearGradient>
+    <linearGradient id="bggrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8f4fb"/>
+      <stop offset="100%" stop-color="#dceefb"/>
+    </linearGradient>
+    <clipPath id="dropmask">
+      <path d="M130,28 C130,28 90,75 78,105 C68,130 82,158 105,165 C115,168 145,168 155,165 C178,158 192,130 182,105 C170,75 130,28 130,28 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Card background -->
+  <rect width="260" height="200" rx="12" fill="#f5f8fc"/>
+
+  <!-- Top strip -->
+  <rect x="0" y="0" width="260" height="26" rx="10" fill="#0e1c36"/>
+  <rect x="0" y="16" width="260" height="10" fill="#0e1c36"/>
+  <rect x="0" y="23" width="260" height="3" fill="#c9a84c"/>
+  <text x="13" y="16" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#fff" letter-spacing="0.5">WATER USE &amp; ABSTRACTION</text>
+
+  <!-- Main chart area -->
+  <rect x="8" y="30" width="244" height="130" rx="6" fill="url(#bggrad)"/>
+
+  <!-- Large water drop (left side) -->
+  <path d="M72,42 C72,42 42,80 34,102 C26,122 36,145 55,150 C64,153 82,153 90,150 C108,145 118,122 110,102 C102,80 72,42 72,42 Z"
+        fill="url(#dropgrad)" opacity="0.92"/>
+  <!-- Drop shine -->
+  <ellipse cx="62" cy="80" rx="6" ry="10" fill="white" opacity="0.25" transform="rotate(-20,62,80)"/>
+
+  <!-- Drop volume label -->
+  <text x="72" y="118" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="white">km³</text>
+  <text x="72" y="133" text-anchor="middle" font-family="Arial" font-size="8" fill="#bbdefb">total</text>
+
+  <!-- Sector bars (right side) -->
+  <!-- Agriculture -->
+  <rect x="118" y="42" width="128" height="22" rx="4" fill="#e3f2fd"/>
+  <rect x="118" y="42" width="100" height="22" rx="4" fill="#1565c0"/>
+  <text x="126" y="57" font-family="Arial" font-size="9" font-weight="bold" fill="white">Agriculture</text>
+  <text x="225" y="57" font-family="Arial" font-size="9" fill="#1565c0" font-weight="bold">78%</text>
+
+  <!-- Industrial -->
+  <rect x="118" y="72" width="128" height="22" rx="4" fill="#e8f5e9"/>
+  <rect x="118" y="72" width="54" height="22" rx="4" fill="#2e7d32"/>
+  <text x="126" y="87" font-family="Arial" font-size="9" font-weight="bold" fill="white">Industrial</text>
+  <text x="225" y="87" font-family="Arial" font-size="9" fill="#2e7d32" font-weight="bold">42%</text>
+
+  <!-- Municipal -->
+  <rect x="118" y="102" width="128" height="22" rx="4" fill="#fff8e1"/>
+  <rect x="118" y="102" width="38" height="22" rx="4" fill="#f9a825"/>
+  <text x="126" y="117" font-family="Arial" font-size="9" font-weight="bold" fill="white">Municipal</text>
+  <text x="225" y="117" font-family="Arial" font-size="9" fill="#f9a825" font-weight="bold">30%</text>
+
+  <!-- Environmental flow -->
+  <rect x="118" y="132" width="128" height="22" rx="4" fill="#fce4ec"/>
+  <rect x="118" y="132" width="20" height="22" rx="4" fill="#c62828"/>
+  <text x="126" y="147" font-family="Arial" font-size="9" font-weight="bold" fill="#c62828">Env. Flow</text>
+  <text x="225" y="147" font-family="Arial" font-size="9" fill="#c62828" font-weight="bold">16%</text>
+
+  <!-- Year label -->
+  <text x="72" y="155" text-anchor="middle" font-family="Arial" font-size="7.5" fill="#5c7a99">2000 – 2022</text>
+
+  <!-- Bottom footer bar -->
+  <rect x="0" y="163" width="260" height="37" fill="#0e1c36" rx="0"/>
+  <rect x="0" y="163" width="260" height="2.5" fill="#c9a84c"/>
+
+  <!-- Footer info pills -->
+  <rect x="10" y="172" width="70" height="18" rx="9" fill="#1a2f55"/>
+  <text x="45" y="184" text-anchor="middle" font-family="Arial" font-size="8" fill="#c9a84c" font-weight="bold">Jupyter Notebook</text>
+
+  <rect x="88" y="172" width="55" height="18" rx="9" fill="#1a2f55"/>
+  <text x="115" y="184" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">N. Kazakhstan</text>
+
+  <rect x="151" y="172" width="48" height="18" rx="9" fill="#1a2f55"/>
+  <text x="175" y="184" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">2000–2022</text>
+
+  <rect x="207" y="172" width="43" height="18" rx="9" fill="#1a2f55"/>
+  <text x="228" y="184" text-anchor="middle" font-family="Arial" font-size="8" fill="#fff">Open Data</text>
+</svg>
