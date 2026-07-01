@@ -49,6 +49,12 @@
     #legend .item { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
     #legend .swatch { width: 18px; height: 14px; border: 1px solid #999; }
     #layer-switcher { position: absolute; top: 86px; left: 95%; transform: translateX(-5%); background: rgba(255,255,255,0.97); padding: 2px; border: 1px solid #ccc; border-radius: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.12); font-size: 13px; max-height: 280px; max-width: 480px; overflow-y: auto; z-index: 1000; }
+    #wb-panel .wb-var-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 4px; }
+    #wb-panel .wb-var-item { display: flex; align-items: center; gap: 5px; background: #f0f3f8; border-radius: 5px; padding: 5px 7px; font-size: 0.75rem; font-family: 'Roboto Condensed', sans-serif; cursor: pointer; border-left: 3px solid transparent; transition: background 0.15s; }
+    #wb-panel .wb-var-item:hover { background: #e4e9f2; }
+    #wb-panel .wb-var-item input[type="checkbox"] { margin: 0; flex-shrink: 0; }
+    #wb-panel .wb-var-full { grid-column: 1 / -1; }
+    #wb-loading { font-size: 0.78rem; color: #c9a84c; padding: 4px 0; }
     @media (max-width: 900px) {
       .dash-body { grid-template-columns: 1fr; grid-template-rows: auto; }
       .dash-sidebar { grid-column: 1; grid-row: auto; flex-direction: row; flex-wrap: wrap; }
@@ -57,6 +63,8 @@
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
   <script src="assets/ol/ol.js"></script>
 </head>
 <body>
@@ -88,14 +96,19 @@
   <div class="dash-topbar">
     <div>
       <p class="page-title">Дашборд временных рядов</p>
-      <p class="page-subtitle">Осадки · Эвапотранспирация · Влажность почвы — Бассейны Северного Казахстана</p>
+      <p class="page-subtitle">Осадки · Эвапотранспирация · Сток · Изменение водных запасов — Бассейны Северного Казахстана</p>
     </div>
     <div style="display:flex;gap:8px;align-items:center;">
       <span style="font-size:0.72rem;color:rgba(255,255,255,0.45);font-family:'Roboto Condensed',sans-serif;letter-spacing:0.05em;">НАБОР ДАННЫХ</span>
-      <select id="fileSelect" class="form-select form-select-sm" style="width:220px;font-size:0.82rem;border-color:#c9a84c;">
-        <option value="input_data/GLEAM_WaterBalanceAllBAsin.json">Водный баланс (GLEAM)</option>
-        <option value="input_data/P_MSWEP_ALL.json">Осадки (MSWEP)</option>
-        <option value="input_data/Soil_Moisture_ERA5.json">Влажность почвы (ERA5)</option>
+      <select id="fileSelect" class="form-select form-select-sm" style="width:270px;font-size:0.82rem;border-color:#c9a84c;">
+        <optgroup label="Стандартные наборы данных">
+          <option value="input_data/GLEAM_WaterBalanceAllBAsin.json">Водный баланс (GLEAM)</option>
+          <option value="input_data/P_MSWEP_ALL.json">Осадки (MSWEP)</option>
+          <option value="input_data/Soil_Moisture_ERA5.json">Влажность почвы (ERA5)</option>
+        </optgroup>
+        <optgroup label="Продукты водного баланса">
+          <option value="wb_products">◈ Продукты ВБ — Ертіс · Нура · Торгай · Есіл</option>
+        </optgroup>
       </select>
     </div>
   </div>
@@ -103,7 +116,7 @@
   <div class="dash-body">
     <aside class="dash-sidebar">
 
-      <div class="panel">
+      <div class="panel" id="controls-panel">
         <div class="panel-header"><span class="panel-icon"></span><span class="panel-title">Управление</span></div>
         <div class="panel-body">
           <div class="mb-3">
@@ -118,6 +131,67 @@
             <button id="playPauseBtn" class="btn-play" aria-label="Воспроизвести анимацию">&#9654; Запуск</button>
             <button id="clearSelection" class="btn-show-all" disabled aria-label="Сбросить выделение">Все</button>
           </div>
+        </div>
+      </div>
+
+      <!-- ══ Панель продуктов водного баланса (скрыта до выбора wb_products) ══ -->
+      <div class="panel" id="wb-panel" style="display:none;">
+        <div class="panel-header">
+          <span class="panel-icon"></span>
+          <span class="panel-title">Продукты водного баланса</span>
+        </div>
+        <div class="panel-body">
+
+          <!-- Выбранный бассейн (из клика на карте) -->
+          <div class="mb-2">
+            <label class="form-label">Выбранный бассейн</label>
+            <div id="wbBasinName" style="font-family:'Roboto Condensed',sans-serif;font-size:0.88rem;font-weight:700;color:#0e1c36;background:#f0f3f8;border-radius:5px;padding:5px 8px;border-left:3px solid #1a7f6e;">
+              Нажмите на бассейн на карте
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <label for="wbComboSelect" class="form-label">Комбинация P × E × Q</label>
+            <select id="wbComboSelect" class="form-select form-select-sm" style="font-size:0.76rem;"></select>
+            <div id="wb-loading" style="display:none;" class="mt-1">⏳ Загрузка данных…</div>
+          </div>
+
+          <!-- Управление воспроизведением -->
+          <div class="mb-2">
+            <div class="d-flex gap-2 align-items-center">
+              <button id="wbPlayBtn" class="btn-play" aria-label="Воспроизвести">&#9654; Воспр.</button>
+              <span id="wbSliderDate" style="font-family:'Roboto Condensed',sans-serif;font-size:0.85rem;color:#c9a84c;">--</span>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Показать переменные</label>
+            <div class="wb-var-grid">
+              <label class="wb-var-item" style="border-left-color:#2196F3;">
+                <input type="checkbox" id="wbShow_P" checked><span>P</span>
+              </label>
+              <label class="wb-var-item" style="border-left-color:#FF5722;">
+                <input type="checkbox" id="wbShow_E" checked><span>E</span>
+              </label>
+              <label class="wb-var-item" style="border-left-color:#4CAF50;">
+                <input type="checkbox" id="wbShow_Q" checked><span>Q</span>
+              </label>
+              <label class="wb-var-item" style="border-left-color:#9C27B0;">
+                <input type="checkbox" id="wbShow_PE" checked><span>P−E</span>
+              </label>
+              <label class="wb-var-item" style="border-left-color:#0D47A1;">
+                <input type="checkbox" id="wbShow_WB_storage" checked><span>ΔS баланс</span>
+              </label>
+              <label class="wb-var-item wb-var-full" style="border-left-color:#FF8F00;">
+                <input type="checkbox" id="wbShow_GRACE_storage" checked><span>GRACE (спутник)</span>
+              </label>
+            </div>
+            <div style="font-size:0.68rem;color:#8a96a8;margin-top:5px;line-height:1.4;">
+              Левая ось: P, E, Q &nbsp;|&nbsp; Правая ось: P−E, ΔS, GRACE<br>
+              Колесо мыши — масштаб · Ctrl+перетаскивание — сдвиг
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -153,6 +227,7 @@
             <label class="form-label">Выбранные бассейны</label>
             <div id="selectedBasins" class="small text-muted mt-1">Нет</div>
           </div>
+          <div id="wb-stats" style="margin-top:6px;border-top:1px solid #eef1f6;padding-top:6px;"></div>
         </div>
       </div>
 
@@ -204,6 +279,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/chartHandler.js"></script>
+  <script src="js/wbHandler.js"></script>
   <script src="js/mapHandler.js"></script>
   <script>
     function safeNum(v) { const n = parseFloat(String(v).replace(',', '.')); return Number.isFinite(n) ? n : null; }

@@ -221,6 +221,55 @@ function updateSelectedWidget() {
 function updateMapStyle() {
   if (!vectorLayers.watersheds.getVisible()) return;
 
+  /* ── WB Products mode styling ───────────────────────────────────── */
+  if (window.wbMode) {
+    legendDiv.innerHTML = `
+      <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:#0e1c36;">
+        Water Balance Products
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;font-size:11px;">
+        <div style="width:14px;height:14px;background:rgba(26,127,110,0.45);border:2px solid #1a7f6e;"></div>
+        WB Product Basins (4)
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;">
+        <div style="width:14px;height:14px;background:rgba(201,168,76,0.45);border:3px solid #c9a84c;"></div>
+        Selected basin
+      </div>
+      <div style="font-size:10px;color:#888;margin-top:5px;">Click a teal basin to load data</div>
+    `;
+
+    vectorLayers.watersheds.setStyle(feat => {
+      const id   = feat.get('WATERSHED_ID');
+      const name = watershedNames[id] || '';
+      const isWB  = WB_IDS.has(id);
+      const isSel = selectedWatershedIds.has(id);
+
+      let fill   = isWB ? 'rgba(26,127,110,0.35)' : 'rgba(200,200,200,0.12)';
+      let stroke = isWB ? '#1a7f6e'                : '#cccccc';
+      let sw     = isWB ? 1.5                      : 0.5;
+
+      if (isSel) {
+        fill   = 'rgba(201,168,76,0.45)';
+        stroke = '#c9a84c';
+        sw     = 3;
+      }
+
+      return new ol.style.Style({
+        fill:   new ol.style.Fill({ color: fill }),
+        stroke: new ol.style.Stroke({ color: stroke, width: sw }),
+        text:   isWB ? new ol.style.Text({
+          text:      name,
+          font:      isSel ? 'bold 13px Poppins,Arial,sans-serif' : '11px Poppins,Arial,sans-serif',
+          fill:      new ol.style.Fill({ color: '#0e1c36' }),
+          stroke:    new ol.style.Stroke({ color: '#fff', width: 3 }),
+          overflow:  true,
+          placement: 'point'
+        }) : null
+      });
+    });
+    return; // skip original choropleth
+  }
+
   const datasetKey = fileSelect.value;
   const cfg = DATASET_STYLE[datasetKey] || {
     name: "Dataset",
@@ -417,6 +466,19 @@ function loadData(url) {
 
 /* ---------- Dataset change ----------------------------------------- */
 fileSelect.addEventListener('change', () => {
+  // ── WB Products mode ──────────────────────────────────────────────
+  if (fileSelect.value === 'wb_products') {
+    window.activateWBMode?.();
+    return;
+  }
+
+  // Switching away from WB Products mode
+  if (window.wbMode) {
+    window.deactivateWBMode?.();
+    selectedWatershedIds.clear();
+    updateSelectedWidget();
+  }
+
   if (vectorLayers.watersheds.getVisible()) {
     loadData(fileSelect.value);
   }
@@ -448,6 +510,9 @@ metricSelect.addEventListener('change', () => {
   window.updateBasinStats?.();
 });
 
+/* ---------- WB basin IDs (used in click handler + updateMapStyle) -- */
+const WB_IDS = new Set(['NWB_00001', 'NWB_00003', 'NWB_00007', 'NWB_00009']);
+
 /* ---------- Selection: MULTI-SELECTION on map ---------------------- */
 map.on('singleclick', evt => {
   if (!vectorLayers.watersheds.getVisible()) return;
@@ -455,6 +520,19 @@ map.on('singleclick', evt => {
   if (feat && feat.get('WATERSHED_ID')) {
     selectedFeature = feat;
     const id = feat.get('WATERSHED_ID');
+
+    // ── WB Products mode: route to wbHandler ─────────────────────────
+    if (window.wbMode) {
+      if (!WB_IDS.has(id)) return; // ignore non-WB basins
+      selectedWatershedIds.clear();
+      selectedWatershedIds.add(id);
+      updateSelectedWidget();
+      clearBtn.disabled = false;
+      map.getView().fit(feat.getGeometry(), { padding: [40, 40, 40, 40], duration: 300 });
+      updateMapStyle();
+      window.onWBBasinMapClick?.(id);
+      return;
+    }
 
     // Toggle selection
     if (selectedWatershedIds.has(id)) {

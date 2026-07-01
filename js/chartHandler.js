@@ -175,9 +175,10 @@ function highlightChartPoint(index) {
 }
 
 function exportChartImage() {
-  if (!chart) return null;
+  const activeChart = chart || window.wbChart;
+  if (!activeChart) return null;
   const canvas = document.getElementById('chart');
-  chart.update(); // обновить, чтобы заголовок точно был на PNG
+  activeChart.update();
   return canvas.toDataURL('image/png');
 }
 
@@ -221,7 +222,7 @@ function exportGeoJSONForSelected() {
 
 /* -------------------- DOWNLOAD CHART ----------------------- */
 document.getElementById("downloadChart").addEventListener("click", (e) => {
-  if (!chart) {
+  if (!chart && !window.wbChart) {
     e.preventDefault();
     alert("Chart not ready yet.");
     return;
@@ -234,7 +235,6 @@ document.getElementById("downloadChart").addEventListener("click", (e) => {
     return;
   }
 
-  // не блокируем дефолт, просто даём браузеру перейти по href=blob
   const link = e.currentTarget;
   link.href = url;
   link.download = "chart.png";
@@ -242,21 +242,30 @@ document.getElementById("downloadChart").addEventListener("click", (e) => {
 
 /* -------------------- DOWNLOAD CSV -------------------------- */
 document.getElementById("downloadCSV").addEventListener("click", (e) => {
-  // если данных нет – блокируем клик
+  // WB Products mode – delegate to wbHandler
+  if (window.wbMode) {
+    if (typeof window.prepareWBCSV === 'function') window.prepareWBCSV(e.currentTarget);
+    return;
+  }
+
   if (!window.latestData || !window.selectedMetric) {
     e.preventDefault();
     alert("Select dataset and metric first.");
     return;
   }
 
-  // генерируем Blob и обновляем href; дефолтное поведение ссылки всё сделает
   exportSelectedCSV(window.latestData, window.selectedMetric, null);
 });
 
 
-/* --------- Экспортируем функции для mapHandler.js ------------------ */
+/* --------- Exports for mapHandler / wbHandler ---------------------- */
 
-window.drawChart = drawChart;
+window.drawChart          = drawChart;
 window.highlightChartPoint = highlightChartPoint;
-window.exportChartImage = exportChartImage;
-window.exportSelectedCSV = exportSelectedCSV;
+window.exportChartImage   = exportChartImage;
+window.exportSelectedCSV  = exportSelectedCSV;
+
+/** Destroy the current chart so wbHandler can safely create a new one */
+window.destroyChart = function () {
+  if (chart) { chart.destroy(); chart = null; }
+};
