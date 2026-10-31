@@ -2,19 +2,40 @@
  *  wbHandler.js – Water Balance Products Mode Handler
  *
  *  Handles basin/combination selection and multi-variable chart
- *  for the 4 target basins (Ertis, Nura, Torgai, Yesil).
- *  Activated when fileSelect = "wb_products".
+ *  for all 14 basins (total_basin_wb_ts, 3 P × 3 E × 3 Q = 27
+ *  combinations each). Activated when fileSelect = "wb_products".
+ *
+ *  Data layout (input_data/wb_products/):
+ *    json/<ID>_<slug>.json      dashboard file, all 27 combinations
+ *    csv/<ID>_<slug>.csv        long-format table, all combinations
+ *    xlsx/<ID>_<slug>/*.xlsx    original Excel files
+ *    zip/<ID>_<slug>_xlsx.zip   Excel bundle per basin
  * ================================================================ */
 
 /* ---- Basin registry ------------------------------------------- */
+const WB_DIR = 'input_data/wb_products/json/';
 const WB_BASINS = [
-  { id: 'NWB_00001', name: 'Ertis',  file: 'input_data/new_upload/NWB_00001_ertis.json'  },
-  { id: 'NWB_00003', name: 'Nura',   file: 'input_data/new_upload/NWB_00003_nura.json'   },
-  { id: 'NWB_00007', name: 'Torgai', file: 'input_data/new_upload/NWB_00007_torgai.json' },
-  { id: 'NWB_00009', name: 'Yesil',  file: 'input_data/new_upload/NWB_00009_yesil.json'  },
+  { id: 'NWB_00001', name: 'Ertis',               file: WB_DIR + 'NWB_00001_ertis.json'                    },
+  { id: 'NWB_00002', name: 'Esil-Ertis closed',   file: WB_DIR + 'NWB_00002_yesil_ertis_closed_basin.json' },
+  { id: 'NWB_00003', name: 'Nura',                file: WB_DIR + 'NWB_00003_nura.json'                     },
+  { id: 'NWB_00004', name: 'Ob-Ertis closed',     file: WB_DIR + 'NWB_00004_ob_ertis_closed_basin.json'    },
+  { id: 'NWB_00005', name: 'Sarysu',              file: WB_DIR + 'NWB_00005_sarysu.json'                   },
+  { id: 'NWB_00006', name: 'Tobyl',               file: WB_DIR + 'NWB_00006_tobyl.json'                    },
+  { id: 'NWB_00007', name: 'Torgai',              file: WB_DIR + 'NWB_00007_torgai.json'                   },
+  { id: 'NWB_00008', name: 'Vagay',               file: WB_DIR + 'NWB_00008_vagay.json'                    },
+  { id: 'NWB_00009', name: 'Yesil',               file: WB_DIR + 'NWB_00009_yesil.json'                    },
+  { id: 'NWB_00010', name: 'Zhaiyk-Caspian',      file: WB_DIR + 'NWB_00010_zhaiyk_caspian.json'           },
+  { id: 'SWB_00001', name: 'Syr Darya-Aral',      file: WB_DIR + 'SWB_00001_syr_darya_aral.json'           },
+  { id: 'SWB_00002', name: 'Ily-Balkhash-Alakol', file: WB_DIR + 'SWB_00002_ily_balkhash_alakol.json'      },
+  { id: 'SWB_00003', name: 'Shu-Talas',           file: WB_DIR + 'SWB_00003_shu_talas.json'                },
+  { id: 'SWB_00004', name: 'Amu Darya-Aral',      file: WB_DIR + 'SWB_00004_amu_darya_aral.json'           },
 ];
 
 const WB_BASIN_MAP = Object.fromEntries(WB_BASINS.map(b => [b.id, b]));
+const WB_IDS       = new Set(WB_BASINS.map(b => b.id));   // used by mapHandler
+
+/* ---- Product selectors (P / E / Q) ---------------------------- */
+const WB_PRODUCT_SELECTS = { p: 'wbSelP', e: 'wbSelE', q: 'wbSelQ' };
 
 /* ---- Variable display config ---------------------------------- */
 // yAxisID: 'y'  = left axis  (raw fluxes: P, E, Q)
@@ -61,7 +82,7 @@ window.activateWBMode = function () {
 
   // Reset basin display – wait for map click
   wbUpdateBasinNameDisplay(null);
-  wbEl('wbComboSelect').innerHTML = '';
+  Object.values(WB_PRODUCT_SELECTS).forEach(id => { wbEl(id).innerHTML = ''; });
   const sliderDate = wbEl('wbSliderDate');
   if (sliderDate) sliderDate.textContent = '--';
 
@@ -141,7 +162,6 @@ function wbLoadBasin (basinId) {
   if (!info) return;
 
   wbEl('wb-loading').style.display = '';
-  wbEl('wbComboSelect').innerHTML  = '';
 
   fetch(info.file)
     .then(r => r.json())
@@ -149,14 +169,19 @@ function wbLoadBasin (basinId) {
       wbBasinData = data;
       wbEl('wb-loading').style.display = 'none';
 
-      // Populate combination selector
-      const comboSel = wbEl('wbComboSelect');
-      comboSel.innerHTML = data.combinations
-        .map((c, i) => `<option value="${i}">${c.label}</option>`)
-        .join('');
+      // Populate P / E / Q selectors, keeping the user's previous product
+      // choice when switching basins (all basins share the same products)
+      Object.entries(WB_PRODUCT_SELECTS).forEach(([k, id]) => {
+        const sel  = wbEl(id);
+        const prev = sel.value;
+        const opts = new Map(data.combinations.map(c => [c[`${k}_key`], c[`${k}_label`]]));
+        sel.innerHTML = [...opts]
+          .map(([key, label]) => `<option value="${key}">${label}</option>`)
+          .join('');
+        if (opts.has(prev)) sel.value = prev;
+      });
 
-      // Select first combination
-      wbComboData = data.combinations[0];
+      wbComboData = wbFindCombo();
 
       wbSyncMapHighlight(basinId);
       wbDrawChart();
@@ -166,6 +191,14 @@ function wbLoadBasin (basinId) {
       console.error('[wbHandler] load error:', err);
       wbEl('wb-loading').style.display = 'none';
     });
+}
+
+/** Combination matching the current P / E / Q selector values */
+function wbFindCombo () {
+  const [p, e, q] = Object.values(WB_PRODUCT_SELECTS).map(id => wbEl(id).value);
+  return wbBasinData?.combinations?.find(c => c.p_key === p && c.e_key === e && c.q_key === q)
+      || wbBasinData?.combinations?.[0]
+      || null;
 }
 
 /* ================================================================
@@ -302,7 +335,9 @@ function wbUpdateStats () {
   const data = wbComboData?.data;
   if (!data?.length) return;
 
-  const period = `${data[0].date} – ${data[data.length - 1].date}`;
+  // P/E/Q end earlier than GRACE, so report both periods
+  const lastFlux = data.reduce((last, d, i) => (d.P != null ? i : last), 0);
+  const period = `P/E/Q ${data[0].date} – ${data[lastFlux].date} · GRACE to ${data[data.length - 1].date}`;
 
   // Update existing sidebar stat elements
   const statBasins = wbEl('stat-basins');
@@ -344,7 +379,7 @@ function wbUpdateStats () {
         `).join('')}
       </tbody>
     </table>
-    <div style="font-size:0.7rem;color:#8a96a8;margin-top:4px;">Period: ${period} · ${data.length} months</div>
+    <div style="font-size:0.7rem;color:#8a96a8;margin-top:4px;">${period}</div>
   `;
 }
 
@@ -352,14 +387,14 @@ function wbUpdateStats () {
  *  Event wiring (DOM is ready — scripts load after HTML)
  * ================================================================ */
 
-/* Combination selector */
-wbEl('wbComboSelect')?.addEventListener('change', e => {
-  const idx = parseInt(e.target.value, 10);
-  if (wbBasinData?.combinations?.[idx]) {
-    wbComboData = wbBasinData.combinations[idx];
+/* P / E / Q product selectors */
+Object.values(WB_PRODUCT_SELECTS).forEach(id => {
+  wbEl(id)?.addEventListener('change', () => {
+    if (!wbBasinData) return;
+    wbComboData = wbFindCombo();
     wbDrawChart();
     wbUpdateStats();
-  }
+  });
 });
 
 /* Variable toggle checkboxes */

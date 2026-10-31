@@ -6,10 +6,10 @@
   <meta name="description" content="Водный баланс Казахстана – Открытый геопортал для водосборных бассейнов. Карты LULC, временные ряды гидрологических данных и анализ водопользования.">
   <title>Водный баланс Казахстана | Открытый геопортал</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style/nla-theme.css">
+  <link rel="stylesheet" href="style/nla-theme.css?v=2">
   <style>
     body {
-      background: url('image_logo/Irtysh 1.png') no-repeat center center fixed;
+      background: url('image_logo/irtysh_bg.jpg') no-repeat center center fixed;
       background-size: cover;
     }
     body::before {
@@ -59,6 +59,7 @@
         Водный баланс водохозяйственных бассейнов Северного Казахстана<br>
         на основе дистанционного зондирования, глобальных наборов данных и гидрологической информации.
       </p>
+      <a href="story_ru.html" class="btn btn-nla-story mt-2 me-2"><span aria-hidden="true">&#9873;</span> История на карте</a>
       <a href="spatialData_ru.html" class="btn btn-nla mt-2 me-2">Каталог данных</a>
       <a href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan"
          target="_blank" class="btn btn-nla-outline mt-2" style="color:#fff;border-color:rgba(255,255,255,0.5);">
@@ -101,8 +102,8 @@
           <img src="image_logo/logo_wateruse.svg" class="img-fluid" alt="Водопользование и водозабор">
           <div class="card-body">
             <h5 class="card-title">Водопользование и водозабор</h5>
-            <p class="card-text">Визуализация анализа водопользования и водозабора в Jupyter Notebook.</p>
-            <a href="Report Water Use Analysis.html" class="btn btn-nla">Открыть отчёт</a>
+            <p class="card-text">Интерактивный дашборд водозабора, водопользования и потерь по отраслям в водохозяйственных бассейнах, 2004–2023.</p>
+            <a href="water_use_ru.html" class="btn btn-nla">Открыть дашборд</a>
           </div>
         </div>
       </div>
@@ -151,7 +152,7 @@
       <div class="row g-3">
 
         <!-- Zenodo Dataset -->
-        <div class="col-md-4 d-flex">
+        <div class="col-md-6 col-xl-3 d-flex">
           <div class="pub-card w-100">
             <span class="pub-badge pub-badge-data">Набор данных</span>
             <p class="pub-title">
@@ -170,7 +171,7 @@
         </div>
 
         <!-- Frontiers in Water paper -->
-        <div class="col-md-4 d-flex">
+        <div class="col-md-6 col-xl-3 d-flex">
           <div class="pub-card w-100">
             <span class="pub-badge pub-badge-article">Статья</span>
             <p class="pub-title">
@@ -189,7 +190,7 @@
         </div>
 
         <!-- Earth Systems and Environment paper -->
-        <div class="col-md-4 d-flex">
+        <div class="col-md-6 col-xl-3 d-flex">
           <div class="pub-card w-100">
             <span class="pub-badge pub-badge-article">Статья</span>
             <p class="pub-title">
@@ -205,6 +206,26 @@
               водоносных горизонтов.
             </p>
             <a href="https://doi.org/10.1007/s41748-026-01101-x" target="_blank" rel="noopener" class="pub-link">Читать статью ↗</a>
+          </div>
+        </div>
+
+        <!-- CAJWR opinion paper -->
+        <div class="col-md-6 col-xl-3 d-flex">
+          <div class="pub-card w-100">
+            <span class="pub-badge pub-badge-article">Аналитическая статья</span>
+            <p class="pub-title">
+              <a href="https://water-ca.org/article/the-paradoxes-of-adaption-to-climate-change-in-central-asia" target="_blank" rel="noopener">
+                Парадоксы адаптации к изменению климата в Центральной Азии
+              </a>
+            </p>
+            <p class="pub-authors">Yapiyev V., Saidaliyeva Z., Ongdas N.</p>
+            <p class="pub-meta">Central Asian Journal of Water Research &nbsp;·&nbsp; 2026</p>
+            <p class="pub-desc">
+              Рассматривает восемь «парадоксов адаптации» в Центральной Азии, когда меры по адаптации к
+              изменению климата непреднамеренно создают новые риски, и показывает, что они отражают глубокие
+              структурные противоречия вододефицитного и политически фрагментированного региона.
+            </p>
+            <a href="https://water-ca.org/article/the-paradoxes-of-adaption-to-climate-change-in-central-asia" target="_blank" rel="noopener" class="pub-link">Читать статью ↗</a>
           </div>
         </div>
 
@@ -240,5 +261,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/visitorCounter.js" defer></script>
 </body>
 </html>

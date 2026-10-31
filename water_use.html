@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Water Use &amp; Abstraction | WaterBalance Kazakhstan</title>
+  <!-- Generated page: all data comes from notebooks/water_use_dashboard.ipynb -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/ol/ol.css" />
+  <link rel="stylesheet" href="style/nla-theme.css" />
+  <link rel="stylesheet" href="style/water-use.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/ol/ol.js"></script>
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar navbar-expand-lg nla-navbar">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand" href="index.html">
+        <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="spatialData.html">Data Catalogue</a></li>
+          <li class="nav-item"><a class="nav-link" href="lulc_map.html">LULC Map</a></li>
+          <li class="nav-item"><a class="nav-link" href="timeseries.html">Timeseries</a></li>
+        </ul>
+        <div class="lang-switcher">
+          <a class="lang-btn active" href="water_use.html">EN</a>
+          <a class="lang-btn" href="water_use_ru.html">RU</a>
+          <a class="lang-btn" href="water_use_kz.html">KZ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Top bar ===== -->
+  <div class="wu-topbar">
+    <div>
+      <p class="page-title">Water Use &amp; Abstraction Dashboard</p>
+      <p class="page-subtitle">Water withdrawal, use, discharge and losses by sector — 5 northern water management basins · 2004–2023 · mln m³</p>
+    </div>
+    <div class="wu-downloads">
+      <a href="input_data/water_use/water_use_dashboard.json" download>&#8595; Data (JSON)</a>
+      <a href="input_data/water_use/water_use_tidy.csv" download>&#8595; Table (CSV)</a>
+      <a href="input_data/water_use/water_use_tables.xlsx" download>&#8595; Tables (Excel)</a>
+      <a href="notebooks/water_use_dashboard.ipynb" download>&#8595; Source notebook</a>
+      <a href="notebooks/water_use_dashboard.html" target="_blank" rel="noopener">Notebook report ↗</a>
+    </div>
+  </div>
+
+  <!-- ===== Dashboard grid ===== -->
+  <div class="wu-body">
+
+    <aside class="wu-sidebar">
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title">Controls</span></div>
+        <div class="panel-body">
+          <div class="mb-2">
+            <label for="wu-indicator" class="form-label">Indicator</label>
+            <select id="wu-indicator" class="form-select form-select-sm"></select>
+          </div>
+          <div class="mb-2">
+            <label for="wu-sector" class="form-label">Sector</label>
+            <select id="wu-sector" class="form-select form-select-sm"></select>
+          </div>
+          <div class="mb-2">
+            <div class="wu-year-row">
+              <label for="wu-slider" class="form-label">Year</label><span id="wu-year">—</span>
+            </div>
+            <input type="range" id="wu-slider" class="form-range" step="1" />
+            <div class="wu-range-ends"><span id="wu-y0"></span><span id="wu-y1"></span></div>
+          </div>
+          <div class="mb-1">
+            <label for="wu-basin" class="form-label">Basin</label>
+            <select id="wu-basin" class="form-select form-select-sm"></select>
+            <div class="wu-hint" id="wu-click-hint"></div>
+          </div>
+          <div class="d-flex gap-2 mt-2 flex-wrap">
+            <button id="wu-play" class="wu-btn" type="button"></button>
+            <button id="wu-reset" class="wu-btn wu-btn-outline" type="button"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title">Key figures</span></div>
+        <div class="panel-body"><div id="wu-kpis"></div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title">About the data</span></div>
+        <div class="panel-body wu-notes">
+          <p><strong>Source:</strong> basin water-use statistics for 2004–2023 (21 water-use types), converted from thousand m³ to <strong>mln m³</strong>. All analysis is done in the
+          <a href="notebooks/water_use_dashboard.ipynb">source Jupyter notebook</a>; this page only displays its output.</p>
+          <p><strong>Efficiency</strong> = water used ÷ water withdrawn; <strong>loss rate</strong> = transport losses ÷ withdrawn. ▲/▼ compare the selected year with 2004.</p>
+          <p>Statistics cover 5 of the 8 water management basins; southern basins are hatched.</p>
+          <a href="#" id="wu-csv" class="wu-btn wu-btn-outline d-inline-block mt-1" style="text-decoration:none;">&#8595; Chart CSV</a>
+        </div>
+      </div>
+    </aside>
+
+    <section class="wu-map-cell">
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title" id="wu-map-title">Map</span></div>
+        <div id="wu-map"><div id="wu-hover" hidden></div><div id="wu-legend"></div></div>
+      </div>
+    </section>
+
+    <section class="wu-mix-cell">
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title" id="wu-mix-title">Structure</span></div>
+        <div class="panel-body">
+          <div class="wu-mix-wrap"><canvas id="wu-mix"></canvas></div>
+          <div class="wu-top-title" id="wu-top-title"></div>
+          <div id="wu-top"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wu-ts-cell">
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title" id="wu-ts-title">Time series</span></div>
+        <div class="panel-body"><div class="wu-chart"><canvas id="wu-ts"></canvas></div></div>
+      </div>
+    </section>
+
+    <section class="wu-src-cell">
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title" id="wu-src-title">Water sources</span></div>
+        <div class="panel-body"><div class="wu-chart-sm"><canvas id="wu-src"></canvas></div></div>
+      </div>
+    </section>
+
+    <section class="wu-eff-cell">
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title" id="wu-eff-title">Efficiency &amp; losses</span></div>
+        <div class="panel-body"><div class="wu-chart-sm"><canvas id="wu-eff"></canvas></div></div>
+      </div>
+    </section>
+
+    <section class="wu-mat-cell">
+      <div class="panel">
+        <div class="panel-header"><span class="panel-icon"></span><span class="panel-title" id="wu-matrix-title">Basin × year</span></div>
+        <div class="panel-body"><div id="wu-matrix"></div></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="nla-footer">
+    <div class="container-fluid text-center px-3">
+      <div>
+        <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
+        <span class="footer-divider">|</span>
+        <a href="https://nla.nu.edu.kz/" target="_blank">National Laboratory Astana</a>
+        <span class="footer-divider">|</span>
+        Nazarbayev University
+      </div>
+      <div style="margin-top:4px;font-size:0.75rem;opacity:0.55;">
+        &copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz &nbsp;·&nbsp; All rights reserved
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/waterUseHandler.js"></script>
+  <script src="js/visitorCounter.js" defer></script>
+</body>
+</html>

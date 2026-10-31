@@ -9,7 +9,7 @@
   <style>
     html, body { height: 100%; display: flex; flex-direction: column; }
     body {
-      background: url('image_logo/Irtysh 1.png') no-repeat center center fixed;
+      background: url('image_logo/irtysh_bg.jpg') no-repeat center center fixed;
       background-size: cover;
     }
     body::before {
@@ -215,6 +215,22 @@
               </td>
             </tr>
 
+            <tr>
+              <td><strong>Water Use &amp; Abstraction</strong></td>
+              <td>Annual water withdrawal, use, discharge, non-returnable consumption and transport losses for 5 northern water management basins, 21 water-use types, 2004–2023 (mln m³). Produced by the source Jupyter notebook.</td>
+              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Water Use</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/water_use/water_use_dashboard.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/water_use/water_use_tidy.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/water_use/water_use_tables.xlsx" class="btn btn-outline-success">Excel</a>
+                  <a href="input_data/water_use/wateruse_masterTable.xlsx" class="btn btn-outline-success">Source Excel</a>
+                  <a href="notebooks/water_use_dashboard.ipynb" class="btn btn-outline-dark">Notebook</a>
+                  <a href="water_use.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
             <!-- ── Water Balance Products ──────────────────────────────── -->
             <tr>
               <td colspan="4" style="background:#f0f7f5;padding:10px 14px;border-left:4px solid #1a7f6e;">
@@ -222,18 +238,47 @@
                   ◈ Water Balance Products
                 </strong>
                 <span style="font-size:0.78rem;color:#6c757d;margin-left:10px;">
-                  P · E · Q · P−E · WB Storage ΔS · GRACE Storage &nbsp;|&nbsp; 12 P×E×Q combinations &nbsp;|&nbsp; Monthly · Oct 2002–Sep 2023
+                  P · E · Q · P−E · WB Storage ΔS · GRACE Storage &nbsp;|&nbsp; 14 basins · 27 P×E×Q combinations &nbsp;|&nbsp; Monthly · P/E/Q Oct 2002–Nov 2022 · GRACE to Sep 2023
                 </span>
+                <div style="font-size:0.74rem;color:#6c757d;margin-top:4px;">P: ERA5BC, MSWEP v2.8, MSWEP v3.16 · E: GLEAM v4.2a, GLEAM v4.3a, PML v2.2c · Q: ERA5, ERA5-Land, WaterGAP v2.2e</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — All basins (full package)</strong></td>
+              <td>All 378 original Excel files (14 basins × 27 combinations), organised in one folder per basin.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/zip/wb_products_all_basins.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
               </td>
             </tr>
 
             <tr>
               <td><strong>WB Products — Ertis</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00001)</span></td>
-              <td>Water balance multi-variable timeseries for the Ertis (Irtysh) basin — 12 P×E×Q combinations, monthly, Oct 2002–Sep 2023.</td>
+              <td>Water balance timeseries for the Ertis basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
               <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
               <td>
                 <div class="btn-group btn-group-sm btn-dl-group">
-                  <a href="input_data/new_upload/NWB_00001_ertis.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/json/NWB_00001_ertis.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00001_ertis.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00001_ertis_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — Esil-Ertis closed</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00002)</span></td>
+              <td>Water balance timeseries for the Esil-Ertis closed basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00002_yesil_ertis_closed_basin.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00002_yesil_ertis_closed_basin.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00002_yesil_ertis_closed_basin_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
                   <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
                 </div>
               </td>
@@ -241,11 +286,55 @@
 
             <tr>
               <td><strong>WB Products — Nura</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00003)</span></td>
-              <td>Water balance multi-variable timeseries for the Nura basin — 12 P×E×Q combinations, monthly, Oct 2002–Sep 2023.</td>
+              <td>Water balance timeseries for the Nura basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
               <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
               <td>
                 <div class="btn-group btn-group-sm btn-dl-group">
-                  <a href="input_data/new_upload/NWB_00003_nura.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/json/NWB_00003_nura.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00003_nura.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00003_nura_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — Ob-Ertis closed</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00004)</span></td>
+              <td>Water balance timeseries for the Ob-Ertis closed basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00004_ob_ertis_closed_basin.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00004_ob_ertis_closed_basin.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00004_ob_ertis_closed_basin_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — Sarysu</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00005)</span></td>
+              <td>Water balance timeseries for the Sarysu basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00005_sarysu.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00005_sarysu.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00005_sarysu_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — Tobyl</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00006)</span></td>
+              <td>Water balance timeseries for the Tobyl basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00006_tobyl.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00006_tobyl.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00006_tobyl_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
                   <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
                 </div>
               </td>
@@ -253,11 +342,27 @@
 
             <tr>
               <td><strong>WB Products — Torgai</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00007)</span></td>
-              <td>Water balance multi-variable timeseries for the Torgai basin — 12 P×E×Q combinations, monthly, Oct 2002–Sep 2023.</td>
+              <td>Water balance timeseries for the Torgai basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
               <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
               <td>
                 <div class="btn-group btn-group-sm btn-dl-group">
-                  <a href="input_data/new_upload/NWB_00007_torgai.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/json/NWB_00007_torgai.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00007_torgai.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00007_torgai_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — Vagay</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00008)</span></td>
+              <td>Water balance timeseries for the Vagay basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00008_vagay.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00008_vagay.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00008_vagay_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
                   <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
                 </div>
               </td>
@@ -265,11 +370,83 @@
 
             <tr>
               <td><strong>WB Products — Yesil</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00009)</span></td>
-              <td>Water balance multi-variable timeseries for the Yesil basin — 12 P×E×Q combinations, monthly, Oct 2002–Sep 2023.</td>
+              <td>Water balance timeseries for the Yesil basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
               <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
               <td>
                 <div class="btn-group btn-group-sm btn-dl-group">
-                  <a href="input_data/new_upload/NWB_00009_yesil.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/json/NWB_00009_yesil.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00009_yesil.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00009_yesil_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — Zhaiyk-Caspian</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00010)</span></td>
+              <td>Water balance timeseries for the Zhaiyk-Caspian basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00010_zhaiyk_caspian.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00010_zhaiyk_caspian.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00010_zhaiyk_caspian_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — Syr Darya-Aral</strong> <span style="font-size:0.75rem;color:#6c757d;">(SWB_00001)</span></td>
+              <td>Water balance timeseries for the Syr Darya-Aral basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/SWB_00001_syr_darya_aral.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/SWB_00001_syr_darya_aral.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/SWB_00001_syr_darya_aral_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — Ily-Balkhash-Alakol</strong> <span style="font-size:0.75rem;color:#6c757d;">(SWB_00002)</span></td>
+              <td>Water balance timeseries for the Ily-Balkhash-Alakol basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/SWB_00002_ily_balkhash_alakol.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/SWB_00002_ily_balkhash_alakol.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/SWB_00002_ily_balkhash_alakol_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — Shu-Talas</strong> <span style="font-size:0.75rem;color:#6c757d;">(SWB_00003)</span></td>
+              <td>Water balance timeseries for the Shu-Talas basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/SWB_00003_shu_talas.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/SWB_00003_shu_talas.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/SWB_00003_shu_talas_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>WB Products — Amu Darya-Aral</strong> <span style="font-size:0.75rem;color:#6c757d;">(SWB_00004)</span></td>
+              <td>Water balance timeseries for the Amu Darya-Aral basin — P, E, Q, P−E, ΔS and GRACE for 27 P×E×Q combinations, monthly. CSV holds all combinations in long format; the ZIP holds one Excel file per combination.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">WB Products</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/SWB_00004_amu_darya_aral.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/SWB_00004_amu_darya_aral.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/SWB_00004_amu_darya_aral_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
                   <a href="timeseries.html" class="btn btn-outline-secondary">Explore ↗</a>
                 </div>
               </td>
@@ -307,5 +484,6 @@
     });
   </script>
 
+  <script src="js/visitorCounter.js" defer></script>
 </body>
 </html>

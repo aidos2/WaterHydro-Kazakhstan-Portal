@@ -1,0 +1,168 @@
+/* ================================================================
+ *  story.css – Story Map (story*.html), ArcGIS StoryMaps-style layout
+ *  cover · narrative blocks · "sidecar" (sticky media + scrolling
+ *  cards) · map tour.  Builds on nla-theme.css.
+ * ================================================================ */
+
+:root { --sm-nav: 58px; }   /* real navbar height, refreshed by storyMap.js */
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #f5f7fa; color: #1d2433; font-family: 'Roboto', sans-serif; }
+
+/* ── Reading progress ────────────────────────────────────────── */
+#sm-progress {
+  position: fixed; top: 0; left: 0; height: 4px; width: 0; z-index: 2000;
+  background: linear-gradient(90deg, #c9a84c, #e3c87a);
+}
+
+/* ── Cover ───────────────────────────────────────────────────── */
+.sm-cover {
+  position: relative; min-height: calc(100vh - var(--sm-nav)); display: flex; align-items: flex-end;
+  background: #0e1c36 center / cover no-repeat; color: #fff;
+}
+.sm-cover::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(14,28,54,0.15) 0%, rgba(14,28,54,0.55) 55%, rgba(14,28,54,0.92) 100%);
+}
+.sm-cover-inner { position: relative; max-width: 900px; padding: 0 24px calc(6vh + 70px); margin: 0 auto 0 8vw; }  /* room for the scroll cue */
+.sm-kicker {
+  display: inline-block; font-family: 'Roboto Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #c9a84c; border: 1px solid #c9a84c; padding: 3px 10px; border-radius: 3px; margin-bottom: 1rem;
+}
+.sm-cover h1 {
+  font-family: 'Roboto Condensed', sans-serif; font-weight: 700; font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.05; margin: 0 0 0.8rem; text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+.sm-cover p { font-size: clamp(1rem, 1.6vw, 1.25rem); font-weight: 300; max-width: 680px; color: rgba(255,255,255,0.88); margin: 0; }
+.sm-cover-meta { margin-top: 1.4rem; font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+.sm-scroll-cue {
+  position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); color: #fff; text-decoration: none;
+  font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; opacity: 0.85;
+}
+.sm-scroll-cue span { display: block; font-size: 1.5rem; animation: sm-bob 1.8s ease-in-out infinite; }
+@keyframes sm-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* ── Chapter navigation (right-hand dots) ────────────────────── */
+.sm-toc {
+  position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 1500;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.sm-toc a {
+  position: relative; display: block; width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(14,28,54,0.25); border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(14,28,54,0.25);
+}
+.sm-toc a.active { background: #c9a84c; transform: scale(1.25); }
+.sm-toc a span {
+  position: absolute; right: 22px; top: 50%; transform: translateY(-50%); white-space: nowrap;
+  background: #0e1c36; color: #fff; font-family: 'Roboto Condensed', sans-serif; font-size: 0.75rem;
+  padding: 3px 8px; border-radius: 3px; opacity: 0; pointer-events: none; transition: opacity 0.15s;
+}
+.sm-toc a:hover span, .sm-toc a:focus-visible span { opacity: 1; }
+.sm-toc.on-cover a { background: rgba(255,255,255,0.35); }
+
+/* ── Narrative (full-width text) block ───────────────────────── */
+.sm-text { max-width: 720px; margin: 0 auto; padding: 72px 24px; font-size: 1.08rem; line-height: 1.75; }
+.sm-text h2, .sm-chapter-head h2 {
+  font-family: 'Roboto Condensed', sans-serif; font-weight: 700; color: #0e1c36; font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 0 0 1rem;
+}
+.sm-chapter-num {
+  font-family: 'Roboto Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c9a84c; font-weight: 700;
+}
+.sm-chapter-head { max-width: 720px; margin: 0 auto; padding: 72px 24px 8px; }
+.sm-chapter-head p { font-size: 1.08rem; line-height: 1.75; color: #3b4658; }
+.sm-quote {
+  border-left: 4px solid #c9a84c; padding: 6px 0 6px 18px; margin: 1.6rem 0; font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.35rem; color: #0e1c36;
+}
+.sm-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin: 1.8rem 0 0; }
+.sm-stat { background: #fff; border-radius: 8px; border-top: 3px solid #c9a84c; padding: 14px 16px; box-shadow: 0 1px 6px rgba(14,28,54,0.08); }
+.sm-stat b { display: block; font-family: 'Roboto Condensed', sans-serif; font-size: 2rem; color: #0e1c36; line-height: 1.1; }
+.sm-stat span { font-size: 0.82rem; color: #5b6576; line-height: 1.35; display: block; margin-top: 2px; }
+
+/* ── Sidecar: sticky media + scrolling cards ─────────────────── */
+.sm-sidecar { position: relative; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+.sm-sidecar.dark { background: #0e1c36; }
+.sm-media { position: sticky; top: var(--sm-nav); height: calc(100vh - var(--sm-nav)); overflow: hidden; background: #0e1c36; }
+.sm-slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity 0.7s ease; display: flex; align-items: center; justify-content: center; }
+.sm-slide.active { opacity: 1; }
+.sm-slide img { width: 100%; height: 100%; object-fit: contain; }
+.sm-slide.cover img { object-fit: cover; }
+.sm-slide figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 20px 12px; font-size: 0.8rem; color: rgba(255,255,255,0.9);
+  background: linear-gradient(0deg, rgba(14,28,54,0.85), rgba(14,28,54,0));
+}
+.sm-narrative { padding: 30vh 28px 40vh; display: flex; flex-direction: column; gap: 60vh; }
+.sm-step {
+  background: #fff; border-radius: 8px; padding: 24px 26px; box-shadow: 0 4px 22px rgba(14,28,54,0.12);
+  border-left: 4px solid transparent; opacity: 0.55; transition: opacity 0.3s, border-color 0.3s;
+  font-size: 1rem; line-height: 1.7;
+}
+.sm-step.active { opacity: 1; border-left-color: #c9a84c; }
+.sm-step h3 { font-family: 'Roboto Condensed', sans-serif; font-weight: 700; color: #0e1c36; font-size: 1.35rem; margin: 0 0 0.6rem; }
+.sm-step p { margin: 0 0 0.7rem; }
+.sm-step p:last-child { margin-bottom: 0; }
+.sm-step ul { padding-left: 1.1rem; margin: 0 0 0.7rem; }
+.sm-step li { margin-bottom: 0.25rem; }
+.sm-step .sm-eq { font-family: 'Roboto Condensed', sans-serif; font-size: 1.5rem; color: #0e1c36; text-align: center; margin: 0.6rem 0; letter-spacing: 0.04em; }
+.sm-step .sm-tag {
+  display: inline-block; font-family: 'Roboto Condensed', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #1a7f6e; background: #e6f4f1; border-radius: 3px; padding: 2px 8px; margin-bottom: 8px;
+}
+.sm-link {
+  display: inline-block; margin-top: 6px; font-family: 'Roboto Condensed', sans-serif; font-weight: 700; font-size: 0.9rem;
+  color: #fff; background: #0e1c36; border-radius: 4px; padding: 6px 14px; text-decoration: none;
+}
+.sm-link:hover { background: #c9a84c; color: #0e1c36; }
+.sm-team { display: grid; grid-template-columns: 1fr; gap: 6px; margin: 0.4rem 0 0.8rem; }
+.sm-team div { font-size: 0.92rem; }
+.sm-team b { color: #0e1c36; }
+
+/* map tour */
+#sm-map { position: absolute; inset: 0; }
+.sm-map-legend {
+  position: absolute; left: 14px; bottom: 26px; z-index: 5; background: rgba(255,255,255,0.95); border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2); padding: 8px 12px; font-size: 0.78rem; max-width: 260px;
+}
+.sm-map-legend:empty { display: none; }
+.sm-map-legend .row-l { display: flex; align-items: center; gap: 7px; margin: 3px 0; }
+.sm-map-legend i { display: inline-block; width: 16px; height: 11px; border: 1px solid rgba(0,0,0,0.35); flex-shrink: 0; }
+.sm-map-legend .title { font-family: 'Roboto Condensed', sans-serif; font-weight: 700; color: #0e1c36; margin-bottom: 3px; }
+
+/* ── Publications / closing ──────────────────────────────────── */
+.sm-pubs { max-width: 1100px; margin: 0 auto; padding: 72px 24px; }
+.sm-pubs h2 { font-family: 'Roboto Condensed', sans-serif; font-weight: 700; color: #0e1c36; font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 0; }
+.sm-pub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 1.4rem; }
+.sm-pub { background: #fff; border-radius: 8px; padding: 16px 18px; box-shadow: 0 1px 6px rgba(14,28,54,0.08); border-top: 3px solid #0e1c36; }
+.sm-pub small { font-family: 'Roboto Condensed', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; color: #1a7f6e; font-weight: 700; }
+.sm-pub a { display: block; color: #0e1c36; font-weight: 500; text-decoration: none; margin: 4px 0; line-height: 1.35; }
+.sm-pub a:hover { text-decoration: underline; }
+.sm-pub span { font-size: 0.8rem; color: #6c757d; }
+.sm-end { background: #0e1c36; color: #fff; text-align: center; padding: 72px 24px; }
+.sm-end h2 { font-family: 'Roboto Condensed', sans-serif; font-weight: 700; color: #fff; margin-bottom: 0.8rem; }
+.sm-end p { color: rgba(255,255,255,0.75); max-width: 640px; margin: 0 auto 1.4rem; }
+.sm-end .btn-nla { background: #c9a84c; border-color: #c9a84c; color: #0e1c36; }
+.sm-end .btn-nla:hover { background: #e3c87a; border-color: #e3c87a; }
+.sm-credits { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 2rem; }
+
+footer.nla-footer { margin-top: 0; }
+
+/* ── Small screens: media on top, cards below ────────────────── */
+@media (max-width: 900px) {
+  .sm-sidecar { grid-template-columns: minmax(0, 1fr); }
+  .sm-media { top: var(--sm-nav); height: 45vh; z-index: 1; }
+  .sm-narrative { padding: 4vh 14px 30vh; gap: 55vh; position: relative; z-index: 2; }
+  .sm-step { opacity: 0.95; }
+  .sm-cover-inner { margin: 0 auto; }
+  .sm-toc { display: none; }
+}
+
+@media (min-width: 901px) {
+  .sm-narrative { padding-right: 52px; }   /* keep cards clear of the chapter dots */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .sm-toc a.active { transform: none; }
+  .sm-step { transition: none; }
+  .sm-slide { transition: none; }
+  .sm-scroll-cue span { animation: none; }
+}

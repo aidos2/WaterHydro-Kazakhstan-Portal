@@ -416,7 +416,7 @@
     }
   </style>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
   <script src="assets/ol/ol.js"></script>
@@ -453,18 +453,18 @@
   <div class="dash-topbar">
     <div>
       <p class="page-title">Water Timeseries Dashboard</p>
-      <p class="page-subtitle">Precipitation · Evapotranspiration · Runoff · Water Balance Storage — Northern Kazakhstan Basins</p>
+      <p class="page-subtitle">Precipitation · Evapotranspiration · Runoff · Water Balance Storage — Kazakhstan Basins</p>
     </div>
     <div style="display:flex;gap:8px;align-items:center;">
       <span style="font-size:0.72rem;color:rgba(255,255,255,0.45);font-family:'Roboto Condensed',sans-serif;letter-spacing:0.05em;">DATASET</span>
-      <select id="fileSelect" class="form-select form-select-sm" style="width:260px;font-size:0.82rem;border-color:#c9a84c;">
+      <select id="fileSelect" class="form-select form-select-sm" style="width:260px;max-width:calc(100vw - 120px);font-size:0.82rem;border-color:#c9a84c;">
         <optgroup label="Legacy Datasets">
           <option value="input_data/GLEAM_WaterBalanceAllBAsin.json">Water Balance (GLEAM)</option>
           <option value="input_data/P_MSWEP_ALL.json">Precipitation (MSWEP)</option>
           <option value="input_data/Soil_Moisture_ERA5.json">Soil Moisture (ERA5)</option>
         </optgroup>
         <optgroup label="Water Balance Products">
-          <option value="wb_products">◈ WB Products — Ertis · Nura · Torgai · Yesil</option>
+          <option value="wb_products">◈ WB Products — All 14 basins · 27 P×E×Q combinations</option>
         </optgroup>
       </select>
     </div>
@@ -516,8 +516,13 @@
 
           <!-- Combination selector -->
           <div class="mb-2">
-            <label for="wbComboSelect" class="form-label">P × E × Q Combination</label>
-            <select id="wbComboSelect" class="form-select form-select-sm" style="font-size:0.76rem;"></select>
+            <div class="form-label" style="margin-bottom:2px;">P × E × Q Combination</div>
+            <label for="wbSelP" class="form-label" style="font-size:0.7rem;font-weight:400;text-transform:none;margin:0;">Precipitation (P)</label>
+            <select id="wbSelP" class="form-select form-select-sm mb-1" style="font-size:0.76rem;"></select>
+            <label for="wbSelE" class="form-label" style="font-size:0.7rem;font-weight:400;text-transform:none;margin:0;">Evapotranspiration (E)</label>
+            <select id="wbSelE" class="form-select form-select-sm mb-1" style="font-size:0.76rem;"></select>
+            <label for="wbSelQ" class="form-label" style="font-size:0.7rem;font-weight:400;text-transform:none;margin:0;">Runoff (Q)</label>
+            <select id="wbSelQ" class="form-select form-select-sm mb-1" style="font-size:0.76rem;"></select>
             <div id="wb-loading" style="display:none;" class="mt-1">⏳ Loading data…</div>
           </div>
 
@@ -755,5 +760,6 @@
     };
   </script>
 
+  <script src="js/visitorCounter.js" defer></script>
 </body>
 </html>

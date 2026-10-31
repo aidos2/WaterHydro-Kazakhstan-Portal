@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>История на карте | WaterBalance Kazakhstan</title>
+  <meta name="description" content="Как набросок на доске превратился в полевые станции, международное сотрудничество и этот открытый геопортал.">
+  <!-- Generated page (story map); photos in image_logo/story/ follow the order of the project's story document -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/ol/ol.css">
+  <link rel="stylesheet" href="style/nla-theme.css">
+  <link rel="stylesheet" href="style/story.css">
+  <script src="assets/ol/ol.js"></script>
+</head>
+<body>
+  <div id="sm-progress" aria-hidden="true"></div>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar navbar-expand-lg nla-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index_ru.html">
+        <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index_ru.html">Главная</a></li>
+          <li class="nav-item"><a class="nav-link" href="spatialData_ru.html">Каталог данных</a></li>
+          <li class="nav-item"><a class="nav-link" href="lulc_map_ru.html">Карта LULC</a></li>
+          <li class="nav-item"><a class="nav-link" href="timeseries_ru.html">Временные ряды</a></li>
+        </ul>
+        <div class="lang-switcher">
+          <a class="lang-btn" href="story.html">EN</a>
+          <a class="lang-btn active" href="story_ru.html">RU</a>
+          <a class="lang-btn" href="story_kz.html">KZ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="sm-toc on-cover" aria-label="Главы">
+    <a href="#intro"><span>Зачем водный баланс</span></a>
+    <a href="#idea"><span>Идея</span></a>
+    <a href="#team"><span>Команда</span></a>
+    <a href="#field"><span>Полевые работы</span></a>
+    <a href="#conferences"><span>Конференции</span></a>
+    <a href="#seminar"><span>Наш семинар</span></a>
+    <a href="#geoportal"><span>Геопортал</span></a>
+    <a href="#publications"><span>Публикации</span></a>
+  </nav>
+
+  <!-- ===== Cover ===== -->
+  <header class="sm-cover" style="background-image:url('image_logo/story/07_field_steppe.jpg')">
+    <div class="sm-cover-inner">
+      <div class="sm-kicker">История на карте · 2024–2026</div>
+      <h1>Водный баланс Северного Казахстана</h1>
+      <p>Как набросок на доске превратился в полевые станции, международное сотрудничество и этот открытый геопортал.</p>
+      <div class="sm-cover-meta">Национальная лаборатория Астана · Назарбаев Университет</div>
+    </div>
+    <a class="sm-scroll-cue" href="#intro">Прокрутите вниз<span aria-hidden="true">⌄</span></a>
+  </header>
+
+  <!-- ===== Intro ===== -->
+  <section class="sm-text" id="intro" data-chapter>
+    <h2>Зачем изучать водный баланс?</h2>
+    <p>В полузасушливой степи Казахстана на счету каждый миллиметр воды. Цель проекта — оценить, сколько воды получают северные водохозяйственные бассейны, сколько теряют на испарение и сток, сколько накапливают и используют, и как это изменилось за последние 20 лет.</p>
+    <p>Проект охватывает пять водохозяйственных бассейнов — Жайык-Каспийский, Есильский, Тобол-Торгайский, Нура-Сарысуский и Ертисский, — которые вместе занимают 69 % территории Казахстана, и объединяет данные дистанционного зондирования, глобальные наборы данных и национальную гидрологическую информацию.</p>
+    <div class="sm-stats">
+      <div class="sm-stat"><b>5</b><span>водохозяйственных бассейнов</span></div>
+      <div class="sm-stat"><b>69 %</b><span>территории Казахстана</span></div>
+      <div class="sm-stat"><b>20+</b><span>лет данных водного баланса</span></div>
+      <div class="sm-stat"><b>2024–26</b><span>период проекта</span></div>
+    </div>
+  </section>
+
+  <!-- ===== Chapter 1 – the idea ===== -->
+  <section class="sm-sidecar" id="idea" data-chapter aria-label="Идея">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="idea0">
+          <img src="image_logo/story/01_brainstorm.jpg" alt="" loading="eager">
+          <figcaption>Мозговой штурм: план работ, уравнение водного баланса и гидрологический год</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="idea0">
+          <div class="sm-tag">Глава 1 · Идея</div>
+          <h3>Всё началось с доски</h3>
+          <p>Проект начался с мозгового штурма. Первый план уместился в две строки: <b>(1)</b> обзор литературы о доступных продуктах, бассейнах и их неопределённостях; <b>(2)</b> загрузка данных.</p>
+        </div>
+        <div class="sm-step" data-slide="idea0">
+          <h3>Одно уравнение</h3>
+          <div class="sm-eq">ΔS = P − E − R − A</div>
+          <p>Изменение запасов воды равно осадкам за вычетом эвапотранспирации, стока и водозабора. Каждый член уравнения стал отдельным блоком работ, а позже — разделом этого портала.</p>
+        </div>
+        <div class="sm-step" data-slide="idea0">
+          <h3>Гидрологический год</h3>
+          <p>На доске зафиксирован и временной период: гидрологический год с 1 октября по 1 октября, холодный сезон накопления снега и тёплый сезон, начинающийся со снеготаяния около апреля. Схемы бассейнов — разбитых на ячейки спутниковой сетки и на суббассейны с речной сетью — показывают, как предстояло объединить дистанционное зондирование и гидрологию.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 2 – the team ===== -->
+  <section class="sm-sidecar" id="team" data-chapter aria-label="Команда">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="team0">
+          <img src="image_logo/story/02_team.jpg" alt="" loading="lazy">
+          <figcaption>Команда проекта и участники</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="team0">
+          <div class="sm-tag">Глава 2 · Команда</div>
+          <h3>Люди, стоящие за цифрами</h3>
+          <div class="sm-team">
+            <div><b>Vadim Yapiyev</b> — руководитель проекта · испарение (E), методология, полевые работы</div>
+            <div><b>Nurlan Ongdas</b> — суммарные запасы воды на суше (TWS, GRACE), гидрология</div>
+            <div><b>Abdikaiym Zhiyenbek</b> — водный баланс, гидрология (сток Q)</div>
+            <div><b>Dr. Zarina Saidaliyeva</b> — осадки (P), гидроклимат</div>
+            <div><b>Aidos Makhanov</b> — водопользование (A), геопортал</div>
+          </div>
+        </div>
+        <div class="sm-step" data-slide="team0">
+          <h3>Партнёры</h3>
+          <p>Международные партнёры: <b>Egor Prikaziuk</b> (ITC, Университет Твенте) и <b>Sifan Koriche</b> (Alabama Water Institute). Местные партнёры и участники: <b>ISSAI</b>, <b>Madina Abdrakhmanova</b> и <b>Казгидромет</b>.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 3 – field work ===== -->
+  <section class="sm-sidecar dark" id="field" data-chapter aria-label="Полевые работы">
+      <div class="sm-media">
+        <figure class="sm-slide cover active" data-slide="field0">
+          <img src="image_logo/story/03_field_station.jpg" alt="" loading="lazy">
+          <figcaption>Станция эвапотранспирации рядом с метеостанцией</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field1">
+          <img src="image_logo/story/04_field_team.jpg" alt="" loading="lazy">
+          <figcaption>Полевые работы в степи</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field2">
+          <img src="image_logo/story/05_field_install.jpg" alt="" loading="lazy">
+          <figcaption>Монтаж станции на солнечной энергии</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field3">
+          <img src="image_logo/story/06_field_licor.jpg" alt="" loading="lazy">
+          <figcaption>Станция с логгером LI-COR</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field4">
+          <img src="image_logo/story/07_field_steppe.jpg" alt="" loading="lazy">
+          <figcaption>Степной ландшафт</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="field0">
+          <div class="sm-tag">Глава 3 · Полевые работы</div>
+          <h3>Наземная проверка спутниковых данных</h3>
+          <p>Спутниковые продукты оценивают эвапотранспирацию для целых бассейнов, но их нужно проверять на земле. Команда установила станцию измерения эвапотранспирации с модулем LI-COR IoE и солнечной панелью рядом с действующей метеостанцией.</p>
+        </div>
+        <div class="sm-step" data-slide="field1">
+          <h3>В степь</h3>
+          <p>Полевые выезды уводили команду — на фото Vadim Yapiyev и Nurlan Ongdas — далеко в степь, чтобы выбрать площадки и установить приборы.</p>
+        </div>
+        <div class="sm-step" data-slide="field2">
+          <h3>Монтаж</h3>
+          <p>Мачта, датчики, солнечная панель и аккумулятор собираются и подключаются на месте; инструкции и инструменты едут в каждую поездку.</p>
+        </div>
+        <div class="sm-step" data-slide="field3">
+          <h3>Станция работает</h3>
+          <p>После подключения логгер LI-COR непрерывно записывает эвапотранспирацию и погодные параметры — наземный эталон для спутниковых оценок.</p>
+        </div>
+        <div class="sm-step" data-slide="field4">
+          <h3>Ландшафт, который мы измеряем</h3>
+          <p>Гранитные останцы и сухая степь до горизонта — ландшафт, водный баланс которого описывает проект.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 4 – international conferences ===== -->
+  <section class="sm-sidecar" id="conferences" data-chapter aria-label="Конференции">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="conf0">
+          <img src="image_logo/story/08_conf_partners.jpg" alt="" loading="lazy">
+          <figcaption>Встреча с международными партнёрами</figcaption>
+        </figure>
+        <figure class="sm-slide" data-slide="conf1">
+          <img src="image_logo/story/09_conf_egu26.jpg" alt="" loading="lazy">
+          <figcaption>На стендовой сессии Генеральной ассамблеи EGU 2026</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="conf0">
+          <div class="sm-tag">Глава 4 · Конференции</div>
+          <h3>Работа с партнёрами</h3>
+          <p>Команда проекта встретилась с международными партнёрами и коллегами, чтобы обсудить работу.</p>
+        </div>
+        <div class="sm-step" data-slide="conf1">
+          <h3>Генеральная ассамблея EGU 2026</h3>
+          <p>Команда приняла участие в Генеральной ассамблее EGU 2026 в Вене и обменялась опытом с международным гидрологическим сообществом.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 5 – own seminar ===== -->
+  <section class="sm-sidecar" id="seminar" data-chapter aria-label="Наш семинар">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="sem0">
+          <img src="image_logo/story/10_seminar.jpg" alt="" loading="lazy">
+          <figcaption>Анонс семинара</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="sem0">
+          <div class="sm-tag">Глава 5 · Наш семинар</div>
+          <h3>Водный бюджет Казахстана</h3>
+          <p>В октябре 2026 года команда провела собственный семинар <b>«Water Budget of Kazakhstan: A Transboundary View from Space and Ground»</b> («Водный бюджет Казахстана: трансграничный взгляд из космоса и с земли»). Докладчик — руководитель проекта д-р Vadim Yapiyev.</p>
+          <ul>
+            <li>21 октября 2026 г., 09:00</li>
+            <li>Назарбаев Университет, блок C3, аудитория 3015</li>
+            <li>Гибридный формат</li>
+          </ul>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 6 – the geoportal (map tour) ===== -->
+  <div class="sm-chapter-head">
+    <div class="sm-chapter-num">Глава 6</div>
+    <h2>Геопортал</h2>
+    <p>Всё, что создано в проекте, открыто на этом портале. Прокрутите, чтобы увидеть его основные разделы на карте.</p>
+  </div>
+  <section class="sm-sidecar" id="geoportal" data-chapter aria-label="Геопортал">
+      <div class="sm-media">
+        <div id="sm-map"></div>
+        <div class="sm-map-legend" id="sm-map-legend"></div>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-map="regions">
+          <div class="sm-tag">Глава 6 · Геопортал</div>
+          <h3>14 водосборов, два гидрологических региона</h3>
+          <p>Пространственная основа портала — согласованный набор границ 14 водосборов, объединённых в Северный и Южный гидрологические регионы; он также опубликован как открытый набор данных на Zenodo.</p>
+        </div>
+        <div class="sm-step" data-map="catalogue">
+          <div class="sm-tag">Глава 6 · Каталог данных</div>
+          <h3>Всё можно скачать</h3>
+          <p>Водосборы, водохозяйственные бассейны, суббассейны, гидрологические регионы, речная сеть GIRES v10 и озёра, покрытие земель ESA WorldCover и все временные ряды — в форматах GeoJSON, GeoPackage, Shapefile, GeoTIFF, JSON, CSV и Excel.</p>
+          <a class="sm-link" href="spatialData_ru.html">Открыть каталог данных →</a>
+        </div>
+        <div class="sm-step" data-map="lulc">
+          <div class="sm-tag">Глава 6 · Карта LULC</div>
+          <h3>Землепользование и земельный покров</h3>
+          <p>Интерактивная карта ArcGIS с покрытием земель ESA WorldCover (100 м) и границами бассейнов показывает, где в каждом бассейне расположены пашни, травянистая растительность, леса и водные объекты.</p>
+          <a class="sm-link" href="lulc_map_ru.html">Открыть карту LULC →</a>
+        </div>
+        <div class="sm-step" data-map="timeseries">
+          <div class="sm-tag">Глава 6 · Временные ряды</div>
+          <h3>Водный баланс месяц за месяцем</h3>
+          <p>Дашборд временных рядов показывает осадки, влажность почвы и водный баланс по бассейнам. Режим «Продукты водного баланса» сравнивает 27 комбинаций продуктов осадков, эвапотранспирации и стока со спутниковыми запасами GRACE для всех 14 бассейнов (октябрь 2002 – ноябрь 2022).</p>
+          <a class="sm-link" href="timeseries_ru.html">Открыть временные ряды →</a>
+        </div>
+        <div class="sm-step" data-map="wateruse">
+          <div class="sm-tag">Глава 6 · Водопользование</div>
+          <h3>Кто использует воду?</h3>
+          <p>Дашборд водопользования и водозабора превращает статистику бассейнов за 2004–2023 гг. в карты и графики водозабора, использования, сброса и потерь по отраслям для пяти водохозяйственных бассейнов. В 2023 году в них было забрано около 8,8 км³ воды, почти две трети — для промышленности.</p>
+          <a class="sm-link" href="water_use_ru.html">Открыть дашборд водопользования →</a>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Publications ===== -->
+  <section class="sm-pubs" id="publications" data-chapter>
+    <h2>Публикации и данные</h2>
+    <div class="sm-pub-grid">
+      <div class="sm-pub">
+        <small>Набор данных</small>
+        <a href="https://zenodo.org/records/17077776" target="_blank" rel="noopener">Границы водосборов крупных речных и водохозяйственных бассейнов Казахстана</a>
+        <span>Yapiyev V., Ongdas N., Saidaliyeva Z., Zhiyenbek A.<br>Zenodo &nbsp;·&nbsp; 2025 &nbsp;·&nbsp; CC BY 4.0</span>
+      </div>
+      <div class="sm-pub">
+        <small>Статья</small>
+        <a href="https://doi.org/10.3389/frwa.2025.1601671" target="_blank" rel="noopener">Базовая информация и районирование крупных речных бассейнов Казахстана</a>
+        <span>Yapiyev V., Ongdas N., Saidaliyeva Z., Zhiyenbek A., Smogulova T., Baigaliyeva M., Prikaziuk E.<br>Frontiers in Water &nbsp;·&nbsp; 2025</span>
+      </div>
+      <div class="sm-pub">
+        <small>Статья</small>
+        <a href="https://doi.org/10.1007/s41748-026-01101-x" target="_blank" rel="noopener">Анализ сезонной гидроклиматической изменчивости для планирования управляемого пополнения водоносных горизонтов в Казахстане</a>
+        <span>Ongdas N., Sallwey J., Yapiyev V., Mukanov Y., Stefan C.<br>Earth Systems and Environment &nbsp;·&nbsp; 2026</span>
+      </div>
+      <div class="sm-pub">
+        <small>Аналитическая статья</small>
+        <a href="https://water-ca.org/article/the-paradoxes-of-adaption-to-climate-change-in-central-asia" target="_blank" rel="noopener">Парадоксы адаптации к изменению климата в Центральной Азии</a>
+        <span>Yapiyev V., Saidaliyeva Z., Ongdas N.<br>Central Asian Journal of Water Research &nbsp;·&nbsp; 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sm-end">
+    <h2>Исследуйте портал</h2>
+    <p>Все данные и инструменты из этой истории открыты. Начните с каталога или сразу перейдите к дашбордам.</p>
+      <a class="btn btn-nla m-1" href="spatialData_ru.html">Каталог данных</a>
+      <a class="btn btn-nla m-1" href="timeseries_ru.html">Временные ряды</a>
+      <a class="btn btn-nla m-1" href="water_use_ru.html">Водопользование</a>
+      <a class="btn btn-nla-outline m-1" style="color:#fff;border-color:rgba(255,255,255,0.5);" href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan" target="_blank" rel="noopener">Страница проекта ↗</a>
+    <div class="sm-credits">Фото: команда проекта. Проект финансируется Министерством науки и высшего образования Республики Казахстан.</div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="nla-footer">
+    <div class="container text-center">
+      <div>
+        <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
+        <span class="footer-divider">|</span>
+        <a href="https://nla.nu.edu.kz/" target="_blank">Национальная лаборатория Астана</a>
+        <span class="footer-divider">|</span>
+        Назарбаев Университет
+      </div>
+      <div style="margin-top:6px;font-size:0.78rem;opacity:0.6;">
+        &copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz &nbsp;·&nbsp; Все права защищены
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/storyMap.js"></script>
+  <script src="js/visitorCounter.js" defer></script>
+</body>
+</html>

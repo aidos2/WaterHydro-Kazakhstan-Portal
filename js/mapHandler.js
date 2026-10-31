@@ -229,7 +229,7 @@ function updateMapStyle() {
       </div>
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;font-size:11px;">
         <div style="width:14px;height:14px;background:rgba(26,127,110,0.45);border:2px solid #1a7f6e;"></div>
-        WB Product Basins (4)
+        WB Product Basins (${WB_IDS.size})
       </div>
       <div style="display:flex;align-items:center;gap:6px;font-size:11px;">
         <div style="width:14px;height:14px;background:rgba(201,168,76,0.45);border:3px solid #c9a84c;"></div>
@@ -510,8 +510,7 @@ metricSelect.addEventListener('change', () => {
   window.updateBasinStats?.();
 });
 
-/* ---------- WB basin IDs (used in click handler + updateMapStyle) -- */
-const WB_IDS = new Set(['NWB_00001', 'NWB_00003', 'NWB_00007', 'NWB_00009']);
+/* WB basin IDs (WB_IDS) come from wbHandler.js's WB_BASINS registry */
 
 /* ---------- Selection: MULTI-SELECTION on map ---------------------- */
 map.on('singleclick', evt => {

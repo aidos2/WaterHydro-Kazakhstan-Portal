@@ -9,7 +9,7 @@
   <style>
     html, body { height: 100%; display: flex; flex-direction: column; }
     body {
-      background: url('image_logo/Irtysh 1.png') no-repeat center center fixed;
+      background: url('image_logo/irtysh_bg.jpg') no-repeat center center fixed;
       background-size: cover;
     }
     body::before {
@@ -187,56 +187,241 @@
               </div></td>
             </tr>
 
-            <!-- ── Су балансы өнімдері ────────────────────────────────── -->
+            <tr>
+              <td><strong>Су пайдалану мен алу</strong></td>
+              <td>5 солтүстік су шаруашылығы алабы бойынша жылдық су алу, пайдалану, ағызу, қайтарымсыз тұтыну және тасымалдау шығындары, су пайдаланудың 21 түрі, 2004–2023 жж. (млн м³). Бастапқы Jupyter ноутбугымен дайындалған.</td>
+              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Су пайдалану</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/water_use/water_use_dashboard.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/water_use/water_use_tidy.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/water_use/water_use_tables.xlsx" class="btn btn-outline-success">Excel</a>
+                  <a href="input_data/water_use/wateruse_masterTable.xlsx" class="btn btn-outline-success">Бастапқы Excel</a>
+                  <a href="notebooks/water_use_dashboard.ipynb" class="btn btn-outline-dark">Ноутбук</a>
+                  <a href="water_use_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <!-- ── Су балансы өнімдері ──────────────────────────────── -->
             <tr>
               <td colspan="4" style="background:#f0f7f5;padding:10px 14px;border-left:4px solid #1a7f6e;">
                 <strong style="font-family:'Roboto Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.06em;color:#1a7f6e;text-transform:uppercase;">
                   ◈ Су балансы өнімдері
                 </strong>
                 <span style="font-size:0.78rem;color:#6c757d;margin-left:10px;">
-                  P · E · Q · P−E · Су қоры ΔS · GRACE &nbsp;|&nbsp; 12 P×E×Q комбинациясы &nbsp;|&nbsp; Ай сайын · 2002 қазан–2023 қыркүйек
+                  P · E · Q · P−E · Су қоры ΔS · GRACE &nbsp;|&nbsp; 14 алап · 27 P×E×Q комбинациясы &nbsp;|&nbsp; Ай сайын · P/E/Q 2002 қазан–2022 қараша · GRACE 2023 қыркүйекке дейін
                 </span>
+                <div style="font-size:0.74rem;color:#6c757d;margin-top:4px;">P: ERA5BC, MSWEP v2.8, MSWEP v3.16 · E: GLEAM v4.2a, GLEAM v4.3a, PML v2.2c · Q: ERA5, ERA5-Land, WaterGAP v2.2e</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — барлық алаптар (толық пакет)</strong></td>
+              <td>Барлық 378 бастапқы Excel файлы (14 алап × 27 комбинация), әр алапқа бір қалта.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/zip/wb_products_all_basins.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
               </td>
             </tr>
 
             <tr>
               <td><strong>СБ өнімдері — Ертіс</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00001)</span></td>
-              <td>Ертіс алабының су балансы көп айнымалы уақыт қатарлары — 12 P×E×Q комбинациясы, ай сайын, 2002 қазан–2023 қыркүйек.</td>
+              <td>Ертіс алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
               <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
-              <td><div class="btn-group btn-group-sm btn-dl-group">
-                <a href="input_data/new_upload/NWB_00001_ertis.json" class="btn btn-outline-primary">JSON</a>
-                <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
-              </div></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00001_ertis.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00001_ertis.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00001_ertis_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — Есіл-Ертіс тұйық</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00002)</span></td>
+              <td>Есіл-Ертіс тұйық алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00002_yesil_ertis_closed_basin.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00002_yesil_ertis_closed_basin.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00002_yesil_ertis_closed_basin_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
             </tr>
 
             <tr>
               <td><strong>СБ өнімдері — Нұра</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00003)</span></td>
-              <td>Нұра алабының су балансы көп айнымалы уақыт қатарлары — 12 P×E×Q комбинациясы, ай сайын, 2002 қазан–2023 қыркүйек.</td>
+              <td>Нұра алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
               <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
-              <td><div class="btn-group btn-group-sm btn-dl-group">
-                <a href="input_data/new_upload/NWB_00003_nura.json" class="btn btn-outline-primary">JSON</a>
-                <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
-              </div></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00003_nura.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00003_nura.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00003_nura_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — Об-Ертіс тұйық</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00004)</span></td>
+              <td>Об-Ертіс тұйық алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00004_ob_ertis_closed_basin.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00004_ob_ertis_closed_basin.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00004_ob_ertis_closed_basin_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — Сарысу</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00005)</span></td>
+              <td>Сарысу алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00005_sarysu.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00005_sarysu.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00005_sarysu_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — Тобыл</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00006)</span></td>
+              <td>Тобыл алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00006_tobyl.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00006_tobyl.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00006_tobyl_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
             </tr>
 
             <tr>
               <td><strong>СБ өнімдері — Торғай</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00007)</span></td>
-              <td>Торғай алабының су балансы көп айнымалы уақыт қатарлары — 12 P×E×Q комбинациясы, ай сайын, 2002 қазан–2023 қыркүйек.</td>
+              <td>Торғай алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
               <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
-              <td><div class="btn-group btn-group-sm btn-dl-group">
-                <a href="input_data/new_upload/NWB_00007_torgai.json" class="btn btn-outline-primary">JSON</a>
-                <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
-              </div></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00007_torgai.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00007_torgai.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00007_torgai_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — Вагай</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00008)</span></td>
+              <td>Вагай алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00008_vagay.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00008_vagay.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00008_vagay_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
             </tr>
 
             <tr>
               <td><strong>СБ өнімдері — Есіл</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00009)</span></td>
-              <td>Есіл алабының су балансы көп айнымалы уақыт қатарлары — 12 P×E×Q комбинациясы, ай сайын, 2002 қазан–2023 қыркүйек.</td>
+              <td>Есіл алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
               <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
-              <td><div class="btn-group btn-group-sm btn-dl-group">
-                <a href="input_data/new_upload/NWB_00009_yesil.json" class="btn btn-outline-primary">JSON</a>
-                <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
-              </div></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00009_yesil.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00009_yesil.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00009_yesil_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — Жайық-Каспий</strong> <span style="font-size:0.75rem;color:#6c757d;">(NWB_00010)</span></td>
+              <td>Жайық-Каспий алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/NWB_00010_zhaiyk_caspian.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/NWB_00010_zhaiyk_caspian.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/NWB_00010_zhaiyk_caspian_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — Сырдария-Арал</strong> <span style="font-size:0.75rem;color:#6c757d;">(SWB_00001)</span></td>
+              <td>Сырдария-Арал алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/SWB_00001_syr_darya_aral.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/SWB_00001_syr_darya_aral.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/SWB_00001_syr_darya_aral_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — Іле-Балқаш-Алакөл</strong> <span style="font-size:0.75rem;color:#6c757d;">(SWB_00002)</span></td>
+              <td>Іле-Балқаш-Алакөл алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/SWB_00002_ily_balkhash_alakol.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/SWB_00002_ily_balkhash_alakol.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/SWB_00002_ily_balkhash_alakol_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — Шу-Талас</strong> <span style="font-size:0.75rem;color:#6c757d;">(SWB_00003)</span></td>
+              <td>Шу-Талас алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/SWB_00003_shu_talas.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/SWB_00003_shu_talas.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/SWB_00003_shu_talas_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>СБ өнімдері — Әмудария-Арал</strong> <span style="font-size:0.75rem;color:#6c757d;">(SWB_00004)</span></td>
+              <td>Әмудария-Арал алабының су балансы уақыт қатарлары — 27 P×E×Q комбинациясы бойынша P, E, Q, P−E, ΔS және GRACE, ай сайын. CSV барлық комбинацияларды ұзын форматта қамтиды; ZIP — әр комбинацияға бір Excel файлы.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">СБ өнімдері</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/SWB_00004_amu_darya_aral.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/SWB_00004_amu_darya_aral.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/SWB_00004_amu_darya_aral_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_kz.html" class="btn btn-outline-secondary">Ашу ↗</a>
+                </div>
+              </td>
             </tr>
 
           </tbody>
@@ -269,5 +454,6 @@
       });
     });
   </script>
+  <script src="js/visitorCounter.js" defer></script>
 </body>
 </html>

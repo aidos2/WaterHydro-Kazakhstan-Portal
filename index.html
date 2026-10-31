@@ -6,10 +6,10 @@
   <meta name="description" content="WaterBalance Kazakhstan – Open Data GIS Portal for Watershed Basins. Explore LULC maps, water timeseries datasets, and water use analysis.">
   <title>WaterBalance Kazakhstan | Open Data GIS Portal</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style/nla-theme.css">
+  <link rel="stylesheet" href="style/nla-theme.css?v=2">
   <style>
     body {
-      background: url('image_logo/Irtysh 1.png') no-repeat center center fixed;
+      background: url('image_logo/irtysh_bg.jpg') no-repeat center center fixed;
       background-size: cover;
     }
     body::before {
@@ -60,6 +60,7 @@
         Water Balance of Northern Kazakhstan's Water Management Basins<br>
         estimated using Remote Sensing, Global Datasets, and Hydrological Information.
       </p>
+      <a href="story.html" class="btn btn-nla-story mt-2 me-2" id="hero-btn-story"><span aria-hidden="true">&#9873;</span> Story Map</a>
       <a href="spatialData.html" class="btn btn-nla mt-2 me-2" id="hero-btn1">Explore Data Catalogue</a>
       <a href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan"
          target="_blank" class="btn btn-nla-outline mt-2" style="color:#fff;border-color:rgba(255,255,255,0.5);"
@@ -101,8 +102,8 @@
           <img src="image_logo/logo_wateruse.svg" class="img-fluid" alt="Water Use and Abstraction">
           <div class="card-body">
             <h5 class="card-title" id="card3-title">Water Use &amp; Abstraction</h5>
-            <p class="card-text" id="card3-text">Jupyter Notebook visualization of water use and abstraction analysis across basins.</p>
-            <a href="Report Water Use Analysis.html" class="btn btn-nla" id="card3-btn">Explore Notebook</a>
+            <p class="card-text" id="card3-text">Interactive dashboard of water withdrawal, use and losses by sector across water management basins, 2004–2023.</p>
+            <a href="water_use.html" class="btn btn-nla" id="card3-btn">Explore Dashboard</a>
           </div>
         </div>
       </div>
@@ -150,7 +151,7 @@
       <div class="row g-3">
 
         <!-- Zenodo Dataset -->
-        <div class="col-md-4 d-flex">
+        <div class="col-md-6 col-xl-3 d-flex">
           <div class="pub-card w-100">
             <span class="pub-badge pub-badge-data">Dataset</span>
             <p class="pub-title">
@@ -169,7 +170,7 @@
         </div>
 
         <!-- Frontiers in Water paper -->
-        <div class="col-md-4 d-flex">
+        <div class="col-md-6 col-xl-3 d-flex">
           <div class="pub-card w-100">
             <span class="pub-badge pub-badge-article">Article</span>
             <p class="pub-title">
@@ -188,7 +189,7 @@
         </div>
 
         <!-- Earth Systems and Environment paper -->
-        <div class="col-md-4 d-flex">
+        <div class="col-md-6 col-xl-3 d-flex">
           <div class="pub-card w-100">
             <span class="pub-badge pub-badge-article">Article</span>
             <p class="pub-title">
@@ -204,6 +205,26 @@
               to address seasonal water scarcity.
             </p>
             <a href="https://doi.org/10.1007/s41748-026-01101-x" target="_blank" rel="noopener" class="pub-link">Read Paper ↗</a>
+          </div>
+        </div>
+
+        <!-- CAJWR opinion paper -->
+        <div class="col-md-6 col-xl-3 d-flex">
+          <div class="pub-card w-100">
+            <span class="pub-badge pub-badge-article">Opinion Paper</span>
+            <p class="pub-title">
+              <a href="https://water-ca.org/article/the-paradoxes-of-adaption-to-climate-change-in-central-asia" target="_blank" rel="noopener">
+                The paradoxes of adaptation to climate change in Central Asia
+              </a>
+            </p>
+            <p class="pub-authors">Yapiyev V., Saidaliyeva Z., Ongdas N.</p>
+            <p class="pub-meta">Central Asian Journal of Water Research &nbsp;·&nbsp; 2026</p>
+            <p class="pub-desc">
+              Examines eight “adaptation paradoxes” in Central Asia, where climate adaptation measures can
+              inadvertently create new risks, and argues they reflect deep structural contradictions in the
+              region’s water-scarce, politically fragmented landscapes.
+            </p>
+            <a href="https://water-ca.org/article/the-paradoxes-of-adaption-to-climate-change-in-central-asia" target="_blank" rel="noopener" class="pub-link">Read Paper ↗</a>
           </div>
         </div>
 
@@ -241,5 +262,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
+  <script src="js/visitorCounter.js" defer></script>
 </body>
 </html>

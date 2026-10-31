@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Картадағы оқиға | WaterBalance Kazakhstan</title>
+  <meta name="description" content="Тақтадағы сызбаның далалық станцияларға, халықаралық ынтымақтастыққа және осы ашық геопорталға қалай айналғаны туралы.">
+  <!-- Generated page (story map); photos in image_logo/story/ follow the order of the project's story document -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/ol/ol.css">
+  <link rel="stylesheet" href="style/nla-theme.css">
+  <link rel="stylesheet" href="style/story.css">
+  <script src="assets/ol/ol.js"></script>
+</head>
+<body>
+  <div id="sm-progress" aria-hidden="true"></div>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar navbar-expand-lg nla-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index_kz.html">
+        <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Навигацияны ауыстыру">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index_kz.html">Басты бет</a></li>
+          <li class="nav-item"><a class="nav-link" href="spatialData_kz.html">Деректер каталогы</a></li>
+          <li class="nav-item"><a class="nav-link" href="lulc_map_kz.html">LULC картасы</a></li>
+          <li class="nav-item"><a class="nav-link" href="timeseries_kz.html">Уақыт қатарлары</a></li>
+        </ul>
+        <div class="lang-switcher">
+          <a class="lang-btn" href="story.html">EN</a>
+          <a class="lang-btn" href="story_ru.html">RU</a>
+          <a class="lang-btn active" href="story_kz.html">KZ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="sm-toc on-cover" aria-label="Тараулар">
+    <a href="#intro"><span>Неге су балансы</span></a>
+    <a href="#idea"><span>Идея</span></a>
+    <a href="#team"><span>Команда</span></a>
+    <a href="#field"><span>Далалық жұмыстар</span></a>
+    <a href="#conferences"><span>Конференциялар</span></a>
+    <a href="#seminar"><span>Біздің семинар</span></a>
+    <a href="#geoportal"><span>Геопортал</span></a>
+    <a href="#publications"><span>Жарияланымдар</span></a>
+  </nav>
+
+  <!-- ===== Cover ===== -->
+  <header class="sm-cover" style="background-image:url('image_logo/story/07_field_steppe.jpg')">
+    <div class="sm-cover-inner">
+      <div class="sm-kicker">Картадағы оқиға · 2024–2026</div>
+      <h1>Солтүстік Қазақстанның су балансы</h1>
+      <p>Тақтадағы сызбаның далалық станцияларға, халықаралық ынтымақтастыққа және осы ашық геопорталға қалай айналғаны туралы.</p>
+      <div class="sm-cover-meta">Астана ұлттық зертханасы · Назарбаев Университеті</div>
+    </div>
+    <a class="sm-scroll-cue" href="#intro">Төмен қарай айналдырыңыз<span aria-hidden="true">⌄</span></a>
+  </header>
+
+  <!-- ===== Intro ===== -->
+  <section class="sm-text" id="intro" data-chapter>
+    <h2>Су балансын неге зерттейміз?</h2>
+    <p>Қазақстанның жартылай құрғақ даласында судың әр миллиметрі маңызды. Жобаның мақсаты — солтүстік су шаруашылығы алаптары қанша су алатынын, булану мен ағынға қанша жоғалтатынын, қанша жинап, пайдаланатынын және соңғы 20 жылда бұл қалай өзгергенін бағалау.</p>
+    <p>Жоба бес су шаруашылығы алабын — Жайық-Каспий, Есіл, Тобыл-Торғай, Нұра-Сарысу және Ертіс алаптарын — қамтиды. Олар бірге Қазақстан аумағының 69 %-ын алып жатыр. Жоба қашықтықтан зондтау деректерін, жаһандық деректер жиындарын және ұлттық гидрологиялық ақпаратты біріктіреді.</p>
+    <div class="sm-stats">
+      <div class="sm-stat"><b>5</b><span>су шаруашылығы алабы</span></div>
+      <div class="sm-stat"><b>69 %</b><span>Қазақстан аумағынан</span></div>
+      <div class="sm-stat"><b>20+</b><span>жылдық су балансы деректері</span></div>
+      <div class="sm-stat"><b>2024–26</b><span>жоба кезеңі</span></div>
+    </div>
+  </section>
+
+  <!-- ===== Chapter 1 – the idea ===== -->
+  <section class="sm-sidecar" id="idea" data-chapter aria-label="Идея">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="idea0">
+          <img src="image_logo/story/01_brainstorm.jpg" alt="" loading="eager">
+          <figcaption>Ми шабуылы: жұмыс жоспары, су балансы теңдеуі және гидрологиялық жыл</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="idea0">
+          <div class="sm-tag">1-тарау · Идея</div>
+          <h3>Бәрі тақтадан басталды</h3>
+          <p>Жоба ми шабуылынан басталды. Алғашқы жоспар екі жолға сыйды: <b>(1)</b> қолжетімді өнімдер, алаптар және олардың белгісіздіктері туралы әдебиетке шолу; <b>(2)</b> деректерді жүктеу.</p>
+        </div>
+        <div class="sm-step" data-slide="idea0">
+          <h3>Бір теңдеу</h3>
+          <div class="sm-eq">ΔS = P − E − R − A</div>
+          <p>Су қорының өзгерісі жауын-шашыннан булануды, ағынды және су алуды шегергенге тең. Теңдеудің әр мүшесі жеке жұмыс бағытына, кейін осы порталдың бөліміне айналды.</p>
+        </div>
+        <div class="sm-step" data-slide="idea0">
+          <h3>Гидрологиялық жыл</h3>
+          <p>Тақтада уақыт аралығы да белгіленді: 1 қазаннан 1 қазанға дейінгі гидрологиялық жыл, қар жиналатын суық маусым және сәуір шамасында қар еруімен басталатын жылы маусым. Спутниктік тор ұяшықтарына және өзен желісі бар кіші алаптарға бөлінген алап сызбалары қашықтықтан зондтау мен гидрологияны қалай біріктіру керектігін көрсетеді.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 2 – the team ===== -->
+  <section class="sm-sidecar" id="team" data-chapter aria-label="Команда">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="team0">
+          <img src="image_logo/story/02_team.jpg" alt="" loading="lazy">
+          <figcaption>Жоба командасы және қатысушылар</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="team0">
+          <div class="sm-tag">2-тарау · Команда</div>
+          <h3>Сандардың артындағы адамдар</h3>
+          <div class="sm-team">
+            <div><b>Vadim Yapiyev</b> — жоба жетекшісі · булану (E), әдістеме, далалық жұмыстар</div>
+            <div><b>Nurlan Ongdas</b> — құрлықтағы жалпы су қоры (TWS, GRACE), гидрология</div>
+            <div><b>Abdikaiym Zhiyenbek</b> — су балансы, гидрология (ағын Q)</div>
+            <div><b>Dr. Zarina Saidaliyeva</b> — жауын-шашын (P), гидроклимат</div>
+            <div><b>Aidos Makhanov</b> — су пайдалану (A), геопортал</div>
+          </div>
+        </div>
+        <div class="sm-step" data-slide="team0">
+          <h3>Серіктестер</h3>
+          <p>Халықаралық серіктестер: <b>Egor Prikaziuk</b> (ITC, Твенте университеті) және <b>Sifan Koriche</b> (Alabama Water Institute). Жергілікті серіктестер мен қатысушылар: <b>ISSAI</b>, <b>Madina Abdrakhmanova</b> және <b>Қазгидромет</b>.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 3 – field work ===== -->
+  <section class="sm-sidecar dark" id="field" data-chapter aria-label="Далалық жұмыстар">
+      <div class="sm-media">
+        <figure class="sm-slide cover active" data-slide="field0">
+          <img src="image_logo/story/03_field_station.jpg" alt="" loading="lazy">
+          <figcaption>Метеостанция жанындағы жиынтық булануды (эвапотранспирацияны) өлшеу станциясы</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field1">
+          <img src="image_logo/story/04_field_team.jpg" alt="" loading="lazy">
+          <figcaption>Далалық жұмыстар</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field2">
+          <img src="image_logo/story/05_field_install.jpg" alt="" loading="lazy">
+          <figcaption>Күн энергиясымен жұмыс істейтін станцияны орнату</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field3">
+          <img src="image_logo/story/06_field_licor.jpg" alt="" loading="lazy">
+          <figcaption>LI-COR логгері бар станция</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field4">
+          <img src="image_logo/story/07_field_steppe.jpg" alt="" loading="lazy">
+          <figcaption>Дала ландшафты</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="field0">
+          <div class="sm-tag">3-тарау · Далалық жұмыстар</div>
+          <h3>Спутниктік деректерді жерде тексеру</h3>
+          <p>Спутниктік өнімдер буланудың бүкіл алап бойынша мәнін бағалайды, бірақ оларды жерде тексеру қажет. Команда жұмыс істеп тұрған метеостанцияның жанына LI-COR IoE модулі мен күн панелі бар жиынтық булануды өлшеу станциясын орнатты.</p>
+        </div>
+        <div class="sm-step" data-slide="field1">
+          <h3>Далаға сапар</h3>
+          <p>Далалық сапарлар команданы — суретте Vadim Yapiyev және Nurlan Ongdas — алаңдарды таңдап, құралдарды орнату үшін даланың түкпіріне апарды.</p>
+        </div>
+        <div class="sm-step" data-slide="field2">
+          <h3>Орнату</h3>
+          <p>Діңгек, датчиктер, күн панелі және аккумулятор орнында құрастырылып, қосылады; нұсқаулықтар мен құралдар әр сапарға бірге алынады.</p>
+        </div>
+        <div class="sm-step" data-slide="field3">
+          <h3>Станция жұмыс істеп тұр</h3>
+          <p>Қуат қосылғаннан кейін LI-COR логгері булану мен ауа райы деректерін үздіксіз жазады — бұл спутниктік бағалаулар үшін жердегі эталон.</p>
+        </div>
+        <div class="sm-step" data-slide="field4">
+          <h3>Біз өлшейтін ландшафт</h3>
+          <p>Көкжиекке дейін созылған гранит жартастар мен құрғақ дала — жоба су балансын сипаттайтын ландшафт.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 4 – international conferences ===== -->
+  <section class="sm-sidecar" id="conferences" data-chapter aria-label="Конференциялар">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="conf0">
+          <img src="image_logo/story/08_conf_partners.jpg" alt="" loading="lazy">
+          <figcaption>Халықаралық серіктестермен кездесу</figcaption>
+        </figure>
+        <figure class="sm-slide" data-slide="conf1">
+          <img src="image_logo/story/09_conf_egu26.jpg" alt="" loading="lazy">
+          <figcaption>EGU 2026 Бас ассамблеясының постерлік сессиясында</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="conf0">
+          <div class="sm-tag">4-тарау · Конференциялар</div>
+          <h3>Серіктестермен жұмыс</h3>
+          <p>Жоба командасы жұмысты талқылау үшін халықаралық серіктестермен және әріптестермен кездесті.</p>
+        </div>
+        <div class="sm-step" data-slide="conf1">
+          <h3>EGU 2026 Бас ассамблеясы</h3>
+          <p>Команда Венадағы EGU 2026 Бас ассамблеясына қатысып, халықаралық гидрологиялық қауымдастықпен тәжірибе алмасты.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 5 – own seminar ===== -->
+  <section class="sm-sidecar" id="seminar" data-chapter aria-label="Біздің семинар">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="sem0">
+          <img src="image_logo/story/10_seminar.jpg" alt="" loading="lazy">
+          <figcaption>Семинар хабарландыруы</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="sem0">
+          <div class="sm-tag">5-тарау · Біздің семинар</div>
+          <h3>Қазақстанның су бюджеті</h3>
+          <p>2026 жылғы қазанда команда <b>«Water Budget of Kazakhstan: A Transboundary View from Space and Ground»</b> («Қазақстанның су бюджеті: ғарыштан және жерден трансшекаралық көзқарас») атты өз семинарын өткізді. Баяндамашы — жоба жетекшісі доктор Vadim Yapiyev.</p>
+          <ul>
+            <li>2026 жылғы 21 қазан, 09:00</li>
+            <li>Назарбаев Университеті, C3 блогы, 3015-аудитория</li>
+            <li>Гибридті формат</li>
+          </ul>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 6 – the geoportal (map tour) ===== -->
+  <div class="sm-chapter-head">
+    <div class="sm-chapter-num">6-тарау</div>
+    <h2>Геопортал</h2>
+    <p>Жобада жасалғанның бәрі осы порталда ашық. Оның негізгі бөлімдерін картадан көру үшін айналдырыңыз.</p>
+  </div>
+  <section class="sm-sidecar" id="geoportal" data-chapter aria-label="Геопортал">
+      <div class="sm-media">
+        <div id="sm-map"></div>
+        <div class="sm-map-legend" id="sm-map-legend"></div>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-map="regions">
+          <div class="sm-tag">6-тарау · Геопортал</div>
+          <h3>14 су жинау алабы, екі гидрологиялық өңір</h3>
+          <p>Порталдың кеңістіктік негізі — Солтүстік және Оңтүстік гидрологиялық өңірлерге біріктірілген 14 су жинау алабы шекараларының келісілген жиынтығы; ол Zenodo-да ашық деректер жиыны ретінде де жарияланған.</p>
+        </div>
+        <div class="sm-step" data-map="catalogue">
+          <div class="sm-tag">6-тарау · Деректер каталогы</div>
+          <h3>Бәрін жүктеп алуға болады</h3>
+          <p>Су жинау алаптары, су шаруашылығы алаптары, кіші алаптар, гидрологиялық өңірлер, GIRES v10 өзен желісі мен көлдер, ESA WorldCover жер жамылғысы және барлық уақыт қатарлары — GeoJSON, GeoPackage, Shapefile, GeoTIFF, JSON, CSV және Excel форматтарында.</p>
+          <a class="sm-link" href="spatialData_kz.html">Деректер каталогын ашу →</a>
+        </div>
+        <div class="sm-step" data-map="lulc">
+          <div class="sm-tag">6-тарау · LULC картасы</div>
+          <h3>Жерді пайдалану және жер жамылғысы</h3>
+          <p>ESA WorldCover жер жамылғысы (100 м) мен алап шекаралары бар интерактивті ArcGIS картасы әр алапта егістік, шөпті алқаптар, орман және су объектілері қайда орналасқанын көрсетеді.</p>
+          <a class="sm-link" href="lulc_map_kz.html">LULC картасын ашу →</a>
+        </div>
+        <div class="sm-step" data-map="timeseries">
+          <div class="sm-tag">6-тарау · Уақыт қатарлары</div>
+          <h3>Су балансы ай сайын</h3>
+          <p>Уақыт қатарлары дашборды әр алап бойынша жауын-шашынды, топырақ ылғалдылығын және су балансын көрсетеді. «Су балансы өнімдері» режимі барлық 14 алап үшін жауын-шашын, булану және ағын өнімдерінің 27 комбинациясын GRACE спутниктік су қорымен салыстырады (2002 жылғы қазан – 2022 жылғы қараша).</p>
+          <a class="sm-link" href="timeseries_kz.html">Уақыт қатарларын ашу →</a>
+        </div>
+        <div class="sm-step" data-map="wateruse">
+          <div class="sm-tag">6-тарау · Су пайдалану</div>
+          <h3>Суды кім пайдаланады?</h3>
+          <p>Су пайдалану мен алу дашборды 2004–2023 жылдардағы алап статистикасын бес су шаруашылығы алабы бойынша салалар бөлінісіндегі су алу, пайдалану, ағызу және шығындардың карталары мен графиктеріне айналдырады. 2023 жылы олардан шамамен 8,8 км³ су алынды, оның үштен екісіне жуығы өнеркәсіпке тиесілі.</p>
+          <a class="sm-link" href="water_use_kz.html">Су пайдалану дашбордын ашу →</a>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Publications ===== -->
+  <section class="sm-pubs" id="publications" data-chapter>
+    <h2>Жарияланымдар мен деректер</h2>
+    <div class="sm-pub-grid">
+      <div class="sm-pub">
+        <small>Деректер жиыны</small>
+        <a href="https://zenodo.org/records/17077776" target="_blank" rel="noopener">Қазақстанның ірі өзен және су шаруашылығы алаптарының су жинау алаптарының шекаралары</a>
+        <span>Yapiyev V., Ongdas N., Saidaliyeva Z., Zhiyenbek A.<br>Zenodo &nbsp;·&nbsp; 2025 &nbsp;·&nbsp; CC BY 4.0</span>
+      </div>
+      <div class="sm-pub">
+        <small>Мақала</small>
+        <a href="https://doi.org/10.3389/frwa.2025.1601671" target="_blank" rel="noopener">Қазақстанның ірі өзен алаптарының базалық ақпараты және аймақтастыруы</a>
+        <span>Yapiyev V., Ongdas N., Saidaliyeva Z., Zhiyenbek A., Smogulova T., Baigaliyeva M., Prikaziuk E.<br>Frontiers in Water &nbsp;·&nbsp; 2025</span>
+      </div>
+      <div class="sm-pub">
+        <small>Мақала</small>
+        <a href="https://doi.org/10.1007/s41748-026-01101-x" target="_blank" rel="noopener">Қазақстандағы басқарылатын сулы қабат толтыруды жоспарлауды қолдау үшін маусымдық гидроклиматтық өзгергіштікті талдау</a>
+        <span>Ongdas N., Sallwey J., Yapiyev V., Mukanov Y., Stefan C.<br>Earth Systems and Environment &nbsp;·&nbsp; 2026</span>
+      </div>
+      <div class="sm-pub">
+        <small>Талдамалық мақала</small>
+        <a href="https://water-ca.org/article/the-paradoxes-of-adaption-to-climate-change-in-central-asia" target="_blank" rel="noopener">Орталық Азиядағы климаттың өзгеруіне бейімделу парадокстары</a>
+        <span>Yapiyev V., Saidaliyeva Z., Ongdas N.<br>Central Asian Journal of Water Research &nbsp;·&nbsp; 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sm-end">
+    <h2>Порталды зерттеңіз</h2>
+    <p>Осы оқиғадағы барлық деректер мен құралдар ашық. Каталогтан бастаңыз немесе бірден дашбордтарға өтіңіз.</p>
+      <a class="btn btn-nla m-1" href="spatialData_kz.html">Деректер каталогы</a>
+      <a class="btn btn-nla m-1" href="timeseries_kz.html">Уақыт қатарлары</a>
+      <a class="btn btn-nla m-1" href="water_use_kz.html">Су пайдалану</a>
+      <a class="btn btn-nla-outline m-1" style="color:#fff;border-color:rgba(255,255,255,0.5);" href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan" target="_blank" rel="noopener">Жоба беті ↗</a>
+    <div class="sm-credits">Фото: жоба командасы. Жоба Қазақстан Республикасы Ғылым және жоғары білім министрлігінің қаржыландыруымен жүзеге асырылады.</div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="nla-footer">
+    <div class="container text-center">
+      <div>
+        <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
+        <span class="footer-divider">|</span>
+        <a href="https://nla.nu.edu.kz/" target="_blank">Астана ұлттық зертханасы</a>
+        <span class="footer-divider">|</span>
+        Назарбаев Университеті
+      </div>
+      <div style="margin-top:6px;font-size:0.78rem;opacity:0.6;">
+        &copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz &nbsp;·&nbsp; Барлық құқықтар қорғалған
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/storyMap.js"></script>
+  <script src="js/visitorCounter.js" defer></script>
+</body>
+</html>

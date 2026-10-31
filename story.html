@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Story Map | WaterBalance Kazakhstan</title>
+  <meta name="description" content="How a whiteboard sketch grew into field stations, international collaboration and this open geoportal.">
+  <!-- Generated page (story map); photos in image_logo/story/ follow the order of the project's story document -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/ol/ol.css">
+  <link rel="stylesheet" href="style/nla-theme.css">
+  <link rel="stylesheet" href="style/story.css">
+  <script src="assets/ol/ol.js"></script>
+</head>
+<body>
+  <div id="sm-progress" aria-hidden="true"></div>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar navbar-expand-lg nla-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <span>Water</span>Balance<span style="color:rgba(255,255,255,0.5);font-weight:300;font-size:0.8rem;margin-left:6px;">Kazakhstan</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="spatialData.html">Data Catalogue</a></li>
+          <li class="nav-item"><a class="nav-link" href="lulc_map.html">LULC Map</a></li>
+          <li class="nav-item"><a class="nav-link" href="timeseries.html">Timeseries</a></li>
+        </ul>
+        <div class="lang-switcher">
+          <a class="lang-btn active" href="story.html">EN</a>
+          <a class="lang-btn" href="story_ru.html">RU</a>
+          <a class="lang-btn" href="story_kz.html">KZ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="sm-toc on-cover" aria-label="Chapters">
+    <a href="#intro"><span>Why water balance</span></a>
+    <a href="#idea"><span>The idea</span></a>
+    <a href="#team"><span>The team</span></a>
+    <a href="#field"><span>Field work</span></a>
+    <a href="#conferences"><span>Conferences</span></a>
+    <a href="#seminar"><span>Our seminar</span></a>
+    <a href="#geoportal"><span>The geoportal</span></a>
+    <a href="#publications"><span>Publications</span></a>
+  </nav>
+
+  <!-- ===== Cover ===== -->
+  <header class="sm-cover" style="background-image:url('image_logo/story/07_field_steppe.jpg')">
+    <div class="sm-cover-inner">
+      <div class="sm-kicker">Story Map · 2024–2026</div>
+      <h1>The Water Balance of Northern Kazakhstan</h1>
+      <p>How a whiteboard sketch grew into field stations, international collaboration and this open geoportal.</p>
+      <div class="sm-cover-meta">National Laboratory Astana · Nazarbayev University</div>
+    </div>
+    <a class="sm-scroll-cue" href="#intro">Scroll to begin<span aria-hidden="true">⌄</span></a>
+  </header>
+
+  <!-- ===== Intro ===== -->
+  <section class="sm-text" id="intro" data-chapter>
+    <h2>Why water balance?</h2>
+    <p>In the semi-arid steppe of Kazakhstan every millimetre of water counts. The project set out to quantify how much water the northern water management basins receive, lose to evaporation and runoff, store and use — and how this has changed over the last 20 years.</p>
+    <p>It focuses on five water management basins — Zhaiyk-Caspian, Yesil, Tobyl-Torgai, Nura-Sarysu and Ertis — which together cover 69 % of Kazakhstan’s territory, and combines remote sensing, global datasets and national hydrological information.</p>
+    <div class="sm-stats">
+      <div class="sm-stat"><b>5</b><span>water management basins</span></div>
+      <div class="sm-stat"><b>69 %</b><span>of Kazakhstan’s territory</span></div>
+      <div class="sm-stat"><b>20+</b><span>years of water balance data</span></div>
+      <div class="sm-stat"><b>2024–26</b><span>project period</span></div>
+    </div>
+  </section>
+
+  <!-- ===== Chapter 1 – the idea ===== -->
+  <section class="sm-sidecar" id="idea" data-chapter aria-label="The idea">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="idea0">
+          <img src="image_logo/story/01_brainstorm.jpg" alt="" loading="eager">
+          <figcaption>Brainstorming the project: work plan, the water balance equation and the hydrological year</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="idea0">
+          <div class="sm-tag">Chapter 1 · The idea</div>
+          <h3>It started on a whiteboard</h3>
+          <p>The project began as a brainstorming session. The first plan fitted in two lines: <b>(1)</b> review the literature on the available products, the basins and their uncertainties; <b>(2)</b> download the data.</p>
+        </div>
+        <div class="sm-step" data-slide="idea0">
+          <h3>One equation</h3>
+          <div class="sm-eq">ΔS = P − E − R − A</div>
+          <p>Change in water storage equals precipitation minus evapotranspiration, runoff and water abstraction. Each term became a work package — and later a section of this portal.</p>
+        </div>
+        <div class="sm-step" data-slide="idea0">
+          <h3>The hydrological year</h3>
+          <p>The board also fixed the time frame: a water year from 1 October to 1 October, a cold season of snow accumulation and a warm season that starts with snowmelt around April. The sketched basins — split into satellite grid cells and into sub-basins with their river network — show how remote sensing and hydrology were to be combined.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 2 – the team ===== -->
+  <section class="sm-sidecar" id="team" data-chapter aria-label="The team">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="team0">
+          <img src="image_logo/story/02_team.jpg" alt="" loading="lazy">
+          <figcaption>Project team and contributors</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="team0">
+          <div class="sm-tag">Chapter 2 · The team</div>
+          <h3>The people behind the numbers</h3>
+          <div class="sm-team">
+            <div><b>Vadim Yapiyev</b> — principal investigator · evaporation (E), methodology, field work</div>
+            <div><b>Nurlan Ongdas</b> — terrestrial water storage (GRACE), hydrology</div>
+            <div><b>Abdikaiym Zhiyenbek</b> — water balance, hydrology (runoff Q)</div>
+            <div><b>Dr. Zarina Saidaliyeva</b> — precipitation (P), hydroclimate</div>
+            <div><b>Aidos Makhanov</b> — water use (A), geoportal</div>
+          </div>
+        </div>
+        <div class="sm-step" data-slide="team0">
+          <h3>Partners</h3>
+          <p>International collaborators: <b>Egor Prikaziuk</b> (ITC, University of Twente) and <b>Sifan Koriche</b> (Alabama Water Institute). Local collaborators and contributors: <b>ISSAI</b>, <b>Madina Abdrakhmanova</b> and <b>Kazhydromet</b>.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 3 – field work ===== -->
+  <section class="sm-sidecar dark" id="field" data-chapter aria-label="Field work">
+      <div class="sm-media">
+        <figure class="sm-slide cover active" data-slide="field0">
+          <img src="image_logo/story/03_field_station.jpg" alt="" loading="lazy">
+          <figcaption>Evapotranspiration station beside a weather station</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field1">
+          <img src="image_logo/story/04_field_team.jpg" alt="" loading="lazy">
+          <figcaption>Field work in the steppe</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field2">
+          <img src="image_logo/story/05_field_install.jpg" alt="" loading="lazy">
+          <figcaption>Installing the solar-powered station</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field3">
+          <img src="image_logo/story/06_field_licor.jpg" alt="" loading="lazy">
+          <figcaption>The station with its LI-COR logger</figcaption>
+        </figure>
+        <figure class="sm-slide cover" data-slide="field4">
+          <img src="image_logo/story/07_field_steppe.jpg" alt="" loading="lazy">
+          <figcaption>Steppe landscape</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="field0">
+          <div class="sm-tag">Chapter 3 · Field work</div>
+          <h3>Ground truth for satellites</h3>
+          <p>Satellite products estimate evapotranspiration for whole basins, but they need checking on the ground. The team installed a solar-powered evapotranspiration station with a LI-COR IoE module next to an existing weather station.</p>
+        </div>
+        <div class="sm-step" data-slide="field1">
+          <h3>Into the steppe</h3>
+          <p>Field campaigns took the team — here Vadim Yapiyev and Nurlan Ongdas — deep into the steppe to choose sites and set up instruments.</p>
+        </div>
+        <div class="sm-step" data-slide="field2">
+          <h3>Installation</h3>
+          <p>Mast, sensors, solar panel and battery are assembled and wired on site; manuals and toolkits travel on every trip.</p>
+        </div>
+        <div class="sm-step" data-slide="field3">
+          <h3>Station running</h3>
+          <p>Once powered, the LI-COR logger records evapotranspiration and weather continuously, giving a ground reference for the satellite estimates.</p>
+        </div>
+        <div class="sm-step" data-slide="field4">
+          <h3>The landscape we measure</h3>
+          <p>Granite outcrops and dry grassland stretching to the horizon — the landscape whose water balance the project describes.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 4 – international conferences ===== -->
+  <section class="sm-sidecar" id="conferences" data-chapter aria-label="Conferences">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="conf0">
+          <img src="image_logo/story/08_conf_partners.jpg" alt="" loading="lazy">
+          <figcaption>Meeting with international partners</figcaption>
+        </figure>
+        <figure class="sm-slide" data-slide="conf1">
+          <img src="image_logo/story/09_conf_egu26.jpg" alt="" loading="lazy">
+          <figcaption>At the EGU General Assembly 2026 poster session</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="conf0">
+          <div class="sm-tag">Chapter 4 · Conferences</div>
+          <h3>Working with partners</h3>
+          <p>The project team met international partners and colleagues to discuss the work.</p>
+        </div>
+        <div class="sm-step" data-slide="conf1">
+          <h3>EGU General Assembly 2026</h3>
+          <p>The team took part in the EGU General Assembly 2026 in Vienna, exchanging ideas with the international hydrology community.</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 5 – own seminar ===== -->
+  <section class="sm-sidecar" id="seminar" data-chapter aria-label="Our seminar">
+      <div class="sm-media">
+        <figure class="sm-slide active" data-slide="sem0">
+          <img src="image_logo/story/10_seminar.jpg" alt="" loading="lazy">
+          <figcaption>Seminar announcement</figcaption>
+        </figure>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-slide="sem0">
+          <div class="sm-tag">Chapter 5 · Our seminar</div>
+          <h3>Water Budget of Kazakhstan</h3>
+          <p>In October 2026 the team hosted its own seminar, <b>“Water Budget of Kazakhstan: A Transboundary View from Space and Ground”</b>, led by principal investigator Dr. Vadim Yapiyev.</p>
+          <ul>
+            <li>21 October 2026, 09:00</li>
+            <li>Nazarbayev University, block C3, room 3015</li>
+            <li>Hybrid format</li>
+          </ul>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Chapter 6 – the geoportal (map tour) ===== -->
+  <div class="sm-chapter-head">
+    <div class="sm-chapter-num">Chapter 6</div>
+    <h2>The geoportal</h2>
+    <p>Everything the project produced is open in this portal. Scroll through its main sections on the map.</p>
+  </div>
+  <section class="sm-sidecar" id="geoportal" data-chapter aria-label="The geoportal">
+      <div class="sm-media">
+        <div id="sm-map"></div>
+        <div class="sm-map-legend" id="sm-map-legend"></div>
+      </div>
+      <div class="sm-narrative">
+        <div class="sm-step" data-map="regions">
+          <div class="sm-tag">Chapter 6 · The geoportal</div>
+          <h3>14 watersheds, two hydrological regions</h3>
+          <p>The portal’s spatial backbone is a consistent set of 14 watershed boundaries grouped into a Northern and a Southern hydrological region, also published as an open dataset on Zenodo.</p>
+        </div>
+        <div class="sm-step" data-map="catalogue">
+          <div class="sm-tag">Chapter 6 · Data Catalogue</div>
+          <h3>Everything downloadable</h3>
+          <p>Watersheds, water management basins, sub-basins, hydrological regions, the GIRES v10 river network and lakes, ESA WorldCover land cover and all time series — as GeoJSON, GeoPackage, Shapefile, GeoTIFF, JSON, CSV and Excel.</p>
+          <a class="sm-link" href="spatialData.html">Open the Data Catalogue →</a>
+        </div>
+        <div class="sm-step" data-map="lulc">
+          <div class="sm-tag">Chapter 6 · LULC Map</div>
+          <h3>Land use and land cover</h3>
+          <p>An interactive ArcGIS map of ESA WorldCover land cover at 100 m with basin boundaries shows where cropland, grassland, forest and water lie in each basin.</p>
+          <a class="sm-link" href="lulc_map.html">Open the LULC Map →</a>
+        </div>
+        <div class="sm-step" data-map="timeseries">
+          <div class="sm-tag">Chapter 6 · Timeseries</div>
+          <h3>The water balance, month by month</h3>
+          <p>The Timeseries dashboard maps precipitation, soil moisture and water balance for every basin. Its Water Balance Products mode compares 27 combinations of precipitation, evapotranspiration and runoff products with GRACE satellite storage for all 14 basins (October 2002 – November 2022).</p>
+          <a class="sm-link" href="timeseries.html">Open Timeseries →</a>
+        </div>
+        <div class="sm-step" data-map="wateruse">
+          <div class="sm-tag">Chapter 6 · Water Use</div>
+          <h3>Who uses the water?</h3>
+          <p>The Water Use & Abstraction dashboard turns basin statistics for 2004–2023 into maps and charts of withdrawal, use, discharge and losses by sector for the five water management basins. In 2023 they withdrew about 8.8 km³ of water, nearly two thirds of it for industry.</p>
+          <a class="sm-link" href="water_use.html">Open the Water Use dashboard →</a>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== Publications ===== -->
+  <section class="sm-pubs" id="publications" data-chapter>
+    <h2>Publications & data</h2>
+    <div class="sm-pub-grid">
+      <div class="sm-pub">
+        <small>Dataset</small>
+        <a href="https://zenodo.org/records/17077776" target="_blank" rel="noopener">The watershed boundaries of large river and water management basins of Kazakhstan</a>
+        <span>Yapiyev V., Ongdas N., Saidaliyeva Z., Zhiyenbek A.<br>Zenodo &nbsp;·&nbsp; 2025 &nbsp;·&nbsp; CC BY 4.0</span>
+      </div>
+      <div class="sm-pub">
+        <small>Article</small>
+        <a href="https://doi.org/10.3389/frwa.2025.1601671" target="_blank" rel="noopener">Baseline information and regionalization of the large river basins of Kazakhstan</a>
+        <span>Yapiyev V., Ongdas N., Saidaliyeva Z., Zhiyenbek A., Smogulova T., Baigaliyeva M., Prikaziuk E.<br>Frontiers in Water &nbsp;·&nbsp; 2025</span>
+      </div>
+      <div class="sm-pub">
+        <small>Article</small>
+        <a href="https://doi.org/10.1007/s41748-026-01101-x" target="_blank" rel="noopener">Analysing Seasonal Hydroclimatic Variability to Support Managed Aquifer Recharge Planning in Kazakhstan</a>
+        <span>Ongdas N., Sallwey J., Yapiyev V., Mukanov Y., Stefan C.<br>Earth Systems and Environment &nbsp;·&nbsp; 2026</span>
+      </div>
+      <div class="sm-pub">
+        <small>Opinion Paper</small>
+        <a href="https://water-ca.org/article/the-paradoxes-of-adaption-to-climate-change-in-central-asia" target="_blank" rel="noopener">The paradoxes of adaptation to climate change in Central Asia</a>
+        <span>Yapiyev V., Saidaliyeva Z., Ongdas N.<br>Central Asian Journal of Water Research &nbsp;·&nbsp; 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sm-end">
+    <h2>Explore the portal</h2>
+    <p>All data and tools from this story are open. Start with the catalogue or go straight to the dashboards.</p>
+      <a class="btn btn-nla m-1" href="spatialData.html">Data Catalogue</a>
+      <a class="btn btn-nla m-1" href="timeseries.html">Timeseries</a>
+      <a class="btn btn-nla m-1" href="water_use.html">Water Use</a>
+      <a class="btn btn-nla-outline m-1" style="color:#fff;border-color:rgba(255,255,255,0.5);" href="https://nla.nu.edu.kz/tpost/9p3vmfjdp1-the-water-balance-of-northern-kazakhstan" target="_blank" rel="noopener">Project page ↗</a>
+    <div class="sm-credits">Photos: project team. The project is funded by the Ministry of Science and Higher Education of the Republic of Kazakhstan.</div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="nla-footer">
+    <div class="container text-center">
+      <div>
+        <strong style="color:#fff;">WaterBalance Kazakhstan</strong>
+        <span class="footer-divider">|</span>
+        <a href="https://nla.nu.edu.kz/" target="_blank">National Laboratory Astana</a>
+        <span class="footer-divider">|</span>
+        Nazarbayev University
+      </div>
+      <div style="margin-top:6px;font-size:0.78rem;opacity:0.6;">
+        &copy; 2025 &nbsp;·&nbsp; waterbalance.org.kz &nbsp;·&nbsp; All rights reserved
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/storyMap.js"></script>
+  <script src="js/visitorCounter.js" defer></script>
+</body>
+</html>

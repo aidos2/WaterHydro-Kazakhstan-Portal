@@ -213,6 +213,26 @@ h1, h2, h3, h4, h5, h6,
   color: var(--white);
 }
 
+/* Story Map call-to-action (hero) */
+.btn-nla-story {
+  background-color: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  padding: 0.45rem 1.2rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-nla-story:hover,
+.btn-nla-story:focus-visible {
+  background-color: var(--gold-light);
+  border-color: var(--gold-light);
+  color: var(--navy);
+}
+
 .btn-nla-outline {
   background-color: transparent;
   border: 1px solid var(--navy);
@@ -435,3 +455,10 @@ h1, h2, h3, h4, h5, h6,
   .nla-hero h1 { font-size: 1.4rem; }
   .lang-switcher { margin-left: 0; margin-top: 0.5rem; }
 }
+
+/* Touch-friendly publication links (WCAG 2.5.8 target size) */
+.pub-link { display: inline-block; padding: 3px 0; }
+
+/* Footer visit counter (js/visitorCounter.js) */
+.nla-visits { white-space: nowrap; }
+.nla-visits strong { color: var(--gold); font-weight: 500; }
