@@ -457,16 +457,7 @@
     </div>
     <div style="display:flex;gap:8px;align-items:center;">
       <span style="font-size:0.72rem;color:rgba(255,255,255,0.45);font-family:'Roboto Condensed',sans-serif;letter-spacing:0.05em;">DATASET</span>
-      <select id="fileSelect" class="form-select form-select-sm" style="width:260px;max-width:calc(100vw - 120px);font-size:0.82rem;border-color:#c9a84c;">
-        <optgroup label="Legacy Datasets">
-          <option value="input_data/GLEAM_WaterBalanceAllBAsin.json">Water Balance (GLEAM)</option>
-          <option value="input_data/P_MSWEP_ALL.json">Precipitation (MSWEP)</option>
-          <option value="input_data/Soil_Moisture_ERA5.json">Soil Moisture (ERA5)</option>
-        </optgroup>
-        <optgroup label="Water Balance Products">
-          <option value="wb_products">◈ WB Products — All 14 basins · 27 P×E×Q combinations</option>
-        </optgroup>
-      </select>
+      <span style="font-size:0.82rem;color:#c9a84c;font-family:'Roboto Condensed',sans-serif;font-weight:700;">◈ WB Products · 27 P×E×Q combinations · 01.10.2002 – 30.09.2023</span>
     </div>
   </div>
 
@@ -498,8 +489,8 @@
         </div>
       </div>
 
-      <!-- ══ Water Balance Products Panel (hidden until wb_products selected) ══ -->
-      <div class="panel" id="wb-panel" style="display:none;">
+      <!-- ══ Water Balance Products Panel ══ -->
+      <div class="panel" id="wb-panel">
         <div class="panel-header">
           <span class="panel-icon"></span>
           <span class="panel-title">Water Balance Products</span>
@@ -526,17 +517,9 @@
             <div id="wb-loading" style="display:none;" class="mt-1">⏳ Loading data…</div>
           </div>
 
-          <!-- Play controls -->
-          <div class="mb-2">
-            <div class="d-flex gap-2 align-items-center">
-              <button id="wbPlayBtn" class="btn-play" aria-label="Play animation">&#9654; Play</button>
-              <span id="wbSliderDate" style="font-family:'Roboto Condensed',sans-serif;font-size:0.85rem;color:#c9a84c;">--</span>
-            </div>
-          </div>
-
           <!-- Variable toggles -->
           <div class="mb-2">
-            <label class="form-label">Show Variables</label>
+            <label class="form-label">Show Variables (selected basin)</label>
             <div class="wb-var-grid">
               <label class="wb-var-item" style="border-left-color:#2196F3;">
                 <input type="checkbox" id="wbShow_P" checked>
@@ -696,70 +679,7 @@
   <script src="js/wbHandler.js"></script>
   <script src="js/mapHandler.js"></script>
 
-  <!-- Basin statistics logic -->
-  <script>
-    function safeNum(v) {
-      const n = parseFloat(String(v).replace(',', '.'));
-      return Number.isFinite(n) ? n : null;
-    }
-
-    window.updateBasinStats = function () {
-      try {
-        const data   = window.latestData   || [];
-        const metric = window.selectedMetric || '';
-        const ids    = window.selectedWatershedIds;
-        const names  = window.watershedNames || {};
-
-        if (!data.length || !metric) return;
-
-        // Filter to selected basins if any
-        const rows = (ids && ids.size)
-          ? data.filter(d => ids.has(d.WATERSHED_ID))
-          : data;
-
-        // Collect (value, date, basinName) triples
-        const points = [];
-        rows.forEach(d => {
-          const v = safeNum(d[metric]);
-          if (v !== null && d.date) {
-            points.push({ v, date: d.date, name: names[d.WATERSHED_ID] || d.WATERSHED_ID });
-          }
-        });
-
-        if (!points.length) return;
-
-        // Max
-        const maxPt = points.reduce((a, b) => b.v > a.v ? b : a);
-        // Min
-        const minPt = points.reduce((a, b) => b.v < a.v ? b : a);
-        // Mean
-        const mean  = points.reduce((s, p) => s + p.v, 0) / points.length;
-
-        // Basin & year count
-        const basinCount = new Set(rows.map(d => d.WATERSHED_ID)).size;
-        const dates = rows.map(d => d.date).filter(Boolean);
-        const years = dates.length
-          ? (() => {
-              const yrs = new Set(dates.map(d => d.split('.')[2]));
-              return yrs.size;
-            })()
-          : '—';
-
-        // Update DOM
-        document.getElementById('stat-basins').textContent = basinCount || '—';
-        document.getElementById('stat-years').textContent  = years;
-
-        document.getElementById('stat-max-val').textContent  = maxPt.v.toFixed(2) + ' mm';
-        document.getElementById('stat-max-date').textContent = maxPt.date + (maxPt.name ? '  ·  ' + maxPt.name : '');
-
-        document.getElementById('stat-min-val').textContent  = minPt.v.toFixed(2) + ' mm';
-        document.getElementById('stat-min-date').textContent = minPt.date + (minPt.name ? '  ·  ' + minPt.name : '');
-
-        document.getElementById('stat-mean-val').textContent = mean.toFixed(2) + ' mm';
-      } catch (e) { /* silent */ }
-    };
-  </script>
-
+  <script src="js/dataInfo.js" defer></script>
   <script src="js/visitorCounter.js" defer></script>
 </body>
 </html>

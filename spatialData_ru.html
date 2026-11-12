@@ -62,7 +62,7 @@
     <div class="container mt-4 mb-5">
       <div class="mb-3">
         <input type="text" id="searchInput" class="form-control nla-search"
-               placeholder="Поиск по ключевому слову (например: Почва, Бассейн, LULC)"
+               placeholder="Поиск по ключевому слову (например: GRACE, Бассейн, LULC)"
                aria-label="Поиск наборов данных">
       </div>
 
@@ -151,39 +151,6 @@
               <td><div class="btn-group btn-group-sm btn-dl-group">
                 <a href="input_data/ESA_WorldCover_100m.tif" class="btn btn-outline-success">GeoTIFF</a>
                 <a href="https://tiles.arcgis.com/tiles/Kri0Q7xwN5k6MG7L/arcgis/rest/services/LULC_Boundaries_WTL1/MapServer?view=wmtsview&cacheKey=9d73a0d114c9e54d" target="_blank" class="btn btn-outline-primary">WMTS</a>
-              </div></td>
-            </tr>
-
-            <tr>
-              <td><strong>Осадки (MSWEP)</strong></td>
-              <td>Ежемесячный набор данных об осадках для гидрологического анализа.</td>
-              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Временной ряд</span></td>
-              <td><div class="btn-group btn-group-sm btn-dl-group">
-                <a href="input_data/P_MSWEP_ALL.json" class="btn btn-outline-primary">JSON</a>
-                <a href="input_data/P_MSWEP_ALL.csv" class="btn btn-outline-secondary">CSV</a>
-                <a href="input_data/P_MSWEP_ALL.xlsx" class="btn btn-outline-success">Excel</a>
-              </div></td>
-            </tr>
-
-            <tr>
-              <td><strong>Влажность почвы (ERA5)</strong></td>
-              <td>Ежемесячная влажность почвы ERA5 (0–100 см, 0–289 см) в разрезе бассейнов.</td>
-              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Временной ряд</span></td>
-              <td><div class="btn-group btn-group-sm btn-dl-group">
-                <a href="input_data/Soil_Moisture_ERA5.json" class="btn btn-outline-primary">JSON</a>
-                <a href="input_data/Soil_Moisture_ERA5.csv" class="btn btn-outline-secondary">CSV</a>
-                <a href="input_data/Soil_Moisture_ERA5.xlsx" class="btn btn-outline-success">Excel</a>
-              </div></td>
-            </tr>
-
-            <tr>
-              <td><strong>Водный баланс GLEAM</strong></td>
-              <td>Набор данных водного баланса (эвапотранспирация vs осадки).</td>
-              <td><span class="badge" style="background:#8b3a0f;font-family:'Roboto Condensed',sans-serif;">Временной ряд</span></td>
-              <td><div class="btn-group btn-group-sm btn-dl-group">
-                <a href="input_data/GLEAM_WaterBalanceAllBAsin.json" class="btn btn-outline-primary">JSON</a>
-                <a href="input_data/GLEAM_WaterBalanceAllBAsin.csv" class="btn btn-outline-secondary">CSV</a>
-                <a href="input_data/GLEAM_WaterBalanceAllBAsin.xlsx" class="btn btn-outline-success">Excel</a>
               </div></td>
             </tr>
 
@@ -424,6 +391,142 @@
               </td>
             </tr>
 
+            <!-- ── Water Balance Products: Water Management Basins ─────── -->
+            <tr>
+              <td colspan="4" style="background:#f0f7f5;padding:10px 14px;border-left:4px solid #1a7f6e;">
+                <strong style="font-family:'Roboto Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.06em;color:#1a7f6e;text-transform:uppercase;">
+                  ◈ Продукты водного баланса — водохозяйственные бассейны
+                </strong>
+                <span style="font-size:0.78rem;color:#6c757d;margin-left:10px;">
+                  8 водохозяйственных бассейнов (WMB) · 27 комбинаций P×E×Q · ежемесячно 01.10.2002 – 30.09.2023
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Продукты ВБ — все ВХ бассейны (полный пакет)</strong></td>
+              <td>Все 216 исходных файлов Excel (8 водохозяйственных бассейнов × 27 комбинаций), по одной папке на бассейн.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">Продукты ВБ</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/zip/wm_basins_all.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_ru.html" class="btn btn-outline-secondary">Открыть ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Продукты ВБ — ВХ бассейн Тобыл-Торгай</strong> <span style="font-size:0.75rem;color:#6c757d;">(WMB_00001)</span></td>
+              <td>Временные ряды водного баланса водохозяйственного бассейна Тобыл-Торгай — P, E, Q, P−E, ΔS и GRACE для 27 комбинаций P×E×Q, ежемесячно. CSV содержит все комбинации в длинном формате; ZIP — по одному файлу Excel на комбинацию.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">Продукты ВБ</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/WMB_00001_tobyl_torgai.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/WMB_00001_tobyl_torgai.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/WMB_00001_tobyl_torgai_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_ru.html" class="btn btn-outline-secondary">Открыть ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Продукты ВБ — ВХ бассейн Арал-Сырдарья</strong> <span style="font-size:0.75rem;color:#6c757d;">(WMB_00002)</span></td>
+              <td>Временные ряды водного баланса водохозяйственного бассейна Арал-Сырдарья — P, E, Q, P−E, ΔS и GRACE для 27 комбинаций P×E×Q, ежемесячно. CSV содержит все комбинации в длинном формате; ZIP — по одному файлу Excel на комбинацию.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">Продукты ВБ</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/WMB_00002_aral_syr_darya.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/WMB_00002_aral_syr_darya.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/WMB_00002_aral_syr_darya_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_ru.html" class="btn btn-outline-secondary">Открыть ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Продукты ВБ — ВХ бассейн Шу-Талас</strong> <span style="font-size:0.75rem;color:#6c757d;">(WMB_00003)</span></td>
+              <td>Временные ряды водного баланса водохозяйственного бассейна Шу-Талас — P, E, Q, P−E, ΔS и GRACE для 27 комбинаций P×E×Q, ежемесячно. CSV содержит все комбинации в длинном формате; ZIP — по одному файлу Excel на комбинацию.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">Продукты ВБ</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/WMB_00003_shu_talas.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/WMB_00003_shu_talas.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/WMB_00003_shu_talas_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_ru.html" class="btn btn-outline-secondary">Открыть ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Продукты ВБ — ВХ бассейн Нура-Сарысу</strong> <span style="font-size:0.75rem;color:#6c757d;">(WMB_00004)</span></td>
+              <td>Временные ряды водного баланса водохозяйственного бассейна Нура-Сарысу — P, E, Q, P−E, ΔS и GRACE для 27 комбинаций P×E×Q, ежемесячно. CSV содержит все комбинации в длинном формате; ZIP — по одному файлу Excel на комбинацию.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">Продукты ВБ</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/WMB_00004_nura_sarysu.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/WMB_00004_nura_sarysu.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/WMB_00004_nura_sarysu_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_ru.html" class="btn btn-outline-secondary">Открыть ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Продукты ВБ — ВХ бассейн Есиль</strong> <span style="font-size:0.75rem;color:#6c757d;">(WMB_00005)</span></td>
+              <td>Временные ряды водного баланса водохозяйственного бассейна Есиль — P, E, Q, P−E, ΔS и GRACE для 27 комбинаций P×E×Q, ежемесячно. CSV содержит все комбинации в длинном формате; ZIP — по одному файлу Excel на комбинацию.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">Продукты ВБ</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/WMB_00005_yesil.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/WMB_00005_yesil.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/WMB_00005_yesil_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_ru.html" class="btn btn-outline-secondary">Открыть ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Продукты ВБ — ВХ бассейн Иртыш (Ертіс)</strong> <span style="font-size:0.75rem;color:#6c757d;">(WMB_00006)</span></td>
+              <td>Временные ряды водного баланса водохозяйственного бассейна Иртыш (Ертіс) — P, E, Q, P−E, ΔS и GRACE для 27 комбинаций P×E×Q, ежемесячно. CSV содержит все комбинации в длинном формате; ZIP — по одному файлу Excel на комбинацию.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">Продукты ВБ</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/WMB_00006_ertis.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/WMB_00006_ertis.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/WMB_00006_ertis_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_ru.html" class="btn btn-outline-secondary">Открыть ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Продукты ВБ — ВХ бассейн Балкаш-Алаколь</strong> <span style="font-size:0.75rem;color:#6c757d;">(WMB_00007)</span></td>
+              <td>Временные ряды водного баланса водохозяйственного бассейна Балкаш-Алаколь — P, E, Q, P−E, ΔS и GRACE для 27 комбинаций P×E×Q, ежемесячно. CSV содержит все комбинации в длинном формате; ZIP — по одному файлу Excel на комбинацию.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">Продукты ВБ</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/WMB_00007_balkhash_alakol.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/WMB_00007_balkhash_alakol.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/WMB_00007_balkhash_alakol_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_ru.html" class="btn btn-outline-secondary">Открыть ↗</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Продукты ВБ — ВХ бассейн Жайык-Каспий</strong> <span style="font-size:0.75rem;color:#6c757d;">(WMB_00008)</span></td>
+              <td>Временные ряды водного баланса водохозяйственного бассейна Жайык-Каспий — P, E, Q, P−E, ΔS и GRACE для 27 комбинаций P×E×Q, ежемесячно. CSV содержит все комбинации в длинном формате; ZIP — по одному файлу Excel на комбинацию.</td>
+              <td><span class="badge" style="background:#1a7f6e;font-family:'Roboto Condensed',sans-serif;">Продукты ВБ</span></td>
+              <td>
+                <div class="btn-group btn-group-sm btn-dl-group">
+                  <a href="input_data/wb_products/json/WMB_00008_zhaiyk_caspian.json" class="btn btn-outline-primary">JSON</a>
+                  <a href="input_data/wb_products/csv/WMB_00008_zhaiyk_caspian.csv" class="btn btn-outline-secondary">CSV</a>
+                  <a href="input_data/wb_products/zip/WMB_00008_zhaiyk_caspian_xlsx.zip" class="btn btn-outline-success">Excel (ZIP)</a>
+                  <a href="timeseries_ru.html" class="btn btn-outline-secondary">Открыть ↗</a>
+                </div>
+              </td>
+            </tr>
+
           </tbody>
         </table>
       </div>
@@ -454,6 +557,7 @@
       });
     });
   </script>
+  <script src="js/dataInfo.js" defer></script>
   <script src="js/visitorCounter.js" defer></script>
 </body>
 </html>

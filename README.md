@@ -38,7 +38,7 @@ The portal was developed under the grant-funded project:
 | Story Map | `story.html` | `story_ru.html` | `story_kz.html` | ArcGIS StoryMaps-style project story: idea → team → field work → conferences → seminar → map tour of the portal sections |
 | Spatial Data Catalogue | `spatialData.html` | `spatialData_ru.html` | `spatialData_kz.html` | Searchable table with direct dataset downloads (including WB Products) |
 | LULC Map | `lulc_map.html` | `lulc_map_ru.html` | `lulc_map_kz.html` | Full-screen ArcGIS Experience Builder map |
-| Water Timeseries Dashboard | `timeseries.html` | `timeseries_ru.html` | `timeseries_kz.html` | Interactive choropleth map + time-series charts + Water Balance Products mode |
+| Water Timeseries Dashboard | `timeseries.html` | `timeseries_ru.html` | `timeseries_kz.html` | WB Products choropleth (Watersheds · WM Basins) + time-series charts, 27 P×E×Q combinations, 01.10.2002 – 30.09.2023 |
 | Water Use & Abstraction Dashboard | `water_use.html` | `water_use_ru.html` | `water_use_kz.html` | Water withdrawal, use, discharge and losses by basin and sector, 2004–2023 (generated from `notebooks/water_use_dashboard.ipynb`) |
 
 ---
@@ -133,14 +133,6 @@ jupyter nbconvert --to notebook --execute --inplace water_use_dashboard.ipynb
 jupyter nbconvert --to html water_use_dashboard.ipynb
 ```
 
-### Legacy Time-Series Data (all basins, aggregated per basin)
-
-| Dataset | Variable | Period | Formats |
-|---------|----------|--------|---------|
-| MSWEP | Precipitation | Monthly | JSON · CSV · Excel |
-| ERA5-Land | Soil Moisture (0–100 cm, 0–289 cm) | Monthly | JSON · CSV · Excel |
-| GLEAM | Evapotranspiration · Water Balance | Monthly | JSON · CSV · Excel |
-
 ### Water Balance Products (all 14 basins, 27 combinations each)
 
 Source: `total_basin_wb_ts` — 378 Excel files (14 basins × 27 P×E×Q combinations), monthly, mm/month.
@@ -163,11 +155,31 @@ P/E/Q (and P−E, ΔS) cover Oct 2002–Nov 2022; GRACE storage covers Oct 2002�
 | Shu-Talas | SWB_00003 | `SWB_00003_shu_talas` |
 | Amu Darya-Aral | SWB_00004 | `SWB_00004_amu_darya_aral` |
 
+### Water Balance Products — Water Management Basins (8 basins, 27 combinations each)
+
+Source: `wmb_wb_ts` — 216 Excel files (8 WM basins × 27 P×E×Q combinations), same format and period as above.
+IDs match `BASIN_ID` in `input_data/Water management basins.geojson` (the "WM Basins" map layer).
+
+| Basin | ID | File stem |
+|-------|----|-----------|
+| Tobyl-Torgai | WMB_00001 | `WMB_00001_tobyl_torgai` |
+| Aral-Syr Darya | WMB_00002 | `WMB_00002_aral_syr_darya` |
+| Shu-Talas | WMB_00003 | `WMB_00003_shu_talas` |
+| Nura-Sarysu | WMB_00004 | `WMB_00004_nura_sarysu` |
+| Yesil | WMB_00005 | `WMB_00005_yesil` |
+| Ertis | WMB_00006 | `WMB_00006_ertis` |
+| Balkhash-Alakol | WMB_00007 | `WMB_00007_balkhash_alakol` |
+| Zhaiyk-Caspian | WMB_00008 | `WMB_00008_zhaiyk_caspian` |
+
+All WM basins' Excel files are bundled in `zip/wm_basins_all.zip`. Sub-basin WB data is not yet available.
+
 Each basin is published in `input_data/wb_products/` as:
 
 | Folder | Content | Format |
 |--------|---------|--------|
-| `json/<stem>.json` | All 27 combinations (used by the dashboard) | JSON |
+| `json/<stem>.json` | All 27 combinations of one basin | JSON |
+| `map/<layer>/<combo>.json` | One combination, all basins of a layer (`watersheds` or `wm_basins`) — used by the dashboard; dates are the first day of each month (01.10.2002 … 01.09.2023) | JSON |
+| `map/<layer>/index.json` | Basin and combination list for a layer | JSON |
 | `csv/<stem>.csv` | All 27 combinations, long format (`basin_id, basin_name, date, P_product, E_product, Q_product, P, E, Q, PE, WB_storage, GRACE_storage`) | CSV |
 | `xlsx/<stem>/*.xlsx` | Original Excel file per combination | Excel |
 | `zip/<stem>_xlsx.zip` | The 27 Excel files of one basin | ZIP |

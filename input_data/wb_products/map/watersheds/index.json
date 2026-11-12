@@ -1,0 +1,333 @@
+{
+ "layer": "watersheds",
+ "basins": [
+  {
+   "id": "NWB_00001",
+   "name": "Ertis"
+  },
+  {
+   "id": "NWB_00002",
+   "name": "Esil-Ertis closed"
+  },
+  {
+   "id": "NWB_00003",
+   "name": "Nura"
+  },
+  {
+   "id": "NWB_00004",
+   "name": "Ob-Ertis closed"
+  },
+  {
+   "id": "NWB_00005",
+   "name": "Sarysu"
+  },
+  {
+   "id": "NWB_00006",
+   "name": "Tobyl"
+  },
+  {
+   "id": "NWB_00007",
+   "name": "Torgai"
+  },
+  {
+   "id": "NWB_00008",
+   "name": "Vagay"
+  },
+  {
+   "id": "NWB_00009",
+   "name": "Yesil"
+  },
+  {
+   "id": "NWB_00010",
+   "name": "Zhaiyk-Caspian"
+  },
+  {
+   "id": "SWB_00001",
+   "name": "Syr Darya-Aral"
+  },
+  {
+   "id": "SWB_00002",
+   "name": "Ily-Balkhash-Alakol"
+  },
+  {
+   "id": "SWB_00003",
+   "name": "Shu-Talas"
+  },
+  {
+   "id": "SWB_00004",
+   "name": "Amu Darya-Aral"
+  }
+ ],
+ "combinations": [
+  {
+   "key": "era5bc__gleam_v_4_2_a__era5",
+   "p_key": "era5bc",
+   "e_key": "gleam_v_4_2_a",
+   "q_key": "era5",
+   "p_label": "ERA5BC",
+   "e_label": "GLEAM v4.2a",
+   "q_label": "ERA5",
+   "label": "P: ERA5BC | E: GLEAM v4.2a | Q: ERA5"
+  },
+  {
+   "key": "era5bc__gleam_v_4_2_a__era5_land",
+   "p_key": "era5bc",
+   "e_key": "gleam_v_4_2_a",
+   "q_key": "era5_land",
+   "p_label": "ERA5BC",
+   "e_label": "GLEAM v4.2a",
+   "q_label": "ERA5-Land",
+   "label": "P: ERA5BC | E: GLEAM v4.2a | Q: ERA5-Land"
+  },
+  {
+   "key": "era5bc__gleam_v_4_2_a__watergap_v_2_2_e",
+   "p_key": "era5bc",
+   "e_key": "gleam_v_4_2_a",
+   "q_key": "watergap_v_2_2_e",
+   "p_label": "ERA5BC",
+   "e_label": "GLEAM v4.2a",
+   "q_label": "WaterGAP v2.2e",
+   "label": "P: ERA5BC | E: GLEAM v4.2a | Q: WaterGAP v2.2e"
+  },
+  {
+   "key": "era5bc__gleam_v_4_3_a__era5",
+   "p_key": "era5bc",
+   "e_key": "gleam_v_4_3_a",
+   "q_key": "era5",
+   "p_label": "ERA5BC",
+   "e_label": "GLEAM v4.3a",
+   "q_label": "ERA5",
+   "label": "P: ERA5BC | E: GLEAM v4.3a | Q: ERA5"
+  },
+  {
+   "key": "era5bc__gleam_v_4_3_a__era5_land",
+   "p_key": "era5bc",
+   "e_key": "gleam_v_4_3_a",
+   "q_key": "era5_land",
+   "p_label": "ERA5BC",
+   "e_label": "GLEAM v4.3a",
+   "q_label": "ERA5-Land",
+   "label": "P: ERA5BC | E: GLEAM v4.3a | Q: ERA5-Land"
+  },
+  {
+   "key": "era5bc__gleam_v_4_3_a__watergap_v_2_2_e",
+   "p_key": "era5bc",
+   "e_key": "gleam_v_4_3_a",
+   "q_key": "watergap_v_2_2_e",
+   "p_label": "ERA5BC",
+   "e_label": "GLEAM v4.3a",
+   "q_label": "WaterGAP v2.2e",
+   "label": "P: ERA5BC | E: GLEAM v4.3a | Q: WaterGAP v2.2e"
+  },
+  {
+   "key": "era5bc__pml_v_2_2_c__era5",
+   "p_key": "era5bc",
+   "e_key": "pml_v_2_2_c",
+   "q_key": "era5",
+   "p_label": "ERA5BC",
+   "e_label": "PML v2.2c",
+   "q_label": "ERA5",
+   "label": "P: ERA5BC | E: PML v2.2c | Q: ERA5"
+  },
+  {
+   "key": "era5bc__pml_v_2_2_c__era5_land",
+   "p_key": "era5bc",
+   "e_key": "pml_v_2_2_c",
+   "q_key": "era5_land",
+   "p_label": "ERA5BC",
+   "e_label": "PML v2.2c",
+   "q_label": "ERA5-Land",
+   "label": "P: ERA5BC | E: PML v2.2c | Q: ERA5-Land"
+  },
+  {
+   "key": "era5bc__pml_v_2_2_c__watergap_v_2_2_e",
+   "p_key": "era5bc",
+   "e_key": "pml_v_2_2_c",
+   "q_key": "watergap_v_2_2_e",
+   "p_label": "ERA5BC",
+   "e_label": "PML v2.2c",
+   "q_label": "WaterGAP v2.2e",
+   "label": "P: ERA5BC | E: PML v2.2c | Q: WaterGAP v2.2e"
+  },
+  {
+   "key": "mswep_v_2_8__gleam_v_4_2_a__era5",
+   "p_key": "mswep_v_2_8",
+   "e_key": "gleam_v_4_2_a",
+   "q_key": "era5",
+   "p_label": "MSWEP v2.8",
+   "e_label": "GLEAM v4.2a",
+   "q_label": "ERA5",
+   "label": "P: MSWEP v2.8 | E: GLEAM v4.2a | Q: ERA5"
+  },
+  {
+   "key": "mswep_v_2_8__gleam_v_4_2_a__era5_land",
+   "p_key": "mswep_v_2_8",
+   "e_key": "gleam_v_4_2_a",
+   "q_key": "era5_land",
+   "p_label": "MSWEP v2.8",
+   "e_label": "GLEAM v4.2a",
+   "q_label": "ERA5-Land",
+   "label": "P: MSWEP v2.8 | E: GLEAM v4.2a | Q: ERA5-Land"
+  },
+  {
+   "key": "mswep_v_2_8__gleam_v_4_2_a__watergap_v_2_2_e",
+   "p_key": "mswep_v_2_8",
+   "e_key": "gleam_v_4_2_a",
+   "q_key": "watergap_v_2_2_e",
+   "p_label": "MSWEP v2.8",
+   "e_label": "GLEAM v4.2a",
+   "q_label": "WaterGAP v2.2e",
+   "label": "P: MSWEP v2.8 | E: GLEAM v4.2a | Q: WaterGAP v2.2e"
+  },
+  {
+   "key": "mswep_v_2_8__gleam_v_4_3_a__era5",
+   "p_key": "mswep_v_2_8",
+   "e_key": "gleam_v_4_3_a",
+   "q_key": "era5",
+   "p_label": "MSWEP v2.8",
+   "e_label": "GLEAM v4.3a",
+   "q_label": "ERA5",
+   "label": "P: MSWEP v2.8 | E: GLEAM v4.3a | Q: ERA5"
+  },
+  {
+   "key": "mswep_v_2_8__gleam_v_4_3_a__era5_land",
+   "p_key": "mswep_v_2_8",
+   "e_key": "gleam_v_4_3_a",
+   "q_key": "era5_land",
+   "p_label": "MSWEP v2.8",
+   "e_label": "GLEAM v4.3a",
+   "q_label": "ERA5-Land",
+   "label": "P: MSWEP v2.8 | E: GLEAM v4.3a | Q: ERA5-Land"
+  },
+  {
+   "key": "mswep_v_2_8__gleam_v_4_3_a__watergap_v_2_2_e",
+   "p_key": "mswep_v_2_8",
+   "e_key": "gleam_v_4_3_a",
+   "q_key": "watergap_v_2_2_e",
+   "p_label": "MSWEP v2.8",
+   "e_label": "GLEAM v4.3a",
+   "q_label": "WaterGAP v2.2e",
+   "label": "P: MSWEP v2.8 | E: GLEAM v4.3a | Q: WaterGAP v2.2e"
+  },
+  {
+   "key": "mswep_v_2_8__pml_v_2_2_c__era5",
+   "p_key": "mswep_v_2_8",
+   "e_key": "pml_v_2_2_c",
+   "q_key": "era5",
+   "p_label": "MSWEP v2.8",
+   "e_label": "PML v2.2c",
+   "q_label": "ERA5",
+   "label": "P: MSWEP v2.8 | E: PML v2.2c | Q: ERA5"
+  },
+  {
+   "key": "mswep_v_2_8__pml_v_2_2_c__era5_land",
+   "p_key": "mswep_v_2_8",
+   "e_key": "pml_v_2_2_c",
+   "q_key": "era5_land",
+   "p_label": "MSWEP v2.8",
+   "e_label": "PML v2.2c",
+   "q_label": "ERA5-Land",
+   "label": "P: MSWEP v2.8 | E: PML v2.2c | Q: ERA5-Land"
+  },
+  {
+   "key": "mswep_v_2_8__pml_v_2_2_c__watergap_v_2_2_e",
+   "p_key": "mswep_v_2_8",
+   "e_key": "pml_v_2_2_c",
+   "q_key": "watergap_v_2_2_e",
+   "p_label": "MSWEP v2.8",
+   "e_label": "PML v2.2c",
+   "q_label": "WaterGAP v2.2e",
+   "label": "P: MSWEP v2.8 | E: PML v2.2c | Q: WaterGAP v2.2e"
+  },
+  {
+   "key": "mswep_v_3_16__gleam_v_4_2_a__era5",
+   "p_key": "mswep_v_3_16",
+   "e_key": "gleam_v_4_2_a",
+   "q_key": "era5",
+   "p_label": "MSWEP v3.16",
+   "e_label": "GLEAM v4.2a",
+   "q_label": "ERA5",
+   "label": "P: MSWEP v3.16 | E: GLEAM v4.2a | Q: ERA5"
+  },
+  {
+   "key": "mswep_v_3_16__gleam_v_4_2_a__era5_land",
+   "p_key": "mswep_v_3_16",
+   "e_key": "gleam_v_4_2_a",
+   "q_key": "era5_land",
+   "p_label": "MSWEP v3.16",
+   "e_label": "GLEAM v4.2a",
+   "q_label": "ERA5-Land",
+   "label": "P: MSWEP v3.16 | E: GLEAM v4.2a | Q: ERA5-Land"
+  },
+  {
+   "key": "mswep_v_3_16__gleam_v_4_2_a__watergap_v_2_2_e",
+   "p_key": "mswep_v_3_16",
+   "e_key": "gleam_v_4_2_a",
+   "q_key": "watergap_v_2_2_e",
+   "p_label": "MSWEP v3.16",
+   "e_label": "GLEAM v4.2a",
+   "q_label": "WaterGAP v2.2e",
+   "label": "P: MSWEP v3.16 | E: GLEAM v4.2a | Q: WaterGAP v2.2e"
+  },
+  {
+   "key": "mswep_v_3_16__gleam_v_4_3_a__era5",
+   "p_key": "mswep_v_3_16",
+   "e_key": "gleam_v_4_3_a",
+   "q_key": "era5",
+   "p_label": "MSWEP v3.16",
+   "e_label": "GLEAM v4.3a",
+   "q_label": "ERA5",
+   "label": "P: MSWEP v3.16 | E: GLEAM v4.3a | Q: ERA5"
+  },
+  {
+   "key": "mswep_v_3_16__gleam_v_4_3_a__era5_land",
+   "p_key": "mswep_v_3_16",
+   "e_key": "gleam_v_4_3_a",
+   "q_key": "era5_land",
+   "p_label": "MSWEP v3.16",
+   "e_label": "GLEAM v4.3a",
+   "q_label": "ERA5-Land",
+   "label": "P: MSWEP v3.16 | E: GLEAM v4.3a | Q: ERA5-Land"
+  },
+  {
+   "key": "mswep_v_3_16__gleam_v_4_3_a__watergap_v_2_2_e",
+   "p_key": "mswep_v_3_16",
+   "e_key": "gleam_v_4_3_a",
+   "q_key": "watergap_v_2_2_e",
+   "p_label": "MSWEP v3.16",
+   "e_label": "GLEAM v4.3a",
+   "q_label": "WaterGAP v2.2e",
+   "label": "P: MSWEP v3.16 | E: GLEAM v4.3a | Q: WaterGAP v2.2e"
+  },
+  {
+   "key": "mswep_v_3_16__pml_v_2_2_c__era5",
+   "p_key": "mswep_v_3_16",
+   "e_key": "pml_v_2_2_c",
+   "q_key": "era5",
+   "p_label": "MSWEP v3.16",
+   "e_label": "PML v2.2c",
+   "q_label": "ERA5",
+   "label": "P: MSWEP v3.16 | E: PML v2.2c | Q: ERA5"
+  },
+  {
+   "key": "mswep_v_3_16__pml_v_2_2_c__era5_land",
+   "p_key": "mswep_v_3_16",
+   "e_key": "pml_v_2_2_c",
+   "q_key": "era5_land",
+   "p_label": "MSWEP v3.16",
+   "e_label": "PML v2.2c",
+   "q_label": "ERA5-Land",
+   "label": "P: MSWEP v3.16 | E: PML v2.2c | Q: ERA5-Land"
+  },
+  {
+   "key": "mswep_v_3_16__pml_v_2_2_c__watergap_v_2_2_e",
+   "p_key": "mswep_v_3_16",
+   "e_key": "pml_v_2_2_c",
+   "q_key": "watergap_v_2_2_e",
+   "p_label": "MSWEP v3.16",
+   "e_label": "PML v2.2c",
+   "q_label": "WaterGAP v2.2e",
+   "label": "P: MSWEP v3.16 | E: PML v2.2c | Q: WaterGAP v2.2e"
+  }
+ ]
+}
