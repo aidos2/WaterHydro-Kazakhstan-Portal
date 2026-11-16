@@ -34,7 +34,7 @@
   const DATA_INFO = {
     grace: {
       title: 'GRACE', role: 's',
-      ref: 'Li & Kusche (2026), GRL', url: '',
+      ref: 'Li & Kusche (2026), GRL', url: 'https://doi.org/10.1029/2025GL119881',
       en: 'GRACE terrestrial water storage anomalies (TWSA), downscaled to 0.25° with a machine-learning method using ERA5 soil moisture, precipitation and temperature, while retaining nearly all of the original GRACE signal.',
       ru: 'Аномалии общих запасов воды на суше (TWSA) по данным GRACE, детализированные до 0,25° методом машинного обучения с использованием влажности почвы, осадков и температуры ERA5 при сохранении практически всего исходного сигнала GRACE.',
       kz: 'GRACE деректері бойынша құрлықтағы су қорының аномалиялары (TWSA); ERA5 топырақ ылғалдылығы, жауын-шашын және температура деректерін пайдаланатын машиналық оқыту әдісімен 0,25° дейін нақтыланған, бастапқы GRACE сигналы түгелге жуық сақталған.'
@@ -62,7 +62,7 @@
     },
     pml: {
       title: 'PML v2.2c', role: 'e',
-      ref: 'Xu et al. (2026), ESSD', url: '',
+      ref: 'Xu et al. (2026), ESSD', url: 'https://doi.org/10.5194/essd-18-5663-2026',
       en: 'Global terrestrial ET (with transpiration, soil evaporation, interception) and GPP at 0.1°, half-monthly, 1982–2025.',
       ru: 'Глобальная эвапотранспирация суши (транспирация, испарение с почвы, перехват) и валовая первичная продукция (GPP) на сетке 0,1°, с шагом полмесяца, 1982–2025 гг.',
       kz: 'Құрлықтың жаһандық эвапотранспирациясы (транспирация, топырақтан булану, интерцепция) және жалпы бастапқы өнім (GPP); 0,1°, жарты айлық қадам, 1982–2025 жж.'
