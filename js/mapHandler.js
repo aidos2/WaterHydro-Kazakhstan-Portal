@@ -20,14 +20,11 @@ function fromLonLatXY(lon, lat) {
 /* ---------- Language ------------------------------------------------ */
 const MAP_I18N = {
   en: { watersheds: 'Watersheds', basins: 'WM Basins', subbasins: 'Sub-basins',
-        selected: 'Selected basin', noData: 'No data', unit: 'Unit',
-        soon: 'Sub-basin water balance data coming soon' },
+        selected: 'Selected basin', noData: 'No data', unit: 'Unit' },
   ru: { watersheds: 'Водосборы', basins: 'Бассейны ВХ', subbasins: 'Подбассейны',
-        selected: 'Выбранный бассейн', noData: 'Нет данных', unit: 'Ед.',
-        soon: 'Данные водного баланса подбассейнов скоро появятся' },
+        selected: 'Выбранный бассейн', noData: 'Нет данных', unit: 'Ед.' },
   kz: { watersheds: 'Су жинау алаптары', basins: 'СШ бассейндері', subbasins: 'Ішкі бассейндер',
-        selected: 'Таңдалған бассейн', noData: 'Деректер жоқ', unit: 'Бірлік',
-        soon: 'Ішкі бассейндердің су балансы деректері жақында қосылады' }
+        selected: 'Таңдалған бассейн', noData: 'Деректер жоқ', unit: 'Бірлік' }
 };
 const MAP_T = MAP_I18N[WB_LANG];
 
@@ -44,7 +41,9 @@ const hoverInfo    = $('hover-info');
 const LAYER_CFG = {
   watersheds: { url: 'input_data/ALL_watersheds_wgs84.geojson',   idProp: 'WATERSHED_ID', nameProp: 'WATERSHED_NAME' },
   basins:     { url: 'input_data/Water management basins.geojson', idProp: 'BASIN_ID',     nameProp: 'BASIN_NAME'     },
-  subbasins:  { url: 'input_data/watershed_subbasins.geojson',     idProp: null,           nameProp: 'SubBasinName'   }
+  // sub-basins = gauging-station catchments; their polygons carry tiny
+  // detached slivers, so the label is drawn once (largest part only)
+  subbasins:  { url: 'input_data/watershed_subbasins.geojson',     idProp: 'SUBBASIN_ID',  nameProp: 'SubBasinName', singleLabel: true }
 };
 let activeLayerKey = 'watersheds';
 
@@ -96,12 +95,9 @@ map = new ol.Map({
     vectorLayers.watersheds,
     vectorLayers.subbasins
   ],
-  view: new ol.View({
-    projection: 'EPSG:3857',
-    center: fromLonLatXY(72, 48),
-    zoom: 4
-  })
+  view: hydroView({ center: fromLonLatXY(72, 48), zoom: 4 })   // locked to the hydro-region extent (mapExtent.js)
 });
+hydroLock(map);
 
 /* ---------- Horizontal top-right Layer switcher UI ----------------- */
 
@@ -160,6 +156,31 @@ function featureName(feat) {
   return (id && window.wbBasinName(id)) || feat.get(LAYER_CFG[activeLayerKey].nameProp) || '';
 }
 
+/** Label anchor: interior point of the feature's largest polygon (cached) */
+function labelPoint(feat) {
+  let pt = feat.get('_labelPt');
+  if (!pt) {
+    let g = feat.getGeometry();
+    if (g.getType() === 'MultiPolygon') {
+      g = g.getPolygons().reduce((a, b) => (b.getArea() > a.getArea() ? b : a));
+    }
+    pt = g.getType() === 'Polygon' ? g.getInteriorPoint() : g;
+    feat.set('_labelPt', pt, true);
+  }
+  return pt;
+}
+
+/** Fill/stroke style + label; the label gets its own point where needed */
+function basinStyles(feat, base, text) {
+  if (!LAYER_CFG[activeLayerKey].singleLabel) {
+    return new ol.style.Style({ ...base, text });
+  }
+  return [
+    new ol.style.Style(base),
+    new ol.style.Style({ geometry: labelPoint(feat), text, zIndex: base.zIndex })
+  ];
+}
+
 function fitLayer(key, duration) {
   const src = vectorLayers[key].getSource();
   const fit = () => {
@@ -188,23 +209,20 @@ function updateMapStyle() {
   const idx   = +timeSlider.value || 0;
   const breaks = window.wbHasData() ? window.wbBreaks(cfg.key) : null;
 
-  /* Layer without WB data (sub-basins): outlines only */
+  /* WB data not loaded (yet): outlines only */
   if (!LAYER_CFG[activeLayerKey].idProp || !breaks) {
-    legendDiv.innerHTML = LAYER_CFG[activeLayerKey].idProp
-      ? ''
-      : `<div style="font-size:12px;max-width:180px;">${MAP_T.soon}</div>`;
-    layer.setStyle(feat => new ol.style.Style({
+    legendDiv.innerHTML = '';
+    layer.setStyle(feat => basinStyles(feat, {
       fill:   new ol.style.Fill({ color: 'rgba(26,127,110,0.12)' }),
-      stroke: new ol.style.Stroke({ color: '#1a7f6e', width: 1.2 }),
-      text:   new ol.style.Text({
-        text: feat.get(LAYER_CFG[activeLayerKey].nameProp) || '',
-        font: '11px Poppins, Arial, sans-serif',
-        fill: new ol.style.Fill({ color: '#0e1c36' }),
-        stroke: new ol.style.Stroke({ color: '#fff', width: 3 }),
-        overflow: true,
-        placement: 'point'
-      })
-    }));
+      stroke: new ol.style.Stroke({ color: '#1a7f6e', width: 1.2 })
+    }, new ol.style.Text({
+      text: feat.get(LAYER_CFG[activeLayerKey].nameProp) || '',
+      font: '11px Poppins, Arial, sans-serif',
+      fill: new ol.style.Fill({ color: '#0e1c36' }),
+      stroke: new ol.style.Stroke({ color: '#fff', width: 3 }),
+      overflow: true,
+      placement: 'point'
+    })));
     return;
   }
 
@@ -236,19 +254,18 @@ function updateMapStyle() {
     const v   = window.wbValue(id, cfg.key, idx);
     const sel = selectedWatershedIds.has(id);
 
-    return new ol.style.Style({
+    return basinStyles(feat, {
       fill:   new ol.style.Fill({ color: v == null ? NO_DATA_PATTERN : cfg.ramp[classIndex(v, breaks)] }),
       stroke: new ol.style.Stroke({ color: sel ? '#c9a84c' : '#444', width: sel ? 3.5 : 1 }),
-      zIndex: sel ? 1 : 0,
-      text: new ol.style.Text({
-        text: featureName(feat),
-        font: sel ? 'bold 13px Poppins, Arial, sans-serif' : '12px Poppins, Arial, sans-serif',
-        fill: new ol.style.Fill({ color: '#000' }),
-        stroke: new ol.style.Stroke({ color: '#fff', width: 3 }),
-        overflow: true,
-        placement: 'point'
-      })
-    });
+      zIndex: sel ? 1 : 0
+    }, new ol.style.Text({
+      text: featureName(feat),
+      font: sel ? 'bold 13px Poppins, Arial, sans-serif' : '12px Poppins, Arial, sans-serif',
+      fill: new ol.style.Fill({ color: '#000' }),
+      stroke: new ol.style.Stroke({ color: '#fff', width: 3 }),
+      overflow: true,
+      placement: 'point'
+    }));
   });
 }
 

@@ -38,7 +38,7 @@ The portal was developed under the grant-funded project:
 | Story Map | `story.html` | `story_ru.html` | `story_kz.html` | ArcGIS StoryMaps-style project story: idea → team → field work → conferences → seminar → map tour of the portal sections |
 | Spatial Data Catalogue | `spatialData.html` | `spatialData_ru.html` | `spatialData_kz.html` | Searchable table with direct dataset downloads (including WB Products) |
 | LULC Map | `lulc_map.html` | `lulc_map_ru.html` | `lulc_map_kz.html` | Full-screen ArcGIS Experience Builder map |
-| Water Timeseries Dashboard | `timeseries.html` | `timeseries_ru.html` | `timeseries_kz.html` | WB Products choropleth (Watersheds · WM Basins) + time-series charts, 27 P×E×Q combinations, 01.10.2002 – 30.09.2023 |
+| Water Timeseries Dashboard | `timeseries.html` | `timeseries_ru.html` | `timeseries_kz.html` | WB Products choropleth (Watersheds · WM Basins · Sub-basins) + time-series charts, 27 P×E×Q combinations, 01.10.2002 – 30.09.2023 |
 | Water Use & Abstraction Dashboard | `water_use.html` | `water_use_ru.html` | `water_use_kz.html` | Water withdrawal, use, discharge and losses by basin and sector, 2004–2023 (generated from `notebooks/water_use_dashboard.ipynb`) |
 
 ---
@@ -99,7 +99,7 @@ Authors: Yapiyev V., Ongdas N., Saidaliyeva Z., Zhiyenbek A., Smogulova T., Baig
 |---------|---------|
 | All Watersheds (WGS84) | GeoJSON · GeoPackage · Shapefile |
 | Water Management Basins | GeoJSON · GeoPackage · Shapefile |
-| Sub-Basins | GeoJSON · GeoPackage · Shapefile |
+| Sub-Basins (6 gauging-station catchments, `SUBBASIN_ID`) | GeoJSON · GeoPackage · Shapefile |
 | Hydro Region Boundaries | GeoJSON · GeoPackage · Shapefile |
 | River Network (GIRES v10) | GeoJSON · GeoPackage · Shapefile |
 | Lakes & Water Bodies | GeoJSON · GeoPackage · Shapefile |
@@ -171,14 +171,31 @@ IDs match `BASIN_ID` in `input_data/Water management basins.geojson` (the "WM Ba
 | Balkhash-Alakol | WMB_00007 | `WMB_00007_balkhash_alakol` |
 | Zhaiyk-Caspian | WMB_00008 | `WMB_00008_zhaiyk_caspian` |
 
-All WM basins' Excel files are bundled in `zip/wm_basins_all.zip`. Sub-basin WB data is not yet available.
+All WM basins' Excel files are bundled in `zip/wm_basins_all.zip`.
+
+### Water Balance Products — Sub-basins (6 sub-basins, 27 combinations each)
+
+Source: `sub_basin_wb_ts` — 162 Excel files (6 sub-basins × 27 P×E×Q combinations), same format and period as above.
+Boundaries: `sub_basin_shapefiles` (one shapefile per gauging-station catchment), merged into `input_data/watershed_subbasins.*`.
+IDs match `SUBBASIN_ID` in `input_data/watershed_subbasins.geojson` (the "Sub-basins" map layer).
+
+| Sub-basin | ID | Gauging station (river) | Area, km² | File stem |
+|-----------|----|-------------------------|-----------|-----------|
+| Ertis (Zhanabet) | SUB_00001 | Zhanabet (Ertis) | 302,466 | `SUB_00001_ertis_zhanabet` |
+| Nura (Akmeshit) | SUB_00002 | Akmeshit (Nura) | 51,760 | `SUB_00002_nura_akmeshit` |
+| Syr Darya-Aral (Karateren) | SUB_00003 | Karateren (Syr Darya) | 310,619 | `SUB_00003_syr_darya_aral_karateren` |
+| Tobyl (Kostanay) | SUB_00004 | Kostanay (Tobyl) | 33,886 | `SUB_00004_tobyl_kostanay` |
+| Yesil (Atbasar) | SUB_00005 | Atbasar (Zhabay) | 8,704 | `SUB_00005_yesil_atbasar` |
+| Zhaiyk-Caspian (Makhambet) | SUB_00006 | Makhambet (Zhaiyk) | 209,440 | `SUB_00006_zhaiyk_caspian_makhambet` |
+
+All sub-basins' Excel files are bundled in `zip/sub_basins_all.zip`.
 
 Each basin is published in `input_data/wb_products/` as:
 
 | Folder | Content | Format |
 |--------|---------|--------|
 | `json/<stem>.json` | All 27 combinations of one basin | JSON |
-| `map/<layer>/<combo>.json` | One combination, all basins of a layer (`watersheds` or `wm_basins`) — used by the dashboard; dates are the first day of each month (01.10.2002 … 01.09.2023) | JSON |
+| `map/<layer>/<combo>.json` | One combination, all basins of a layer (`watersheds`, `wm_basins` or `sub_basins`) — used by the dashboard; dates are the first day of each month (01.10.2002 … 01.09.2023) | JSON |
 | `map/<layer>/index.json` | Basin and combination list for a layer | JSON |
 | `csv/<stem>.csv` | All 27 combinations, long format (`basin_id, basin_name, date, P_product, E_product, Q_product, P, E, Q, PE, WB_storage, GRACE_storage`) | CSV |
 | `xlsx/<stem>/*.xlsx` | Original Excel file per combination | Excel |
@@ -271,7 +288,7 @@ WaterHydro-Kazakhstan-Portal/
 │   ├── Soil_Moisture_ERA5.*     # Soil moisture time series
 │   ├── GLEAM_WaterBalanceAllBAsin.*  # Water balance time series
 │   │
-│   ├── wb_products/             # Water Balance Products (14 basins × 27 combinations)
+│   ├── wb_products/             # Water Balance Products (14 watersheds, 8 WM basins, 6 sub-basins × 27 combinations)
 │   │   ├── json/                # <ID>_<basin>.json – dashboard data, all combinations
 │   │   ├── csv/                 # <ID>_<basin>.csv – long-format table
 │   │   ├── xlsx/<ID>_<basin>/   # original Excel files (27 per basin)

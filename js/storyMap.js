@@ -36,14 +36,24 @@ const SM_NAMES = {
 const SM_LEGEND = {
   en: { north: 'North hydrological region', south: 'South hydrological region', rivers: 'Rivers', lakes: 'Lakes',
         watersheds: 'Watersheds (14)', wb: 'Water balance products · 14 basins', wmb: 'Water-use statistics · 5 basins',
-        wmbOther: 'Other water management basins', imagery: 'Satellite imagery (Esri World Imagery)' },
+        wmbOther: 'Other water management basins',
+        lulc: ['Trees', 'Shrubland', 'Grassland', 'Cropland', 'Built-up', 'Bare / sparse vegetation',
+               'Snow & ice', 'Permanent water bodies', 'Herbaceous wetland', 'Moss & lichen'] },
   ru: { north: 'Северный гидрологический регион', south: 'Южный гидрологический регион', rivers: 'Реки', lakes: 'Озёра',
         watersheds: 'Водосборы (14)', wb: 'Продукты водного баланса · 14 бассейнов', wmb: 'Статистика водопользования · 5 бассейнов',
-        wmbOther: 'Другие водохозяйственные бассейны', imagery: 'Космический снимок (Esri World Imagery)' },
+        wmbOther: 'Другие водохозяйственные бассейны',
+        lulc: ['Леса', 'Кустарники', 'Травянистая растительность', 'Пашни', 'Застройка', 'Голые земли / редкая растительность',
+               'Снег и лёд', 'Постоянные водные объекты', 'Травянистые болота', 'Мхи и лишайники'] },
   kk: { north: 'Солтүстік гидрологиялық өңір', south: 'Оңтүстік гидрологиялық өңір', rivers: 'Өзендер', lakes: 'Көлдер',
         watersheds: 'Су жинау алаптары (14)', wb: 'Су балансы өнімдері · 14 алап', wmb: 'Су пайдалану статистикасы · 5 алап',
-        wmbOther: 'Басқа су шаруашылығы алаптары', imagery: 'Ғарыштық сурет (Esri World Imagery)' },
+        wmbOther: 'Басқа су шаруашылығы алаптары',
+        lulc: ['Ормандар', 'Бұталар', 'Шөпті өсімдіктер', 'Егістік', 'Құрылыс салынған жерлер', 'Жалаңаш жер / сирек өсімдік',
+               'Қар және мұз', 'Тұрақты су объектілері', 'Шөпті батпақтар', 'Мүк және қына'] },
 }[SM_LANG];
+/* ESA WorldCover 2020 class colours, as drawn by the LULC tile service */
+const SM_LULC_COLORS = ['#006400', '#ffbb22', '#ffff4c', '#f096ff', '#fa0000',
+                        '#b4b4b4', '#f0f0f0', '#0064c8', '#0096a0', '#fae6a0'];
+const SM_LULC_TILES = 'https://tiles.arcgis.com/tiles/Kri0Q7xwN5k6MG7L/arcgis/rest/services/LULC_Boundaries_WTL1/MapServer';
 const SM_WU_IDS = new Set(['WMB_00001', 'WMB_00004', 'WMB_00005', 'WMB_00006', 'WMB_00008']);
 const smName = id => SM_NAMES[id]?.[SM_LANG] || id;
 const smMobile = matchMedia('(max-width: 900px)').matches;
@@ -156,10 +166,10 @@ const SM_STEPS = {
     return { show: ['watersheds', 'rivers', 'lakes'], fit: 'watersheds' };
   },
   lulc () {
-    smVector('watersheds', smLabelled(() => 'rgba(0,0,0,0)', () => smStroke('#ffffff', 1.6),
+    smVector('watersheds', smLabelled(() => 'rgba(0,0,0,0)', () => smStroke('#0e1c36', 1.4),
       f => smText(smName(f.get('WATERSHED_ID')), 11)), 2);
-    smLegend([['#3b6e3b', SM_LEGEND.imagery]]);
-    return { show: ['watersheds'], fit: 'watersheds', imagery: true };
+    smLegend(SM_LULC_COLORS.map((c, i) => [c, SM_LEGEND.lulc[i]]));
+    return { show: ['watersheds'], fit: 'watersheds', lulc: true };
   },
   timeseries () {
     smVector('watersheds', smLabelled(() => 'rgba(26,127,110,0.45)', () => smStroke('#1a7f6e', 1.5),
@@ -183,8 +193,7 @@ function smMapStep (name) {
   if (!cfg) return;
   smCurrent = name;
   Object.entries(smLayers).forEach(([k, l]) => l.setVisible(cfg.show.includes(k)));
-  smMap.getLayers().item(0).setVisible(!cfg.imagery);
-  smMap.getLayers().item(1).setVisible(Boolean(cfg.imagery));
+  smMap.getLayers().item(1).setVisible(Boolean(cfg.lulc));   // OSM base (item 0) stays on
   smWhenLoaded(smLayers[cfg.fit].getSource(), src => {
     if (smCurrent !== name) return;                        // a later step is showing now
     smMap.getView().fit(src.getExtent(), { padding: [30, 30, 30, 30], duration: smReduce ? 0 : 900 });
@@ -209,15 +218,18 @@ if (smMapEl) {
       target: smMapEl,
       layers: [
         new ol.layer.Tile({ source: new ol.source.OSM() }),
-        new ol.layer.Tile({ visible: false, source: new ol.source.XYZ({
-          attributions: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community', maxZoom: 18,
-          url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' }) }),
+        // LULC: ESA WorldCover 2020 tile cache (ArcGIS Online, Web Mercator, 512 px tiles, levels 3–9)
+        new ol.layer.Tile({ visible: false, opacity: 0.9, source: new ol.source.XYZ({
+          attributions: 'LULC: ESA WorldCover 2020 (© ESA WorldCover project, CC BY 4.0)',
+          tileSize: 512, minZoom: 3, maxZoom: 9, crossOrigin: 'anonymous',
+          url: `${SM_LULC_TILES}/tile/{z}/{y}/{x}` }) }),
       ],
-      view: new ol.View({ center: ol.proj.fromLonLat([67, 48]), zoom: 4 }),
+      view: hydroView({ center: ol.proj.fromLonLat([67, 48]), zoom: 4 }),   // locked to the hydro-region extent (mapExtent.js)
       controls: ol.control.defaults({ rotate: false }),
       // the page scrolls the story, so the wheel must not zoom the map
       interactions: ol.interaction.defaults({ mouseWheelZoom: false }),
     });
+    hydroLock(smMap);
     // start on the card currently in view (a reader may jump straight to a later step)
     smMapStep(document.querySelector('.sm-step.active[data-map]')?.dataset.map || smPending);
   }, { rootMargin: '600px 0px' }).observe(smMapEl);

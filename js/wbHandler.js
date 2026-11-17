@@ -2,10 +2,10 @@
  *  wbHandler.js – Water Balance Products: data, chart, statistics
  *
  *  The Timeseries dashboard shows only WB Products (3 P × 3 E × 3 Q
- *  = 27 combinations) for two basin layers:
+ *  = 27 combinations) for three basin layers:
  *    watersheds  14 basins (NWB_/SWB_)  ALL_watersheds_wgs84.geojson
  *    basins      8 WM basins (WMB_)     Water management basins.geojson
- *  Sub-basins have no WB data yet.
+ *    subbasins   6 sub-basins (SUB_)    watershed_subbasins.geojson
  *
  *  Data layout (input_data/wb_products/):
  *    map/<layer>/index.json       basins + combination list
@@ -59,7 +59,7 @@ const WB_T = WB_I18N[WB_LANG];
 
 /* ---- Layers with WB data -------------------------------------- */
 const WB_MAP_DIR = 'input_data/wb_products/map/';
-const WB_LAYER_DIRS = { watersheds: 'watersheds', basins: 'wm_basins' };
+const WB_LAYER_DIRS = { watersheds: 'watersheds', basins: 'wm_basins', subbasins: 'sub_basins' };
 
 /* ---- Product selectors (P / E / Q) ---------------------------- */
 const WB_PRODUCT_SELECTS = { p: 'wbSelP', e: 'wbSelE', q: 'wbSelQ' };
@@ -86,7 +86,7 @@ const WB_VAR = Object.fromEntries(WB_VAR_CONFIG.map(c => [c.key, c]));
 const wbVarLabel = key => `${WB_T.vars[key]} (mm/mo)`;
 
 /* ---- State ---------------------------------------------------- */
-let wbLayerKey      = null;      // 'watersheds' | 'basins' | other (no data)
+let wbLayerKey      = null;      // 'watersheds' | 'basins' | 'subbasins'
 let wbIndex         = null;      // map/<layer>/index.json
 let wbCombo         = null;      // map/<layer>/<combo>.json
 let wbActiveBasinId = null;      // null = all basins
@@ -119,7 +119,7 @@ window.wbSetLayer = function (layerKey) {
   wbUpdateBasinNameDisplay();
 
   const dir = WB_LAYER_DIRS[layerKey];
-  if (!dir) {                       // e.g. sub-basins: no data yet
+  if (!dir) {                       // layer without WB data
     wbIndex = null;
     wbClearChart();
     wbUpdateStats();

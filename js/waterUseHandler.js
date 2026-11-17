@@ -146,8 +146,9 @@ function wuInitMap () {
   WU.map = new ol.Map({
     target: 'wu-map',
     layers: [new ol.layer.Tile({ source: new ol.source.OSM() }), WU.layer],
-    view: new ol.View({ center: ol.proj.fromLonLat([67, 48]), zoom: 4.3 }),
+    view: hydroView({ center: ol.proj.fromLonLat([67, 48]), zoom: 4.3 }),   // locked to the hydro-region extent (mapExtent.js)
   });
+  hydroLock(WU.map);
   WU.layer.getSource().once('change', e => {
     if (e.target.getState() === 'ready') {
       WU.map.getView().fit(e.target.getExtent(), { padding: [20, 20, 20, 20] });
